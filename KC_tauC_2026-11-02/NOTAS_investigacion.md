@@ -74,3 +74,6 @@ DBSRH(W): lim_{X→∞} tauc_k(X) = γ_k para todo k, con recorte H(t) ≥ |S(t)
 * [DED sobre fórmula de Selberg REC] con pesos suaves basta RH; con corte agudo hace falta fuerza DRH
   (Conrad, Canad. J. Math. [LIT]; DRH: Kaneko–Koyama–Kurokawa arXiv:2206.02612 [LIT]; la DRH no usa RvM).
 * Falta: DBSRH(W) ⇒ RH (que los términos x^{β−1/2} impidan la convergencia de las medidas de subnivel).
+
+## v10 (2 nov 2026, tarde) — ver v10_rho_slip_landau/NOTA_v10_rho_slip_landau.md
+<D> = -<F> (rho_u sin ceros); cancelación de Landau con Phi°; tau^C hereda las líneas Λ(x)x^{-1/2}; numérico en modelo.

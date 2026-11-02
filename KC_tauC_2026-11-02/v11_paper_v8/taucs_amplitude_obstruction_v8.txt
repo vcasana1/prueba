@@ -1,0 +1,3121 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{microtype}
+\usepackage[a4paper,margin=26mm,headheight=15pt]{geometry}
+\usepackage{xcolor,booktabs,longtable,enumitem,fancyhdr,graphicx}
+\usepackage[pagebackref=true]{hyperref}
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{\ifcase #1 \or\ \textit{(Cited on p.~#2.)}\else\ \textit{(Cited on pp.~#2.)}\fi}
+\hypersetup{colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black,
+ pdftitle={Amplitude and fourth-moment obstructions for prime-corrected sublevel approximations - Research Note v8},
+ pdfauthor={Victor Casana-Giner}}
+\usepackage[capitalize,nameinlink]{cleveref}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{2pt}
+\emergencystretch=2em
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\meas}{\operatorname{meas}}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\clip}{\operatorname{clip}}
+\newcommand{\Cm}{\mathrm{Cm}}
+\newcommand{\Cms}{\mathrm{Cms}}
+\newcommand{\dd}{\,\mathrm dt}
+\fancyhf{}
+\fancyhead[L]{\small Prime-corrected sublevel approximation}
+\fancyhead[R]{\small Research note v8 \textbullet\ 2 Nov 2026}
+\fancyfoot[C]{\thepage}
+\pagestyle{fancy}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Amplitude and Fourth-Moment Obstructions for\\[3pt]
+Prime-Corrected Sublevel Approximations\\[3pt]
+to Riemann Zeta Zeros}\par
+\vspace{10pt}
+{\large V\'ictor Casa\~na-Giner}\par
+\vspace{4pt}
+{\small Research note v8 --- 2 November 2026}\par
+\end{center}
+\begin{abstract}
+We study the author's Euler-prime sublevel points $\tau_k^{\mathrm C}$,
+their MCOM-clipped version $\tau_k^{\mathrm{Cm}}$, and the distinct
+weighted compensated family $\tau_k^{\mathrm{Cms}}(X;W)$.
+The effective MCOM bound $|S(t)|\le0.08382\log t+4.444$ for $t\ge1$
+provides a uniform enclosure for the true counting discrepancy;
+the author's sharper asymptotic coefficient
+$C_{\mathrm H}<0.0748596142711$ supplies a growing margin inside the
+fixed MCOM truncation. We retain the earlier amplitude, fourth-moment,
+sublevel, numerical, correlated-displacement and local-model results,
+carefully separating exact identities from conclusions depending on
+the cited IJNT/Fujii estimates. New deductions include a localized
+crossing-budget inequality for the actual compensated ordinal points;
+a transport estimate $O(T/(\log T)^3)$ between clipped and unclipped
+ordinal sequences conditional on the cited fourth moment; a finite-step
+prime-band inclusion; an exact Fourier-box formula with endpoint
+terms and a parity-sensitive bound for repeated heights; and an exact
+Euler--pole transform yielding a sufficient weighted-$L^2$ criterion
+for RH, together with its MCOM-excess formulation. The transform
+criterion does not assume convergence in measure of the prime phases.
+It is not claimed that the required $L^2$ bound, arithmetic
+noncollapse or the weighted zero-explicit formula has been proved.
+The imported weighted kernel is explicitly distinguished from the
+author's original prime construction. The paper does not establish RH,
+simplicity or an improved Selberg--Fujii fourth-moment theorem.
+\end{abstract}
+\noindent\textbf{Keywords:} Riemann zeta function; Riemann--von Mangoldt formula; prime powers; Selberg approximation; sublevel measures; fourth moments; argument of zeta.\\
+\noindent\textbf{MSC 2020:} 11M26, 11M06, 11N05.
+\tableofcontents
+
+\section*{List of variables and notation}
+\addcontentsline{toc}{section}{List of variables and notation}
+Symbols are listed by first appearance. Where the same letter is used with different meanings, the scope of each meaning is indicated; the context (subscripts, arguments) always distinguishes them.
+\begingroup\footnotesize
+\setlength{\LTpre}{4pt}\setlength{\LTpost}{6pt}
+\begin{longtable}{@{}p{0.22\linewidth}p{0.56\linewidth}p{0.16\linewidth}@{}}
+\toprule
+Symbol & Meaning & Introduced\\
+\midrule
+\endfirsthead
+\toprule
+Symbol & Meaning & Introduced\\
+\midrule
+\endhead
+$\rho_k=\beta_k+i\gamma_k$ & nontrivial zeros with $\gamma_k>0$, with multiplicity, $\gamma_k\le\gamma_{k+1}$ & \S\ref{sec:definitions}\\
+$N(t)$ & number of zeros with $0<\Im\rho\le t$ (right-continuous) & \S\ref{sec:definitions}\\
+$N_0(t)$ & Riemann--von Mangoldt main term \eqref{eq:N0} & \eqref{eq:N0}\\
+$S(t)$ & $\frac1\pi\arg\zeta(\frac12+it)$; at zero heights defined by \eqref{eq:RVM} & \eqref{eq:RVM}\\
+$R(t)$ & $\vartheta(t)/\pi+1-N_0(t)$, $|R(t)|\le0.53/(\pi t)$ for $t\ge1$ & \eqref{eq:RVM}\\
+$\vartheta(t)$ & Riemann--Siegel theta function & \S\ref{sec:definitions}\\
+$N_\vartheta(t)$ & $\vartheta(t)/\pi+1$ & \cref{prop:forward-v3}\\
+$\clip_a(x)$ & symmetric truncation to $[-a,a]$ & \eqref{eq:clip}\\
+$u_k(F)$ & sublevel measure $\meas\{F<k-\frac12\}$ & \eqref{eq:sublevel}\\
+$\mathsf k,\ \alpha_{\rm F},\ H,\ Y,\ h$ & parameters of the Fujii input (moment order, range exponent, interval length, prime cutoff, shift) & \eqref{eq:FujiiA}--\eqref{eq:FujiiB}\\
+$p_\nu$, $m_j$ & $\nu$-th prime; prime budget $\lfloor2^{j/2}\rfloor$ on the dyadic block $[2^j,2^{j+1}]$ & \eqref{eq:Phi-m}, \eqref{eq:interpolation}\\
+$\Phi_m$, $\Phi^\circ$ & Euler phase of the first $m$ primes; its dyadic interpolation & \eqref{eq:Phi-m}, \eqref{eq:interpolation}\\
+$h(t)$ & original truncation $\log\log\max(t,e^e)$ (in \S\ref{sec:kernel-v4} the letter $h$ also denotes $Lg$) & \eqref{eq:old}\\
+$F_h$, $\tau_k^{\mathrm C}$ & original IJNT function and its sublevel points & \eqref{eq:old}\\
+$A(t)$ & generic truncation bound in \cref{lem:countconstraint} & \cref{lem:countconstraint}\\
+$q$ & in \cref{lem:countconstraint}: $N(t)$; elsewhere $q(v)$ is the weight density \eqref{eq:weights} and $q_F$ the integer discrepancy & --\\
+$r$ & index displacement (\cref{thm:omega}); prime-power exponent (\eqref{eq:Phi-m}); radii $r_1,r_2$ (\S\ref{sec:filter-v4}) & --\\
+$H(t)$ & MCOM truncation $0.08382\log\max(t,e)+5.5$ & \eqref{eq:MCOMH}\\
+$A_{\mathrm M},B_{\mathrm M}$ & $0.08382$ and $5.5$ & \cref{prop:rvmbound-v5}\\
+$C_{\mathrm H}$ & asymptotic MCOM coefficient $0.0748596142710907\ldots$ & \eqref{eq:asymptMCOM}\\
+$G(t)$ & $N(t)-N_0(t)$ (in \S\ref{sec:filter-v4}, $G$, $G_L$ also denote generic functions) & \eqref{eq:MCOMH}\\
+$F^{\Cm}$, $\tau_k^{\Cm}$ & taucm: MCOM-truncated function and its sublevel points & \eqref{eq:taucm}\\
+$q_F(t)$ & integer discrepancy $|\lfloor F+\frac12\rfloor-N|$ & \cref{thm:taucm}\\
+$F_Q$, $u_k(Q)$, $Q$ & structural saturation model and its sublevel measures; oscillation parameter & \eqref{eq:sat-model}\\
+$\varphi_\pm$ & $N_0\pm H$ & \cref{thm:structural}\\
+$\mathcal W$, $W$, $q$ & weight class, weight, density $q=-W'$ on $[1,2]$ & \eqref{eq:weights}\\
+$W_{1/4}$, $q_{1/4}$ & weight with $q(v)=v/2+1/4$ (the index labels the weight) & \eqref{eq:weights}, \eqref{eq:q14-v4}\\
+$\Lambda$ & von Mangoldt function & \S\ref{sec:weights}\\
+$X$, $L$ & prime cutoff; $L=\log X$ & \eqref{eq:PhiW}\\
+$\Phi_X^W$, $\Pi_X^W$, $P_X^W$ & weighted Euler phase, pole compensator, $P_X^W=\Phi_X^W-\Pi_X^W$ & \eqref{eq:PhiW}--\eqref{eq:PW}\\
+$F_X^W$, $\tau_k^{\Cms}(X;W)$ & taucms: truncated weighted function and its sublevel points & \eqref{eq:Cms}\\
+$\mathrm{DBSRH}(W)$ & $\lim_{X\to\infty}\tau_k^{\Cms}(X;W)=\gamma_k$ for each $k$ & \eqref{eq:DBSRH}\\
+$a_p$, $D(t)$, $D_T$ & coefficients $1-W(\log p/\log X)$, the difference sum \eqref{eq:diffprime}, $D_T=\log(\log T/\log X)$ & \cref{thm:smallX}\\
+$A_X$, $B_X$, $b_n$, $w_p$, $V_X$, $\delta$ & prime and prime-square sums, coefficients of $A_X^2$, weights, variance, $\delta=\min(\varepsilon/2,1/200)$ & \cref{thm:moderate}\\
+$B_W$, $\mathcal E_{T,X}$ & bound for $q$ of the two fixed weights; saturated set & \cref{thm:moderate-log}, \cref{prop:sat-measure}\\
+$\mathcal Z_L$ & smoothed zero sum & \eqref{eq:ZL}\\
+$\mathcal L_q(L,z)$ & Laplace integral, $z=d+i(\gamma-t)$, $d=\beta-\frac12$ & \eqref{eq:laplace}\\
+$\mathcal A_k^\pm$ & signed sublevel contributions & \eqref{eq:Aplus}, \eqref{eq:Aminus}\\
+$\bar u_k$ & $(u_k+u_{k+1})/2$ & \S\ref{sec:cells}\\
+$\gamma_k^{\mathrm{RvM}}$, $v_k$ & solution of $N_0=k-\frac12$ with $\gamma_k^{\mathrm{RvM}}>2\pi$; $v_k=\gamma_k^{\mathrm{RvM}}$ in proofs & \S\ref{sec:spacing-v3}\\
+$\Delta_k(X;W)$, $s_k$ & consecutive spacing of taucms; $s_k=\Delta_k$ & \eqref{eq:gap-v3}, \eqref{eq:center-v5}\\
+$a_k,b_k$ & barriers $N_0\pm H=k-\frac12$ (not the moment bounds $a_T,b_T$) & \cref{thm:block-sep-v3}\\
+$I_k^\pm$, $B_k^\pm$ & occupation intervals and saturated measures & \cref{prop:occupation-v3}\\
+$e_k(F)$ & evaluation defect $k-\frac12-F(\gamma_k)$ & \eqref{eq:ek-v3}\\
+$\Psi_j$, $j$ & $\int_{z-1/2}^{z+1/2}v^{2j}dv$; moment order (in \eqref{eq:interpolation} $j$ is the dyadic index) & \eqref{eq:Psi-v3}\\
+$M$ & number of indices in repeated-height groups & \eqref{eq:duplicate-count-v3}\\
+$\mathscr F_X$ & generic family in the forward criterion & \cref{prop:forward-v3}\\
+$\theta$ & prime-support exponent, $X=t^\theta$ (not $\vartheta$) & \S\ref{sec:v9-data}\\
+$g_k$ & in \S\ref{sec:v9-data}: normalized nearest-neighbour separation; from \S\ref{sec:near-v4} on: $\gamma_{k+1}-\gamma_k$ & \eqref{eq:gfit-v3}, \eqref{eq:poserror-v4}\\
+$\delta_k$ & $\frac12-|e_k(F)|$ & \S\ref{sec:v9-data}\\
+$\eta$, $\eta_T(F)$ & mean of $e_k(F)^2$ on a block (unrelated to $\eta_k$ below) & \S\ref{sec:v9-data}, \S\ref{sec:jone-v3}\\
+$M_T$, $D_F$, $\Phi_c$ & $N(2T)-N(T)$; $N-F$; truncated phase of the numerical script & \eqref{eq:jone-AB-v3}\\
+$A_T,B_T$ & $\int D_F^2N_0'$ and $\int D_F^2\Phi_c'$ on $[T,2T]$ & \eqref{eq:jone-AB-v3}\\
+$a_T,b_T,\kappa_T,r_T$ & second moment, fourth moment, derivative ratio, endpoint bound & \eqref{eq:jone-input-v3}\\
+$\mathcal E_\partial(F;T)$ & endpoint contribution in \eqref{eq:jone-identity-v3} & \eqref{eq:jone-identity-v3}\\
+$d_k(X;W)$ & true-zero position error $\tau_k^{\Cms}-\gamma_k$ & \eqref{eq:poserror-v4}\\
+$\mathcal M_k(X;W)$ & symmetric margin & \eqref{eq:margin-v4}\\
+$\mathscr L_{k,X}$ & local Lipschitz constant of $F_X^W$ on $[a_k,b_{k+1}]$ & \eqref{eq:Mbound-v4}\\
+$K(z)$, $\mu_m$, $w(y)$ & two-source kernel, moments of $q_{1/4}$, kernel weight $\int_{\max(1,y)}^2q_{1/4}$ & \eqref{eq:q14-v4}, \eqref{eq:moments-v4}, \cref{thm:pair-injective-v4}\\
+$C(z,h)$, $\mathcal R_K$ & pair profile $K(z-h/2)+K(z+h/2)$ and its remainder; $h=Lg$ & \cref{thm:resolution-v4}\\
+$\mathcal C_{c,g,L}$, $c$ & complete local pair profile, centre & \eqref{eq:pair-complete-v4}\\
+$F_L^\circ$ & untruncated $N_0+P_{e^L}^W$ & \S\ref{sec:filter-v4}\\
+$\mathscr D_{L;r}$, $\mathscr Q_{L;r_1,r_2}$, $\mathscr B_{r_1,r_2}$ & symmetric difference, spatial filter, filter symbol & \eqref{eq:Dr-v4}, \eqref{eq:Qdef-v4}\\
+$B$, $\mathcal R_B$ & smooth background and its Taylor remainder & \eqref{eq:Qbackground-v4}\\
+$\dot P_L$ & $\partial_LP_{e^L}^W$ at fixed $t$ & \eqref{eq:dLprime-v4}\\
+$\mathsf A$, $\mathbf v$, $\mathsf P$, $\mathbf y$, $\mathbf b$, $\mathbf r$, $\mathbf r_4$, $\widehat{h^2}$ & sampling matrix, $K''$ vector, projection, data, nuisance, residual, quartic remainder, estimator & \cref{thm:identifiability-v4}\\
+$h_k^{\mathrm{RvM}}$, $\varepsilon_k^{\mathrm{RvM}}$ & RvM spacing; RvM displacement $\tau_k^{\Cms}-\gamma_k^{\mathrm{RvM}}$ & \eqref{eq:hrvm-v5}, \eqref{eq:epsrvm-v5}\\
+$\eta_k$, $X_k$ & coherence fraction and threshold cutoff & \eqref{eq:coherence-eta-v5}\\
+$\xi_{k,\pm}$ & mean-value points & \cref{prop:rvmbound-v5}\\
+$J_k$, $p$, $K_k$ & band $[a_k,b_{k+1}]$, Lebesgue exponent, uniform derivative bound & \cref{prop:sobolev-v5}\\
+$c_k(X;W)$ & pair centre $\frac12(\tau_k^{\Cms}+\tau_{k+1}^{\Cms})$ & \eqref{eq:center-v5}\\
+$\varepsilon$ & fixed small exponent in the cutoff ranges (unrelated to $\varepsilon_k^{\mathrm{RvM}}$) & \cref{thm:moderate}\\
+$E_X(t)$ & excess $(|P_X^W(t)|-H(t))_+$ of the \emph{untruncated} weighted prime phase & \eqref{eq:v7-excess}\\
+$u_k^\circ$ & auxiliary untruncated sublevel points (not the author's original taucs) & \eqref{eq:v7-untruncated}\\
+$\mathcal T$ and $k_s$ & auxiliary Fourier--Laplace transform of the weighted Euler phase & \eqref{eq:v7-ks}\\
+$\Psi_g$ & finite-interval box convolution of a test function & \cref{thm:v7-box}\\
+$J(t)$, $r_0(t)$ & Dirichlet-type integral and the limit correction $r_0=-1+\pi^{-1}\arctan(2t)+\pi^{-1}J(t)$ & \cref{lem:v8-smooth}\\
+$E(s)$ & $s^{-2}-2(s-\frac12)^{-2}+\int_1^2(\log u)u^{-s}du$, the transform of $r_0$ & \cref{lem:v8-smooth}\\
+$P_\infty$, $F_\infty$ & limit in measure of $P_{X_j}^W$; $N_0+P_\infty$ & \cref{prop:v8-first}\\
+$t_\sharp$ & $\meas\{0<t<\gamma_1:R(t)+r_0(t)\le-\frac12\}$, the first-index defect & \cref{prop:v8-first}\\
+$\tau_k^\flat(X;W)$ & $2\pi+\meas\{t\ge2\pi:F_X^W<k-\frac12\}$, sublevel points measured from $2\pi$ & \cref{prop:v8-first}\\
+$\mathcal K_X(s)$ & $\sum_k k_s(\tau_k^\flat(X;W))$ & \cref{prop:v8-criterion}\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\section{Definitions and scope}\label{sec:definitions}
+Let $\rho_k=\beta_k+i\gamma_k$ denote the nontrivial zeros of $\zeta(s)$ with $\gamma_k>0$, counted with multiplicity and indexed so that $\gamma_k\le\gamma_{k+1}$. No assumption $\beta_k=\tfrac12$ is made. Let $N(t)$ count these zeros with $0<\Im\rho\le t$, including multiplicity, and put
+\begin{equation}\label{eq:N0}
+N_0(t)=\frac{t}{2\pi}\log\frac{t}{2\pi e}+\frac78\qquad(t>0).
+\end{equation}
+The unconditional Riemann--von Mangoldt identity, away from the imaginary parts of zeros, is
+\begin{equation}\label{eq:RVM}
+N(t)=N_0(t)+S(t)+R(t),\qquad
+S(t)=\frac1\pi\arg\zeta(\tfrac12+it),\qquad R(t)=O(t^{-1}).
+\end{equation}
+Here $R(t)=\vartheta(t)/\pi+1-N_0(t)$, with $\vartheta$ the standard Riemann--Siegel theta function. At the imaginary parts of zeros, $N$ is right-continuous ($N(t)$ counts the zeros with $0<\Im\rho\le t$), and $S(t)$ is \emph{defined} there by \eqref{eq:RVM}, that is $S(t):=N(t)-N_0(t)-R(t)$; thus \eqref{eq:RVM} holds for every $t>0$ and $S$ is right-continuous. Bounds for $|S|$ stated away from the zero heights extend to all $t>0$ by taking right limits, since the bounding functions are continuous. The distinction between $N(t)$ and the count of zeros on the critical line is essential throughout.
+
+For $a\ge0$ and $x\in\mathbb R$ define the symmetric truncation
+\begin{equation}\label{eq:clip}
+\clip_a(x)=\max\{-a,\min\{a,x\}\}.
+\end{equation}
+For a continuous function $F:(0,\infty)\to\mathbb R$ whose sublevel sets below the levels $k-\frac12$ have finite measure, put
+\begin{equation}\label{eq:sublevel}
+u_k(F)=\meas\{t>0:F(t)<k-\tfrac12\},\qquad k\ge1.
+\end{equation}
+No monotonicity assumption on $F$ is made. The central problem is to determine how accurately $u_k(F)$ approximates $\gamma_k$, including the possible occurrence of equal $\gamma_k$.
+
+\paragraph{Status convention.}
+An \emph{unconditional} assertion means no RH or simplicity assumption. References to the IJNT fourth-moment and gap estimates are expressly identified as inputs of the cited manuscript, rather than independently reverified here. Statements about the full weighted Euler phase as $X\to\infty$ are \emph{not} inferred from bounds proved only for $X\le T^{1/4}$. Section~\ref{sec:open} lists the analytic steps that remain open. Sections~\ref{sec:near-v4}--\ref{sec:observed-v4} further isolate the local two-source model from the actual prime phase, including its residual; \cref{sec:correlated-v5} gives the RvM-displacement comparison.
+
+\paragraph{The Fujii input.}
+All uses of Fujii's theorem below refer to the statement in \cite{CasanaIJNT} (Theorem ``Fujii, for the modulus $1$, with the corrections of \cite[\S5]{Fujii1981}'', label \texttt{thm:known\_fujii}): Fujii's Main Theorem \cite[p.~225]{Fujii1974}, together with Selberg's approximation as given in \cite[\S3, pp.~232--233]{Fujii1974} and \cite[Lemma~5]{Fujii1974}. Let $\mathsf k\ge1$ be an integer, let $0<\alpha_{\rm F}\le\frac12$ be fixed, and let $T^{1/2+\alpha_{\rm F}}\le H\le T$.
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item For $T^{\alpha_{\rm F}/(20\mathsf k)}\le Y\le H^{1/\mathsf k}$,
+\begin{equation}\label{eq:FujiiA}
+\int_T^{T+H}\Bigl|S(t)-\frac1\pi\operatorname{Im}\sum_{p<Y}p^{-1/2-it}\Bigr|^{2\mathsf k}dt\ll_{\mathsf k,\alpha_{\rm F}}H.
+\end{equation}
+\item For $0<h\le1$ and $T\ge T_0(\mathsf k,\alpha_{\rm F})$,
+\begin{equation}\label{eq:FujiiB}
+\int_T^{T+H}\bigl(S(t+h)-S(t)\bigr)^{2\mathsf k}dt\ll_{\mathsf k,\alpha_{\rm F}}H\bigl(\log(2+h\log T)\bigr)^{\mathsf k}.
+\end{equation}
+\end{enumerate}
+Only $\mathsf k\le2$ and $H=T$ are used below; as explained in \cite{CasanaIJNT}, the corrections of \cite[\S5]{Fujii1981} do not affect (a) or (b) in this range.
+
+\section{The original taucs and their amplitude obstruction}\label{sec:original}
+Write $p_1<p_2<\dots$ for the rational primes and set
+\begin{equation}\label{eq:Phi-m}
+\Phi_m(t)=-\frac1\pi\sum_{\nu\le m}\arg(1-p_\nu^{-1/2-it})
+=-\frac1\pi\sum_{\nu\le m}\sum_{r\ge1}
+ \frac{\sin(rt\log p_\nu)}{r p_\nu^{r/2}},\qquad \Phi_0=0.
+\end{equation}
+For $2^j\le t\le2^{j+1}$ define the dyadically interpolated phase
+\begin{equation}\label{eq:interpolation}
+m_j=\lfloor2^{j/2}\rfloor,\qquad
+\Phi^\circ(t)=\left(2-\frac{t}{2^j}\right)\Phi_{m_j}(t)
+ +\left(\frac{t}{2^j}-1\right)\Phi_{m_{j+1}}(t).
+\end{equation}
+The original construction in \cite{CasanaIJNT} is
+\begin{equation}\label{eq:old}
+h(t)=\log\log\max(t,e^e),\qquad
+F_h(t)=N_0(t)+\clip_{h(t)}(\Phi^\circ(t)),\qquad
+\tau_k^{\mathrm C}=u_k(F_h).
+\end{equation}
+The IJNT manuscript establishes its sublevel construction and, for the indices in the asymptotic range, strict increase and that
+\begin{equation}\label{eq:oldMS}
+\sum_{T<\gamma_k\le2T}|\tau_k^{\mathrm C}-\gamma_k|^2\ll\frac{T}{\log T}.
+\end{equation}
+It does not prove pointwise containment between consecutive values of $\gamma_k$.
+
+\begin{lemma}[Necessary counting-function bound]\label{lem:countconstraint}
+Let $A(t)\ge0$ be continuous. Suppose $N_0(t)\pm A(t)$ are eventually strictly increasing,
+$N_0(t)-A(t)\to\infty$, and
+$\sup_{0<s\le t}(N_0(s)+A(s))=N_0(t)+A(t)$ for all sufficiently large $t$.
+If a continuous $F$ satisfies $|F(t)-N_0(t)|\le A(t)$ and
+\begin{equation}\label{eq:neighbor}
+\gamma_{k-1}\le u_k(F)<\gamma_{k+1}\qquad\text{for every sufficiently large }k,
+\end{equation}
+then at every sufficiently large $t$ which is not the imaginary part of a zero,
+\begin{equation}\label{eq:countnecessary}
+|N(t)-N_0(t)|\le A(t)+\tfrac32.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Put $q=N(t)$, so $\gamma_q<t<\gamma_{q+1}$ for large $t$. If
+$q-\frac32>N_0(t)+A(t)$, the upper bound for $F(s)$ holds below $q-\frac32$ on $(0,t]$, whence $u_{q-1}(F)\ge t$. This contradicts $u_{q-1}(F)<\gamma_q<t$. If $q+\frac32<N_0(t)-A(t)$, the lower bound for $F(s)$ holds above $q+\frac32$ for every $s\ge t$ by eventual monotonicity, whence $u_{q+2}(F)\le t$, contradicting $u_{q+2}(F)\ge\gamma_{q+1}>t$.
+\end{proof}
+
+\begin{theorem}[Unconditional failure of eventual neighboring-zero containment]\label{thm:omega}
+For the original $\tau_k^{\mathrm C}$ of \eqref{eq:old}, the inequalities
+\begin{equation}\label{eq:impossible}
+\gamma_{k-1}\le\tau_k^{\mathrm C}<\gamma_{k+1}
+\end{equation}
+cannot hold for all sufficiently large $k$. For every fixed integer $r\ge1$ there are arbitrarily large $k$ with $\tau_k^{\mathrm C}\ge\gamma_{k+r}$ and arbitrarily large $k$ with $\tau_k^{\mathrm C}\le\gamma_{k-r}$. The same statements hold for the sublevel points of any continuous phase correction bounded by $h(t)$, subject to the natural finiteness conditions.
+\end{theorem}
+\begin{proof}
+The truncation $h$ satisfies the conditions of \cref{lem:countconstraint}. The unconditional Tsang $\Omega_\pm$ theorem \cite{Tsang1986,Dobner2024} gives
+\begin{equation}\label{eq:omegaS}
+S(t)=\Omega_\pm\!\left(\left(\frac{\log t}{\log\log t}\right)^{1/3}\right)
+\end{equation}
+along arbitrarily large heights away from zeros. Since
+$(\log t/\log\log t)^{1/3}/\log\log t\to\infty$,
+\eqref{eq:countnecessary} with $A=h$ contradicts \eqref{eq:RVM}.
+For the stronger assertion, at a positive large value of $S(t)$ put $q=N(t)$ and use each index $k$ with $N_0(t)+h(t)<k-\tfrac12$ and $k+r\le q$; then
+$u_k(F)\ge t>\gamma_{k+r}$. The number of such indices tends to infinity along a positive $\Omega$ sequence. The negative sequence gives the analogous assertion on the other side, using $N_0-h$.
+\end{proof}
+
+\begin{corollary}[Necessary truncation scale]\label{cor:amp}
+Under the monotonicity hypotheses of \cref{lem:countconstraint}, eventual containment \eqref{eq:neighbor} is impossible if
+\begin{equation}\label{eq:amp-scale}
+A(t)=o\!\left((\log t/\log\log t)^{1/3}\right).
+\end{equation}
+\end{corollary}
+\begin{proof}Combine \cref{lem:countconstraint} with \eqref{eq:omegaS}.\end{proof}
+
+\section{Modified taucm from the explicit MCOM bound}\label{sec:taucm}
+The accompanying Mathematics of Computation submission \cite{CasanaMCOM} obtains, without RH,
+\begin{equation}\label{eq:MCOM}
+|S(t)|\le0.08382\log t+4.444\qquad(t\ge1),
+\end{equation}
+with the compatible convention at zero heights. Its other bound is
+$|N(t)-\frac{t}{2\pi}\log\frac{t}{2\pi e}|\le0.08382\log t+5.326$ for $t\ge1$.
+Combined with the explicit estimate $|R(t)|\le0.53/(\pi t)$ for $t\ge1$ and the elementary range $0<t<1$, \eqref{eq:MCOM} gives
+\begin{equation}\label{eq:MCOMH}
+|G(t)|\le H(t),\qquad
+G(t):=N(t)-N_0(t),\qquad
+H(t):=0.08382\log\max(t,e)+5.5
+\end{equation}
+for almost every $t>0$ (and under the stated conventions also at the jumps). Indeed $4.444+0.53/\pi<5.5$; for $t<1$ use $N(t)=0$ and the elementary bound on $N_0(t)$.
+
+\begin{definition}[Improved taucm]\label{def:taucm}
+Retain the original $\Phi^\circ$ and its prime budget $m_j=\lfloor2^{j/2}\rfloor$, and set
+\begin{equation}\label{eq:taucm}
+F^{\Cm}(t)=N_0(t)+\clip_{H(t)}(\Phi^\circ(t)),\qquad
+\tau_k^{\Cm}=u_k(F^{\Cm}).
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Contractivity of covered truncation]\label{prop:contract}
+If $|y|\le a$, then for every real $x$,
+\begin{equation}\label{eq:contract}
+|\clip_a(x)-y|\le|x-y|.
+\end{equation}
+Consequently, for almost all $t>0$,
+\begin{equation}\label{eq:contract-F}
+|F^{\Cm}(t)-N(t)|\le|N_0(t)+\Phi^\circ(t)-N(t)|.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Truncation to $[-a,a]$ is the nearest-point projection onto a closed interval. Apply its elementary distance inequality with $x=\Phi^\circ(t)$ and $y=G(t)$.
+\end{proof}
+
+\begin{theorem}[Fourth moment and mean-square localization for taucm]\label{thm:taucm}
+Assume the following unconditional inputs as established in the cited IJNT manuscript \cite{CasanaIJNT}: its fourth-moment estimate for the \emph{untruncated} phase (Lemma ``Fourth moment of the counting error'', label \texttt{lem:fourth}),
+\begin{equation}\label{eq:IJNTinput}
+\int_U^{2U}|N_0(t)+\Phi^\circ(t)-N(t)|^4\dd\ll U
+\quad(U=2^j\text{ sufficiently large}),
+\end{equation}
+and its third-moment estimate for the successive differences $\gamma_{k+1}-\gamma_k$ (Lemma ``Third moment of the gaps'', label \texttt{lem:gaps}) and deterministic sublevel-transfer theorem (Theorem ``Sublevel transfer'', label \texttt{thm:transfer}, with constant $2\cdot24^{1/3}$).
+Then, without RH,
+\begin{align}
+\int_T^{2T}|F^{\Cm}(t)-N(t)|^4\dd&\ll T,\label{eq:cm-fourth}\\
+\sum_{T<\gamma_k\le2T}|\tau_k^{\Cm}-\gamma_k|^2
+&\ll\frac{T}{\log T}.\label{eq:cm-mean}
+\end{align}
+The constants are absolute and the prime budget is unchanged.
+\end{theorem}
+\begin{proof}
+By \cref{prop:contract}, \eqref{eq:IJNTinput} passes directly to $F^{\Cm}$. A general $[T,2T]$ is covered by a bounded number of dyadic intervals of comparable length, proving \eqref{eq:cm-fourth}. For large $T$, \eqref{eq:MCOMH} and $H(t)=O(\log(2+t))$ ensure that all sublevel sets for indices with $T<\gamma_k\le2T$ contain $(0,T/2]$ and are contained in $(0,3T)$, exactly as in the corresponding localization step of IJNT: the separations in $N_0$ across these endpoints have order $T\log T$, whereas both the correction and the difference $N-N_0$ are $O(\log T)$. Explicitly, let $T<\gamma_k\le2T$ with $T$ large, so that $N(T)\le k-1$ and $N(2T)\ge k$. If $0<t\le T/2$, then $F^{\Cm}(t)\le N_0(T/2)+H(T/2)<N_0(T)-H(T)\le N(T)\le k-1$, using that $N_0+H$ is eventually increasing and bounded on the initial range, and \eqref{eq:MCOMH}. If $t\ge3T$, then $F^{\Cm}(t)\ge N_0(3T)-H(3T)>N_0(2T)+H(2T)\ge N(2T)\ge k$. The deterministic sublevel-transfer inequality of IJNT, with integer discrepancy
+$q_F(t)=|\lfloor F(t)+\frac12\rfloor-N(t)|$, gives
+\begin{equation*}
+\sum_{T<\gamma_k\le2T}|\tau_k^{\Cm}-\gamma_k|^2
+\ll \left(\sum_{\gamma_j\in[T/2,3T]}(\gamma_{j+1}-\gamma_j)^3\right)^{1/2}
+\left(\int_{T/2}^{3T}q_{F^{\Cm}}(t)^4\dd\right)^{1/2}.
+\end{equation*}
+The first factor is $O(T^{1/2}/\log T)$ by the cited gap input; the second is $O(T^{1/2})$ because $q_F\le|F-N|+\frac12$ and \eqref{eq:cm-fourth} applies on a bounded collection of dyadic intervals. Their product proves \eqref{eq:cm-mean}.
+\end{proof}
+
+\begin{remark}[Projection does not order the two truncations]
+\label{rem:no-h-cm-comparison}
+The contractivity estimate \eqref{eq:contract-F} compares the improved function
+with the \emph{untruncated} phase $N_0+\Phi^\circ$; it does not yield
+$|F^{\Cm}-N|\le |F_h-N|$. A larger truncation interval need not improve
+pointwise distance to a target lying outside the smaller interval.
+Hence the input required above is specifically the untruncated fourth moment
+\eqref{eq:IJNTinput}, not a fourth-moment estimate deduced solely for $F_h$.
+The elementary bound $|F^{\Cm}-N|\le 2H$ holds whenever
+$|N-N_0|\le H$.
+\end{remark}
+
+\begin{remark}[Asymptotic refinement from the MCOM result]\label{rem:MCOM-asympt}
+The same MCOM submission also states the stronger asymptotic inequality
+\begin{equation}\label{eq:asymptMCOM}
+\limsup_{t\to\infty}\frac{|S(t)|}{\log t}<0.0748596142711.
+\end{equation}
+Consequently, for every fixed $c>0.0748596142711$ there exists $T_c$ such that
+$|N(t)-N_0(t)|\le c\log t$ for all sufficiently large $t$ away from zero heights. One may therefore replace $H$ by a positive continuous truncation bound that agrees with $c\log t$ above $T_c$, and that dominates $|N-N_0|$ below $T_c$. The same projection argument applies. Unlike \eqref{eq:MCOMH}, this refinement does not provide an effective value of $T_c$ and cannot be used as an explicit estimate at a specified height.
+\end{remark}
+
+\begin{remark}[Exact scope]\label{rem:taucm-scope}
+The modification removes the specific impossibility mechanism in \cref{thm:omega}: its truncation is large enough to contain $N-N_0$. It does not prove that every $\tau_k^{\Cm}$ lies between the imaginary parts of neighboring zeros, nor does it establish RH or simplicity. The argument transfers established IJNT estimates to a different truncation; it does not derive a uniform result for arbitrary prime cutoffs $X$.
+\end{remark}
+
+\section{The structural saturation obstruction}\label{sec:saturation}
+The following is the precise mathematical content of the objection that ordering, truncation and the general sublevel-transfer inequality cannot by themselves prohibit saturation. It is not a theorem asserting that the \emph{actual} weighted Euler phases saturate.
+
+\begin{theorem}[Structural saturation model]\label{thm:structural}
+Let $H$ be given by \eqref{eq:MCOMH}. For $Q>0$ define
+\begin{equation}\label{eq:sat-model}
+F_Q(t)=N_0(t)+H(t)\tanh\bigl(Q\sin(Qt)\bigr),
+\qquad u_k(Q)=u_k(F_Q).
+\end{equation}
+For all sufficiently large $Q$, $F_Q$ is continuous; its sublevel measures are finite, positive and strictly increasing in $k$; $|F_Q-N_0|\le H$; and every deterministic sublevel-transfer inequality applicable to continuous $F$ applies to $F_Q$. For each fixed sufficiently large $k$,
+\begin{equation}\label{eq:sat-limit}
+\lim_{Q\to\infty}u_k(Q)
+=\frac12\meas\{N_0+H<k-\tfrac12\}
+ +\frac12\meas\{N_0-H<k-\tfrac12\}.
+\end{equation}
+Writing $\varphi_\pm=N_0\pm H$, which are strictly increasing near the relevant levels for large $k$, one also has
+\begin{equation}\label{eq:sat-spacing}
+\lim_{Q\to\infty}(u_{k+1}(Q)-u_k(Q))
+=\frac12\bigl[\varphi_+^{-1}(k+\tfrac12)-\varphi_+^{-1}(k-\tfrac12)
++\varphi_-^{-1}(k+\tfrac12)-\varphi_-^{-1}(k-\tfrac12)\bigr].
+\end{equation}
+These properties do not characterize the prime-corrected functions $F_X^W$ and do not provide information on $\beta_k$.
+\end{theorem}
+\begin{proof}
+The bounds and continuity follow immediately from \eqref{eq:sat-model}. Since $N_0-H\to+\infty$, all relevant sublevel measures are finite. For $Q$ large, a point near $3\pi/(2Q)$ has $F_Q<1/2$, whereas $F_Q(t)\to+\infty$ as $t\to\infty$. Continuity thus implies that $F_Q$ takes every value in each interval $[k-\frac12,k+\frac12)$ on a set of positive measure, giving $0<u_k(Q)<u_{k+1}(Q)$.
+
+Fix a compact interval $I$ and $c\in\mathbb R$ such that the level sets $\{N_0\pm H=c\}\cap I$ have measure zero. Put $\eta_Q=Q^{-1/2}$ and $I_Q^\pm=\{t\in I:\pm\sin(Qt)\ge\eta_Q\}$. Then $\meas(I\setminus(I_Q^+\cup I_Q^-))\to0$, and on $I_Q^\pm$ one has $|F_Q-(N_0\pm H)|\le H(1-\tanh\sqrt Q)\to0$ uniformly. Since $\meas(\{|N_0\pm H-c|\le\epsilon\}\cap I)\to0$ as $\epsilon\to0$, it follows that $\meas(I_Q^\pm\cap\{F_Q<c\})-\meas(I_Q^\pm\cap\{N_0\pm H<c\})\to0$. Finally, for every measurable $A\subset I$, $\meas(A\cap I_Q^\pm)\to\frac12\meas(A)$: the indicator of $\{\pm\sin(Qt)\ge\eta_Q\}$ differs from that of $\{\pm\sin(Qt)>0\}$ on a set of measure $o(1)$, and the latter is $\frac12$ plus a $2\pi/Q$-periodic function of mean zero, which tends weakly to $0$ by the Riemann--Lebesgue lemma. The level boundaries of $N_0\pm H$ are finite in any compact interval, for sufficiently large $k$, because the functions eventually increase. Since $N_0-H\to\infty$, the sublevel sets lie in a common compact interval for each fixed $k$. This proves \eqref{eq:sat-limit}. Taking differences yields \eqref{eq:sat-spacing}; for large $k$ the two sublevel measures equal the corresponding inverse-function values.
+\end{proof}
+
+\begin{theorem}[Fourth-moment obstruction to saturation]\label{thm:sat-fourth}
+Let $G=N-N_0$. For every fixed $T\ge2$, the functions in \eqref{eq:sat-model} satisfy
+\begin{equation}\label{eq:sat-L4}
+\lim_{Q\to\infty}\int_T^{2T}|F_Q(t)-N(t)|^4\dd
+=\int_T^{2T}\bigl(H^4+6H^2G^2+G^4\bigr)\dd
+\ge\int_T^{2T}H(t)^4\dd.
+\end{equation}
+Consequently no estimate $\int_T^{2T}|F_Q-N|^4\dd\le CT$ can hold for all sufficiently large $T$ and all $Q>0$ with an absolute $C$, because
+\begin{equation}\label{eq:sat-scale}
+\int_T^{2T}H(t)^4\dd\asymp T(\log T)^4.
+\end{equation}
+This does not contradict the fixed-budget IJNT estimate: $F_Q$ is an abstract test construction, not its Euler phase.
+\end{theorem}
+\begin{proof}
+For fixed $T$, $G$ and $H$ are bounded on $[T,2T]$. Weak equidistribution of the two signs, established in the proof of \cref{thm:structural} and applied on each interval between consecutive jumps of $N$, gives the first equality; these jumps form a finite set. The integrand's average is
+$\frac12(H-G)^4+\frac12(-H-G)^4=H^4+6H^2G^2+G^4$.
+The last estimate follows from $H(t)=0.08382\log t+O(1)$ throughout $[T,2T]$.
+\end{proof}
+
+\begin{corollary}[A conditional exclusion principle]\label{cor:exclusion}
+Suppose a family of \emph{actual} weighted prime phases $F_X^W$ satisfies, along some $X_n\to\infty$, the saturated two-sign distribution on every compact interval, in the precise weak-integral sense used in \cref{thm:sat-fourth}. Then the global estimate
+\begin{equation}\label{eq:desired}
+\sup_{X\ge T^\varepsilon}\int_T^{2T}|F_X^W-N|^4\dd\ll_\varepsilon T
+\end{equation}
+for fixed $\varepsilon>0$, uniformly in $T$, is impossible. Conversely, a proof of \eqref{eq:desired} would exclude any scenario for the prime phase for which this saturation assertion is \emph{independently established}.
+\end{corollary}
+\begin{proof}
+For fixed $T$ all sufficiently large $X_n$ satisfy $X_n\ge T^\varepsilon$. Take $n\to\infty$ in the asserted uniform estimate and use \eqref{eq:sat-L4}; then let $T\to\infty$. The resulting $T(\log T)^4\ll_\varepsilon T$ is impossible.
+\end{proof}
+
+\begin{remark}[What the objection does not prove]\label{rem:claude}
+The preceding theorems show that the three elementary properties (increasing sublevel points, a bounded correction, and a universal transfer inequality) do not rule out saturation. They do \emph{not} prove that RH is false, that an arithmetic family necessarily saturates when RH is false, or that no further theorem using the specific prime coefficients can lead to RH. Establishing an off-critical-line saturation statement requires a separate explicit-formula and non-cancellation argument; its present status in \cite{CasanaDBSRH} is a proof sketch under additional hypotheses.
+\end{remark}
+
+\section{Smoothed prime powers and taucm(s)}\label{sec:weights}
+Let $\mathcal W$ denote the class of weights
+\begin{equation}\label{eq:weights}
+W(u)=\int_1^2q(v)\ind_{\{u\le v\}}\,dv,
+\quad q\ge0,\quad q\in BV[1,2],\quad \int_1^2q(v)\,dv=1.
+\end{equation}
+Thus $0\le W\le1$, $W=1$ for $0\le u\le1$, $W=0$ for $u\ge2$, and $W$ is nonincreasing. The Selberg weight corresponds to $q(v)=1$; the tested weight $W_{1/4}$ corresponds to $q(v)=v/2+1/4$. Let $\Lambda$ denote von Mangoldt's function. For $X\ge2$, set
+\begin{align}
+\Phi_X^W(t)&=\frac1\pi\operatorname{Im}\sum_{n\ge2}
+ W\!\left(\frac{\log n}{\log X}\right)
+\frac{\Lambda(n)}{n^{1/2+it}\log n},\label{eq:PhiW}\\
+\Pi_X^W(t)&=\frac1\pi\operatorname{Im}\int_2^\infty
+ W\!\left(\frac{\log u}{\log X}\right)
+\frac{u^{-1/2-it}}{\log u}\,du,\label{eq:PiW}\\
+P_X^W(t)&=\Phi_X^W(t)-\Pi_X^W(t),\label{eq:PW}\\
+F_X^W(t)&=N_0(t)+\clip_{H(t)}(P_X^W(t)),\qquad
+\tau_k^{\Cms}(X;W)=u_k(F_X^W).\label{eq:Cms}
+\end{align}
+The sum and the integral are finite because $W$ is supported on $[0,2]$. The compensator $\Pi_X^W$ corresponds to the pole contribution. These definitions do not use $\beta_k$.
+
+\begin{definition}[DBSRH for a weight]\label{def:DBSRH}
+For a fixed $W\in\mathcal W$, the convergence statement is
+\begin{equation}\label{eq:DBSRH}
+\mathrm{DBSRH}(W):\qquad
+\lim_{X\to\infty}\tau_k^{\Cms}(X;W)=\gamma_k
+\quad\text{for each fixed }k\ge1.
+\end{equation}
+No equivalence between \eqref{eq:DBSRH} and RH is assumed or proved here.
+\end{definition}
+
+\begin{lemma}[Pole compensator]\label{lem:pole}
+Uniformly over $W\in\mathcal W$, $X\ge2$, and $t\ge1$,
+\begin{equation}\label{eq:pole-bound}
+|\Pi_X^W(t)|\ll\frac{1+X}{t}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+With $L=\log X$ and $v=\log u$, the integral in \eqref{eq:PiW} has amplitude $a(v)=W(v/L)e^{v/2}/v$, supported on $[\log2,2L]$. The total variation of $a$ plus its endpoint values is $O(1+X)$, uniformly in $W$: $W$ is nonincreasing with total variation at most one, and $e^{v/2}/v$ has bounded variation $O(1+X)$ on this interval. Integration by parts against $e^{-itv}$ proves the result.
+\end{proof}
+
+\section{A rigorous restriction on small prime cutoffs}\label{sec:subpoly}
+The next theorem demonstrates that a fourth-moment estimate uniform over \emph{all} diverging cutoffs $X=X(T)$ is false, even without any hypothesis on RH.
+
+\begin{theorem}[Subpolynomial cutoff obstruction]\label{thm:smallX}
+Let $X=X(T)\to\infty$ and $\log X=o(\log T)$. For every choice $W=W_T\in\mathcal W$ (allowed to depend on $T$),
+\begin{equation}\label{eq:smallX}
+\int_T^{2T}|F_X^W(t)-N(t)|^4\dd
+\ge\left(\frac1{4\pi^4}+o(1)\right)
+ T\left(\log\frac{\log T}{\log X}\right)^2.
+\end{equation}
+The $o(1)$ is uniform over the indicated weights and, along the stated cutoff sequence, tends to zero. In particular, the left-hand side divided by $T$ diverges.
+\end{theorem}
+\begin{proof}
+Put $Y=T^{1/200}$. By \eqref{eq:FujiiA} with $\mathsf k=2$, $\alpha_{\rm F}=\frac15$ and $H=T$ (so that $Y=T^{\alpha_{\rm F}/(20\mathsf k)}$), and H\"older's inequality, its $L^2$ consequence is
+\begin{equation}\label{eq:FujiiL2}
+\left\|S(t)-\frac1\pi\operatorname{Im}\sum_{p<Y}p^{-1/2-it}\right\|_{L^2[T,2T]}
+\ll\sqrt T.
+\end{equation}
+For large $T$, $X^2<Y$. The difference between the short prime sum and the prime terms of $\Phi_X^W$ is the imaginary part divided by $\pi$ of
+\begin{equation}\label{eq:diffprime}
+D(t)=\sum_{p<Y}\frac{a_p}{\sqrt p}p^{-it},\qquad
+a_p=1-W\!\left(\frac{\log p}{\log X}\right),
+\end{equation}
+where $a_p=0$ for $p\le X$, $0\le a_p\le1$ for $X<p\le X^2$, and $a_p=1$ for $X^2<p<Y$.
+Mertens' theorem \cite{Mertens1874} yields, uniformly in $W$,
+\begin{equation}\label{eq:diffvar}
+\sum_{p<Y}\frac{a_p^2}{p}
+=\log\frac{\log T}{\log X}+O(1).
+\end{equation}
+Indeed the interval $(X,X^2]$ contributes at most $\log2+o(1)$, and the interval $(X^2,Y)$ gives the claimed logarithm up to an absolute constant.
+
+Montgomery--Vaughan \cite{MontgomeryVaughan} gives
+\begin{equation*}
+\int_T^{2T}|D(t)|^2\dd
+=T\sum_{p<Y}\frac{a_p^2}{p}+O(Y).
+\end{equation*}
+Also $\int_T^{2T}D(t)^2\dd=O(Y)$ by direct integration of $(pq)^{-it}$, since $\log(pq)\ge\log4$. Hence
+\begin{equation}\label{eq:imD}
+\int_T^{2T}\left|\frac{\operatorname{Im}D(t)}\pi\right|^2\dd
+=\frac{T}{2\pi^2}\left(\log\frac{\log T}{\log X}+O(1)\right)+O(Y).
+\end{equation}
+The sum over prime powers $p^r$, $r\ge2$, in \eqref{eq:PhiW} has $L^2[T,2T]$ norm $O(\sqrt T)$ uniformly for $X=T^{o(1)}$: for $r=2$ use Montgomery--Vaughan on
+$\sum_{p\le X}W(2\log p/\log X)p^{-1-2it}$, whose diagonal $\sum_p p^{-2}$ converges and whose remainder is $O(\pi(X))=o(T)$; the terms with $r\ge3$ converge absolutely. By \cref{lem:pole}, $\|\Pi_X^W\|_2\ll X/\sqrt T=o(\sqrt T)$; also $\|R\|_2\ll T^{-1/2}$. Combining these estimates with \eqref{eq:FujiiL2} and \eqref{eq:imD}, and writing $D_T=\log(\log T/\log X)\to\infty$, gives
+\begin{equation}\label{eq:preclipL2}
+\|N_0+P_X^W-N\|_2
+\ge \left(\frac1{\sqrt2\pi}+o(1)\right)\sqrt{TD_T}.
+\end{equation}
+
+We now check that truncation does not alter the principal size. Because $X^4=T^{o(1)}$, a second application of Montgomery--Vaughan to the square of the prime polynomial yields
+\begin{equation}\label{eq:powerfour}
+\int_T^{2T}|P_X^W(t)|^4\dd\ll T\bigl(1+\log\log(3X)\bigr)^2.
+\end{equation}
+Indeed, the square of the prime part $\sum_{p\le X^2}W(\log p/\log X)p^{-1/2-it}$ is $\sum_{n\le X^4}c_nn^{-it}$ with $\sum_n|c_n|^2\le2\bigl(\sum_{p\le X^2}p^{-1}\bigr)^2\ll(1+\log\log(3X))^2$ and $\sum_nn|c_n|^2\le2\pi(X^2)^2\le X^4=T^{o(1)}$, so Montgomery--Vaughan gives the bound for this part. The contributions of the prime squares, higher powers and pole term are handled as above. For every $a>0$, $|x-\clip_a(x)|^2\le |x|^4/a^2$; therefore $H(t)\gg\log T$ on $[T,2T]$ implies
+\begin{equation*}
+\int_T^{2T}|P_X^W-\clip_H(P_X^W)|^2\dd
+\ll T\frac{(1+\log\log(3X))^2}{(\log T)^2}=o(T).
+\end{equation*}
+Thus \eqref{eq:preclipL2} remains valid with $N_0+P_X^W$ replaced by $F_X^W$. Finally, H\"older's inequality gives
+\begin{equation*}
+\int_T^{2T}|F_X^W-N|^4\dd
+\ge T^{-1}\left(\int_T^{2T}|F_X^W-N|^2\dd\right)^2,
+\end{equation*}
+which proves \eqref{eq:smallX}.
+\end{proof}
+
+\begin{remark}[Meaning of the lower restriction]\label{rem:necessary}
+A universal $O(T)$ fourth-moment estimate valid for \emph{every} diverging cutoff is therefore impossible. The theorem forces $\liminf_{T\to\infty}\log X(T)/\log T>0$ along any family satisfying a uniform $O(T)$ bound. It does not assert that $X\ge T^\varepsilon$ is sufficient when there is no upper bound on $X$.
+\end{remark}
+
+\section{Uniform fourth moment in a polynomial cutoff range}\label{sec:moderate}
+\begin{theorem}[Uniform weighted fourth moment]\label{thm:moderate}
+Fix $0<\varepsilon<\frac14$. Subject to the Fujii input \eqref{eq:FujiiA}, there is $C_\varepsilon>0$, independent of $T$, $X$, and $W$, such that for $T$ sufficiently large,
+\begin{equation}\label{eq:moderate}
+\boxed{\displaystyle
+\sup_{\substack{W\in\mathcal W\\ T^\varepsilon\le X\le T^{1/4}}}
+\int_T^{2T}|F_X^W(t)-N(t)|^4\dd\le C_\varepsilon T.}
+\end{equation}
+No RH assumption is used.
+\end{theorem}
+\begin{proof}
+Fix $\delta=\min(\varepsilon/2,1/200)>0$ and set $Y=T^\delta$. By \eqref{eq:FujiiA} with $\mathsf k=2$, $\alpha_{\rm F}=40\delta\le\frac15$ and $H=T$ (so that $Y=T^{\alpha_{\rm F}/(20\mathsf k)}\le H^{1/2}$),
+\begin{equation}\label{eq:Fujii4}
+\int_T^{2T}\left|S(t)-\frac1\pi\operatorname{Im}\sum_{p<Y}p^{-1/2-it}\right|^4\dd\ll_\varepsilon T.
+\end{equation}
+Because $Y<X$, the difference between the prime terms of $\Phi_X^W$ and the sum in \eqref{eq:Fujii4} is
+\begin{equation*}
+A_X(t)=\sum_{Y\le p\le X^2}\frac{w_p}{\sqrt p}p^{-it},
+\qquad w_p=W(\log p/\log X)\in[0,1].
+\end{equation*}
+Mertens' theorem and $T^\varepsilon\le X\le T^{1/4}$ give
+\begin{equation}\label{eq:variance}
+V_X:=\sum_{Y\le p\le X^2}\frac{w_p^2}p
+\ll\log\log(X^2)-\log\log Y+O(1)\ll_\varepsilon1.
+\end{equation}
+Write $A_X^2=\sum_{n\le X^4}b_n n^{-it}$. If $d(n)$ counts ordered decompositions $n=pq$ with primes $Y\le p,q\le X^2$, then $d(n)\le2$ and
+\begin{equation*}
+\sum_n|b_n|^2\le2V_X^2\ll_\varepsilon1,
+\quad
+\sum_n n|b_n|^2\le2\pi(X^2)^2\ll X^4\le T.
+\end{equation*}
+Consequently the Montgomery--Vaughan mean-value theorem applied to $A_X^2$ yields
+\begin{equation}\label{eq:A4}
+\int_T^{2T}|A_X(t)|^4\dd\ll_\varepsilon T.
+\end{equation}
+
+The prime-square terms are, up to the coefficient $1/(2\pi)$,
+\begin{equation*}
+B_X(t)=\sum_{p\le X}\frac{W(2\log p/\log X)}p\,p^{-2it}.
+\end{equation*}
+Applying the same argument to $B_X^2$, now with frequencies $(pq)^2$, gives
+\begin{equation}\label{eq:B4}
+\int_T^{2T}|B_X(t)|^4\dd\ll T;
+\end{equation}
+indeed $\sum_p p^{-2}<\infty$ controls the diagonal and the Montgomery--Vaughan remainder is $O(\pi(X)^2)=O(X^2)$. The sum of the prime-power terms with exponent $r\ge3$ is bounded absolutely independently of $X$. By \cref{lem:pole}, $|\Pi_X^W(t)|\ll X/T\ll T^{-3/4}$ on $[T,2T]$. Combining these estimates with \eqref{eq:Fujii4} by Minkowski,
+\begin{equation}\label{eq:untruncatedmoderate}
+\int_T^{2T}|N_0(t)+P_X^W(t)-N(t)|^4\dd\ll_\varepsilon T.
+\end{equation}
+Finally, $|G(t)|\le H(t)$ by \eqref{eq:MCOMH}. The contractivity in \cref{prop:contract}, with $x=P_X^W(t)$ and $y=G(t)$, transfers \eqref{eq:untruncatedmoderate} directly to \eqref{eq:moderate}.
+\end{proof}
+
+\begin{remark}[The precise upper restriction]\label{rem:quarter}
+The exponent $1/4$ comes from the support $n\le X^2$ in the weighted prime polynomial and the support $n\le X^4$ after squaring it. Montgomery--Vaughan controls the remainder by $O(X^4)$. This is a limitation of this \emph{particular fourth-moment proof}; it is not a theorem that a larger $X$ is impossible or incompatible with RH. In particular, \cref{thm:moderate} does not establish \eqref{eq:desired}.
+\end{remark}
+
+\begin{theorem}[Logarithmic improvement for the two fixed weights]\label{thm:moderate-log}
+Fix $0<\varepsilon<1/4$ and choose either the Selberg weight $q(v)=1$
+or $W_{1/4}$ with $q(v)=v/2+1/4$. Under the same Fujii input as
+\cref{thm:moderate}, there exists $C_{\varepsilon,W}$ such that
+\begin{equation}\label{eq:moderate-log}
+\sup_{T^\varepsilon\le X\le T^{1/4}(\log T)^{3/2}}
+\int_T^{2T}|F_X^W(t)-N(t)|^4\dd\le C_{\varepsilon,W}T.
+\end{equation}
+This is an extension in the \emph{weighted support parameter} $X$,
+not a claim for every $W\in\mathcal W$.
+\end{theorem}
+\begin{proof}
+For the indicated weights, $0\le q(v)\le B_W$ and
+$W(v)\le B_W(2-v)$ for $1\le v\le2$. Thus
+\begin{equation}\label{eq:wprime2}
+\sum_{p\le X^2}W(\log p/\log X)^2
+\ll_W\frac{X}{\log X}+\frac{X^2}{(\log X)^3}
+\ll_W\frac{X^2}{(\log X)^3}.
+\end{equation}
+Indeed, for $p\le X$, use the prime-counting bound;
+for $X<p\le X^2$, split into strips
+$X^2e^{-(r+1)}<p\le X^2e^{-r}$ ($r\ge0$),
+use $W\le B_W(r+1)/\log X$ and
+$\pi(y)\ll y/\log y$ when $y\ge X$,
+then sum the absolutely convergent series
+$\sum_{r\ge0}e^{-r}(r+1)^2$.
+For $A_X$ as in the proof of \cref{thm:moderate}, the bound
+$\sum_n|b_n|^2\ll_\varepsilon1$ is unchanged, while
+\begin{equation*}
+\sum_n n|b_n|^2
+\le2\left(\sum_{Y\le p\le X^2} w_p^2\right)^2
+\ll_W\frac{X^4}{(\log X)^6}\ll_\varepsilon T
+\end{equation*}
+throughout the enlarged range. The treatment of prime squares,
+higher prime powers and the pole compensator remains valid:
+$X^2\ll T$ and $X/T\ll1$. Apply Montgomery--Vaughan and the
+projection contraction as before.\end{proof}
+
+\begin{proposition}[Small proportion of saturated values]\label{prop:sat-measure}
+Under the assumptions of \cref{thm:moderate-log}, let
+$\mathcal E_{T,X}=\{t\in[T,2T]:|P_X^W(t)|\ge H(t)\}$.
+Then
+\begin{equation}\label{eq:sat-measure}
+\sup_{T^\varepsilon\le X\le T^{1/4}(\log T)^{3/2}}
+\meas(\mathcal E_{T,X})\ll_{\varepsilon,W}\frac{T}{(\log T)^4}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Split $\mathcal E_{T,X}$ according to $|G(t)|\le H(t)/2$ and its
+complement, where $G=N-N_0$. In the first case $|F_X^W-N|\ge H/2$;
+Markov's inequality and \eqref{eq:moderate-log} give
+$O_{\varepsilon,W}(T/(\log T)^4)$. In the second case,
+$|S(t)|\gg\log T$ for large $T$ because $R(t)=O(T^{-1})$.
+The eighth-moment estimate of Selberg \cite{Selberg1946,Titchmarsh} gives
+$O(T(\log\log T)^4/(\log T)^8)$ for the second set.
+\end{proof}
+\begin{remark}
+The last proposition concerns a jointly growing $X$ and $T$ in a specified
+range. It provides no information about $X\to\infty$ with $T$ held fixed.
+\end{remark}
+
+\section{A zero-sum fourth-moment lemma without an upper cutoff}\label{sec:zero-sum}
+A distinct estimate gives supporting evidence for considering $X\ge T^\varepsilon$ without an upper restriction, but is not an estimate for the full arithmetic phase.
+
+\begin{theorem}[Unconditional smoothed zero-sum bound]\label{thm:ZL}
+For $L>0$ let
+\begin{equation}\label{eq:ZL}
+\mathcal Z_L(t)=\sum_{\gamma_k>0}\frac1{(1+L|t-\gamma_k|)^2},
+\end{equation}
+where the imaginary parts are counted with multiplicity. For each fixed $\varepsilon>0$,
+\begin{equation}\label{eq:ZL4}
+\boxed{\displaystyle
+\sup_{L\ge\varepsilon\log T}\int_T^{2T}\mathcal Z_L(t)^4\dd
+\ll_\varepsilon T.}
+\end{equation}
+No RH hypothesis is required.
+\end{theorem}
+\begin{proof}
+For $v\in\mathbb R$,
+\begin{equation}\label{eq:kernelintegral}
+(1+L|v|)^{-2}=\int_{|v|}^\infty\frac{2L}{(1+Lu)^3}\,du.
+\end{equation}
+Define $N(y)=0$ for $y\le0$. By Tonelli and \eqref{eq:kernelintegral},
+\begin{equation}\label{eq:Zrepresentation}
+\mathcal Z_L(t)=\int_0^\infty\frac{2L}{(1+Lu)^3}
+\bigl(N(t+u)-N(t-u)\bigr)\,du
+\end{equation}
+for almost every $t$. On $0<u\le1$, \eqref{eq:FujiiB} with $\mathsf k=2$, $\alpha_{\rm F}=\frac12$ and $H=T$, together with \eqref{eq:RVM}, implies
+\begin{equation}\label{eq:inc4}
+\|N(t+u)-N(t-u)\|_{L^4[T,2T]}
+\ll T^{1/4}(1+u\log T).
+\end{equation}
+To see this, split the difference into the two increments of length $u$, shift the integration variable for one of them, and use the bound $\int |S(t+u)-S(t)|^4\dd\ll T(\log(2+u\log T))^2$; the main term changes by $O(u\log T)$, and $\sqrt{\log(2+v)}\ll1+v$.
+For $u>1$, the Riemann--von Mangoldt formula and $S(y)=O(\log(2+y))$ yield the elementary pointwise bound
+\begin{equation}\label{eq:inc-tail}
+N(t+u)-N(t-u)\ll(u+1)\log(2T+u),\qquad T\le t\le2T.
+\end{equation}
+Apply Minkowski to \eqref{eq:Zrepresentation}, using \eqref{eq:inc4} on $(0,1]$ and \eqref{eq:inc-tail} on $(1,\infty)$:
+\begin{equation*}
+\|\mathcal Z_L\|_4\ll T^{1/4}
+\left(1+\frac{\log T}{L}\right)
++T^{1/4}\,O\!\left(\frac{1+\log T}{L^2}\right).
+\end{equation*}
+Here $\int_0^\infty 2L(1+Lu)^{-3}\,du=1$ and
+$\int_0^\infty 2Lu(1+Lu)^{-3}\,du=1/L$; the tail integral is $O((1+\log T)/L^2)$ for $L\ge1$.
+When $L\ge\varepsilon\log T$ the right-hand side is $O_\varepsilon(T^{1/4})$, proving \eqref{eq:ZL4}.
+\end{proof}
+
+\begin{remark}[No hidden assumption about $\beta_k$]\label{rem:ZL}
+The sum in \eqref{eq:ZL} uses only $\gamma_k$ and their multiplicities. Thus \eqref{eq:ZL4} is compatible both with RH and with the existence of zeros outside $\Re s=1/2$. To transfer it to the actual weighted Euler phase under RH, one must \emph{first prove} an explicit formula with a kernel satisfying
+$|K_W(\frac12+i\gamma,t;X)|\ll_W(1+|t-\gamma|\log X)^{-2}$ and a suitably controlled remainder. That transfer is not contained in \cref{thm:ZL}.
+\end{remark}
+
+\section{Off-critical zeros, weight smoothness, and the unresolved range}\label{sec:open}
+For $W$ as in \eqref{eq:weights}, the leading contribution of a hypothetical zero with $\rho=\frac12+d+i\gamma$ ($d>0$), in the proposed explicit-formula analysis of \cite{CasanaDBSRH}, involves a Laplace integral of the form
+\begin{equation}\label{eq:laplace}
+\mathcal L_q(L,z)=\int_1^2q(v)e^{vLz}\,dv,
+\qquad z=d+i(\gamma-t),\quad L=\log X.
+\end{equation}
+For a sufficiently regular $q$ with $q(2)\ne0$, integration by parts gives, at fixed $z\ne0$ with $\Re z>0$,
+\begin{equation}\label{eq:Lap-asympt}
+\mathcal L_q(L,z)=\frac{q(2)e^{2Lz}}{Lz}
++O_z\!\left(\frac{e^{2Ld}}{L^2}\right)
++O_z\!\left(\frac{e^{Ld}}L\right),
+\end{equation}
+where the displayed remainder assumes, for instance, that $q$ has a bounded derivative. If $q$ vanishes to finite order at the endpoint, repeated integration by parts introduces additional powers of $1/L$ but does not suppress the factor $e^{2Ld}$. The Selberg weight and $W_{1/4}$ have $q(2)>0$. These statements explain a \emph{possible} saturation mechanism, not a proved lower bound for the total zero sum: distinct off-critical contributions can cancel.
+
+\paragraph{The precise remaining statement.}
+For some fixed $\varepsilon>0$ and a fixed admissible weight $W$, the candidate estimate is
+\begin{equation}\label{eq:fullgoal}
+\boxed{\displaystyle
+\sup_{X\ge T^\varepsilon}
+\frac1T\int_T^{2T}|F_X^W(t)-N(t)|^4\dd\le C_\varepsilon
+\qquad(T\ge T_0).}
+\end{equation}
+The lower restriction is consistent with the unconditional obstruction in \cref{thm:smallX}; there is deliberately no upper restriction. However \eqref{eq:fullgoal} has \emph{not} been proved. It cannot follow just from the deterministic truncation inequality, because the latter bounds the truncated error by the \emph{untruncated} arithmetic error, whose fourth moment is only controlled here in \cref{thm:moderate}.
+
+\paragraph{What remains to be supplied.}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+\item \textbf{A fully justified weighted explicit formula.} The formula relating $P_X^W-S$ to contributions of zeros, the pole and any remaining terms must be established with uniformity in $T$ and in arbitrarily large $X$, including the treatment of jumps and of $t$ near $\gamma_k$. The corresponding proposition in \cite{CasanaDBSRH} is presently a sketch.
+\item \textbf{An arithmetic fourth-moment estimate beyond $X\le T^{1/4}$.} The bound \eqref{eq:fullgoal} requires cancellation among prime powers beyond what the direct Montgomery--Vaughan argument supplies. A fourth-moment estimate on long intervals need not be replaced by a uniform mean square on windows of length one: the latter is sufficient in some approaches but is not logically necessary.
+\item \textbf{Non-cancellation for off-critical zeros.} The abstract model in \cref{thm:structural} cannot establish the behavior of the actual $P_X^W$. A genuine implication towards RH needs a proved saturation or alternative obstruction when $\beta_k>1/2$, with no unjustified hypothesis that a finite set of zeros achieves an isolated maximal real part.
+\item \textbf{Separate cell containment from convergence.} A sequence of strictly increasing $\tau_k^{\Cms}(X;W)$ can converge as $X\to\infty$ to a nondecreasing sequence with equal consecutive values. Thus \eqref{eq:DBSRH} alone does not directly establish RH or simplicity by an argument based solely on strict increase at finite $X$.
+\end{enumerate}
+
+\section{Exact sublevel identity and the stronger cell condition}\label{sec:cells}
+The following identity is valid for every measurable $F$ with finite sublevel measures, irrespective of RH:
+\begin{equation}\label{eq:area}
+u_k(F)-\gamma_k
+=\int_0^\infty\bigl(\ind_{\{F(t)<k-\frac12\}}-
+\ind_{\{N(t)<k-\frac12\}}\bigr)\dd.
+\end{equation}
+Indeed $\{N<k-\frac12\}$ equals $(0,\gamma_k)$ up to a set of measure zero. For $F=F_X^W$, write the right-hand side as
+\begin{align}
+\mathcal A_k^+(X)&=\meas\{t:F_X^W(t)<k-\tfrac12\le N(t)\},\label{eq:Aplus}\\
+\mathcal A_k^-(X)&=\meas\{t:N(t)<k-\tfrac12\le F_X^W(t)\},\label{eq:Aminus}
+\end{align}
+so that $\tau_k^{\Cms}(X;W)-\gamma_k=\mathcal A_k^+(X)-\mathcal A_k^-(X)$.
+A global $L^4$ bound concerns the \emph{size} of the arithmetic discrepancy, not uniform cancellation between the two signed sublevel contributions for every $k$.
+
+For any strictly increasing sequence $u_k$, put $\bar u_k=(u_k+u_{k+1})/2$.
+\begin{proposition}[A sufficient cell condition for RH and simplicity]\label{prop:RH}
+If, with a suitable first cell,
+\begin{equation}\label{eq:cell}
+\frac{u_{k-1}+u_k}{2}<\gamma_k<\frac{u_k+u_{k+1}}2
+\qquad(k\ge2),
+\end{equation}
+then every nontrivial zero has real part $\frac12$ and is simple.
+\end{proposition}
+\begin{proof}
+The intervals in \eqref{eq:cell} are disjoint. Consequently consecutive $\gamma_k$ cannot be equal. A zero of multiplicity greater than one would repeat its imaginary part. A zero $\rho=\beta+i\gamma$ with $\beta\ne\frac12$ would have the distinct reflected zero $1-\beta+i\gamma$, again repeating the imaginary part. Both cases are excluded.
+\end{proof}
+\begin{remark}
+The weaker condition $\gamma_{k-1}\le u_k<\gamma_{k+1}$ does not imply RH or simplicity; it can accommodate equal consecutive $\gamma_k$. The proposition is a sufficient criterion, \emph{not} a claim that the required cell containment has been proved for the proposed taucm(s).
+\end{remark}
+
+\section{Finite computations recorded in the associated research files}\label{sec:data}
+For context, the author's research notes \cite{CasanaNotes} for the branch
+\texttt{kc-tauC-2026-11-02} of the repository \texttt{vcasana1/prueba}
+record the following root-mean-square discrepancies, normalized by the mean spacing between successive $\gamma_k$, over the first $2{,}001{,}052$ zeros. These are \emph{reported measurements}, not computations independently repeated or certified for this note; they do not imply a uniform-in-$k$ result.
+\begin{center}
+\begin{tabular}{@{}p{0.68\linewidth}r@{}}
+\toprule
+Approximation scheme & Reported RMS \\
+\midrule
+Main term $N_0$ alone & $0.332$\\
+Original IJNT $\tau_k^{\mathrm C}$ & $0.0557$\\
+Sharp prime cutoff at $p\le t^{1.4}$ & $0.01456$\\
+Selberg weight with $X=t^{0.7}$ (support to $X^2=t^{1.4}$) & $0.01456$\\
+$W_{1/4}$ with $X=t^{0.7}$ (same support) & $\mathbf{0.01376}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The notes also report that the $W_{1/4}$ weight reduces RMS by approximately $5.5\%$ relative to the sharp cutoff at the same support, but performs less well for the two exceptionally close pairs indexed $4765$--$4766$ and $6709$--$6710$. These measurements concern earlier prime-phase approximations; no new numerical estimate for $\tau_k^{\Cm}$ under the MCOM truncation bound is claimed. Importantly, $X=t^{0.7}$ lies \emph{outside} the rigorously uniform range $X\le T^{1/4}$ proved in \cref{thm:moderate}. This distinction prevents a numerical experiment from being mistaken for an extension of that theorem.
+
+
+\section{Separation from the Riemann--von Mangoldt points}\label{sec:spacing-v3}
+Let $\gamma_k^{\mathrm{RvM}}$ be the unique solutions of
+$N_0(\gamma_k^{\mathrm{RvM}})=k-\tfrac12$ with
+$\gamma_k^{\mathrm{RvM}}>2\pi$. Since $N_0'(t)=(2\pi)^{-1}\log(t/2\pi)$,
+\begin{equation}\label{eq:rvm-separation-v3}
+\gamma_{k+1}^{\mathrm{RvM}}-\gamma_k^{\mathrm{RvM}}
+=\frac{1}{N_0'(\upsilon_k)}>0
+\end{equation}
+for some $\upsilon_k$ between the two points, and this difference is
+$\sim2\pi/\log\gamma_k^{\mathrm{RvM}}$ as $k\to\infty$.
+For the weighted constructions, put
+\begin{equation}\label{eq:gap-v3}
+\Delta_k(X;W)=\tau_{k+1}^{\Cms}(X;W)-\tau_k^{\Cms}(X;W)
+=\meas\{t>0:k-\tfrac12\le F_X^W(t)<k+\tfrac12\}.
+\end{equation}
+The identity is immediate from the definition of sublevel measure.
+A continuous function attaining both levels gives $\Delta_k(X;W)>0$;
+for sufficiently large $k$ this follows from $F_X^W=N_0+O(H)$ and
+$N_0-H\to\infty$, uniformly in $X$. For a small index, the existence
+of a point below the lower level must be checked: continuity and the
+upper bound alone do not guarantee strict positivity for every $X$.
+Even if all finite-cutoff spacings are positive,
+$\lim_{X\to\infty}\Delta_k(X;W)$ may be zero.
+
+\begin{theorem}[Uniform separation of sufficiently distant indices]
+\label{thm:block-sep-v3}
+For $k$ sufficiently large, let $a_k,b_k$ be the unique solutions in
+the eventual increasing region of $N_0(t)+H(t)=k-\tfrac12$ and
+$N_0(t)-H(t)=k-\tfrac12$, respectively. Then
+\begin{equation}\label{eq:barriers-v3}
+a_k\le\tau_k^{\Cms}(X;W)\le b_k\qquad(X\ge2).
+\end{equation}
+For every positive integer $m$ satisfying
+$m>2H(b_k)$,
+\begin{equation}\label{eq:blocksep-v3}
+\inf_{X\ge2}\bigl[\tau_{k+m}^{\Cms}(X;W)-
+\tau_k^{\Cms}(X;W)\bigr]\ge a_{k+m}-b_k>0.
+\end{equation}
+The same conclusion applies to taucm.
+\end{theorem}
+\begin{proof}
+The inequalities $N_0-H\le F_X^W\le N_0+H$ and the eventual
+monotonicity of both barriers show that the sublevel measure is at least
+$a_k$ and at most $b_k$, once the finitely many small-$t$ values cannot
+reach the levels in question. Further,
+$N_0(b_k)+H(b_k)=k-\tfrac12+2H(b_k)<k+m-\tfrac12$.
+Strict increase of $N_0+H$ implies $b_k<a_{k+m}$; subtract
+\eqref{eq:barriers-v3} at the two indices.\end{proof}
+\begin{remark}[Asymptotic MCOM improvement]
+For large $k$ the sufficient index separation is
+$m>(0.16764+o(1))\log\gamma_k^{\mathrm{RvM}}+O(1)$.
+Using a non-explicit large-height truncation bound obtained from the
+MCOM asymptotic coefficient, the coefficient can be replaced by
+$2C_{\mathrm H}+o(1)=0.1497192285422\ldots+o(1)$, where
+$C_{\mathrm H}=0.0748596142710907\ldots$.
+Neither statement covers adjacent indices $m=1$ for all large $k$.
+\end{remark}
+
+\begin{proposition}[Two local arithmetic occupation tests]
+\label{prop:occupation-v3}
+For $k$ sufficiently large put
+\begin{align*}
+I_k^+&=\{t>0:k-\tfrac12<N_0(t)+H(t)<k+\tfrac12\},\\
+I_k^-&=\{t>0:k-\tfrac12<N_0(t)-H(t)<k+\tfrac12\},\\
+B_k^+(X;W)&=\meas\{t\in I_k^+:P_X^W(t)\ge H(t)\},\\
+B_k^-(X;W)&=\meas\{t\in I_k^-:P_X^W(t)\le-H(t)\}.
+\end{align*}
+Then $I_k^+\cap I_k^-=\varnothing$ for large $k$ and
+\begin{equation}\label{eq:occup-v3}
+\boxed{\quad\Delta_k(X;W)\ge B_k^+(X;W)+B_k^-(X;W).\quad}
+\end{equation}
+Consequently, $\limsup_{X\to\infty}(B_k^++B_k^-)>0$
+is a sufficient arithmetic condition for noncollapse at index $k$.
+\end{proposition}
+\begin{proof}
+On $I_k^+$, the condition $P_X^W\ge H$ makes
+$F_X^W=N_0+H\in(k-\tfrac12,k+\tfrac12)$; the negative case is
+analogous. Both sets therefore contribute to \eqref{eq:gap-v3}.
+Since $2H>1$ in the large-height region, the two intervals are disjoint.
+\end{proof}
+
+\begin{remark}[Relevance and exact open issue]
+The occupation inequality uses only $N_0$, the MCOM truncation and
+Euler--Selberg phases. It does not establish that either $B_k^+$ or
+$B_k^-$ stays positive as $X\to\infty$. The structural saturation
+model of \cref{thm:structural} \emph{does} have nonzero limiting spacings;
+a single increasingly sharp passage from $N_0-H$ to $N_0+H$ can, in
+contrast, make one spacing vanish. Therefore the separation of
+$\gamma_k^{\mathrm{RvM}}$ cannot alone be transferred to the $\tau_k^{\Cms}$.
+If DBSRH$(W)$ and $\limsup_{X\to\infty}\Delta_k(X;W)>0$
+hold for every $k$, then $\gamma_{k+1}>\gamma_k$ for all $k$ and the
+functional equation implies RH and simplicity. This implication is
+conditional on \emph{both} hypotheses, not a proof of either.
+\end{remark}
+
+\section{The exact index defect at zero heights}\label{sec:uk-v3}
+To prevent a notation collision with the sublevel measure $u_k(F)$
+from \eqref{eq:sublevel}, denote the \emph{evaluation defect} by
+\begin{equation}\label{eq:ek-v3}
+e_k(F)=k-\tfrac12-F(\gamma_k).
+\end{equation}
+For integer $j\ge1$ define
+\begin{equation}\label{eq:Psi-v3}
+\Psi_j(z)=\int_{z-1/2}^{z+1/2}v^{2j}\,dv
+=\frac{(z+1/2)^{2j+1}-(z-1/2)^{2j+1}}{2j+1}.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:psi1-v3}
+\Psi_1(z)=z^2+\frac1{12}.
+\end{equation}
+The IJNT exact-defect identity relates an integral of $(N-F)^{2j}F'$
+to the sum of $\Psi_j(e_k(F))$, with explicit terms at the two
+integration endpoints. When applying that identity, the endpoint
+convention and the factor $F'(t)$ must not be omitted, especially if
+$F$ is nonmonotone. The exact form, with its endpoint terms, is
+reproduced in \eqref{eq:IJNTidentity} at the end of this section.
+
+\begin{proposition}[Repeated imaginary parts force an evaluation defect]
+\label{prop:duplicate-v3}
+Suppose $F$ is a single-valued real function at all the $\gamma_k$.
+If $\gamma_{k+1}=\gamma_k$, then
+\begin{equation}\label{eq:dup-diff-v3}
+e_{k+1}(F)-e_k(F)=1,
+\qquad e_k(F)^2+e_{k+1}(F)^2\ge\frac12.
+\end{equation}
+More generally, among any finite group of $m\ge2$ equal imaginary
+parts, $\sum e_k(F)^2\ge m(m^2-1)/12$.
+In any consecutive index window, let $M$ count the indices lying in
+fully contained repeated-height groups. Then
+\begin{equation}\label{eq:duplicate-count-v3}
+M\le4\sum_{k\text{ in window}}e_k(F)^2.
+\end{equation}
+In particular, if $|e_k(F)|<\tfrac12$ for each index of the window,
+no two \emph{consecutive indices inside the window} can have the same
+imaginary part.
+\end{proposition}
+\begin{proof}
+At a shared imaginary part, the value of $F$ is unchanged, so
+$e_{k+1}=e_k+1$. The minimum of $z^2+(z+1)^2$ is $1/2$.
+For $m$ successive values $z,z+1,\ldots,z+m-1$, the sum of squares is
+minimized at $z=-(m-1)/2$, giving $m(m^2-1)/12$.
+Since $m\le4m(m^2-1)/12$ for $m\ge2$, summing over distinct
+repeated-height groups proves \eqref{eq:duplicate-count-v3}.
+The strict cell statement follows immediately from $e_{k+1}-e_k=1$.
+\end{proof}
+
+\begin{remark}[Finite-window and high-moment interpretation]
+For a group of two coincident imaginary parts,
+$\Psi_j(e_k)+\Psi_j(e_{k+1})\ge2/(2j+1)$, whereas the two baseline
+terms contribute $2\cdot4^{-j}/(2j+1)$. Their excess is at least
+$2(1-4^{-j})/(2j+1)$. This argument rigorously applies to
+\emph{disjoint} coincident pairs. Counting overlapping pairs with the
+same coefficient requires a separate combinatorial proof.
+For a finite window, strict cell inequalities $|e_k(F)|<1/2$ imply
+absence of internal coincidences. They do not imply the inequalities
+for all zero heights, nor do high-moment estimates at a fixed prime
+budget settle the all-height problem.
+\end{remark}
+
+\begin{proposition}[Forward evaluation: the proved implication]
+\label{prop:forward-v3}
+Let $\mathscr F_X(t)$ be any family of real-valued functions, and suppose
+\begin{equation}\label{eq:forward-v3}
+\lim_{X\to\infty}\mathscr F_X(\gamma_k)=k-\tfrac12
+\qquad\text{for every }k\ge1.
+\end{equation}
+Then RH holds and every nontrivial zero is simple.
+\end{proposition}
+\begin{proof}
+If two consecutive zero indices share the same imaginary part,
+$\mathscr F_X$ has the same value at both indices for every $X$,
+contradicting the two different required limits. Thus all imaginary
+parts are distinct, which excludes both multiple zeros and, by the
+functional equation, any zero with real part different from $1/2$.
+\end{proof}
+\begin{remark}
+For the proposed family
+$\mathscr F_X=N_\vartheta+P_X^W$, with
+$N_\vartheta(t)=\vartheta(t)/\pi+1$, the converse implication
+(RH and simplicity $\Rightarrow$ \eqref{eq:forward-v3}) requires a
+rigorous pointwise weighted explicit formula evaluated at the zeros.
+It is not proved here and must not be replaced by an unverified
+midpoint-kernel argument. The same caution applies to the suggested
+uncorrected evaluations at a hypothetical off-critical zero.
+\end{remark}
+
+\paragraph{The exact defect identity with its endpoint terms.}
+For indices $1\le k_1<k_2$ and a real absolutely continuous $F$ on a
+compact interval containing $[\gamma_{k_1},\gamma_{k_2}]$, the IJNT
+manuscript \cite{CasanaIJNT} (Theorem ``Exact defect identity'', label
+\texttt{thm:identity}) gives, for every integer $j\ge1$ and with
+$e_k=e_k(F)$,
+\begin{equation}\label{eq:IJNTidentity}
+\int_{\gamma_{k_1}}^{\gamma_{k_2}}\bigl(N(t)-F(t)\bigr)^{2j}F'(t)\,dt
+=\sum_{k=k_1+1}^{k_2-1}\Psi_j(e_k)
++\frac{(\frac12+e_{k_1})^{2j+1}+(\frac12-e_{k_2})^{2j+1}}{2j+1}.
+\end{equation}
+No monotonicity of $F$ is required, and repeated imaginary parts are
+admitted: a degenerate gap $\gamma_k=\gamma_{k+1}$ contributes zero to
+both sides.
+
+\section{Numerical evidence from the 2,001,052-zero dataset}\label{sec:v9-data}
+The following results are \emph{reported numerical computations},
+corroborated here against the text outputs in the repository directory
+\texttt{KC\_tauC\_2026-11-02/v8\_identidad\_en\_ordenadas}.
+The binary arrays were not independently recomputed and the
+NUFFT/\texttt{float64} calculations have not been certified with
+interval arithmetic. In particular ``passes the cell test numerically''
+does not mean a new rigorous verification of RH.
+The computation uses the evaluation defects \eqref{eq:ek-v3}
+for three specific prime-phase rules, with
+$X=t^\theta$ for the weighted rules. The numerical variable
+$\theta$ is a prime-support exponent; it is not the
+Riemann--Siegel function $\vartheta$.
+
+\begin{center}\scriptsize
+\begin{tabular}{@{}p{0.30\linewidth}rrrr@{}}
+\toprule
+Rule & RMS $e_k$ & $\eta$ on $(2^{19},2^{20}]$ & $1-4\eta$ & $|e_k|\ge1/2$\\
+\midrule
+IJNT original & $0.0910$ & $0.00840$ & $0.9664$ & $220$\\
+$W_{1/4}$, $\theta=0.5$ & $0.0569$ & $0.00330$ & $0.9868$ & $3$\\
+$W_{1/4}$, $\theta=0.7$ & $\mathbf{0.0381}$ & $0.00149$ & $\mathbf{0.9941}$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Here $\eta$ is the average of $e_k(F)^2$ in the indicated dyadic
+height block; $1-4\eta$ is the numerical value of the lower bound
+that \cref{prop:duplicate-v3} would supply for the fraction of
+single-index-height zeros if the $e_k$ values were certified.
+These values are \emph{not} unconditional asymptotic proportions.
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.27\linewidth}p{0.22\linewidth}p{0.19\linewidth}p{0.17\linewidth}@{}}
+\toprule
+Rule & Passing / 2001 & median/max $j^*$ & minimum margin\\
+\midrule
+IJNT original & $1790$ (89.46\%) & $7/23$ & negative (211)\\
+$W_{1/4}$, $\theta=0.5$ & $1998$ (99.85\%) & $5/10$ & negative (3)\\
+$W_{1/4}$, $\theta=0.7$ & $2001$ (100\%) & $4/7$ & $0.0117$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Windows comprise 1000 consecutive indices each. The numerical script
+checks $\max|e_k|<1/2$ before computing a sufficient high-moment
+threshold $j^*$ for each window. The final 52 indices of the dataset
+are not part of these 2001 complete windows; in the $\theta=0.7$
+run the maximum $|e_k|$ across the \emph{full} dataset remains below $1/2$.
+The label ``not passing'' does not assert that the high-moment
+inequality fails for every $j$, only that this sufficient implementation
+rejects the window when an evaluation lies outside the strict cell.
+
+Let $g_k$ denote the nearest-neighbor separation normalized by the
+local mean separation $2\pi/\log(\gamma_k/2\pi)$, and put
+$\delta_k=1/2-|e_k(F)|$. For the 510 reported points with $g_k<0.05$,
+least-squares fits are
+\begin{equation}\label{eq:gfit-v3}
+\delta_k\approx
+\begin{cases}
+1.49\,g_k-0.0002&\text{original IJNT},\\
+1.79\,g_k-0.0003& W_{1/4},\ \theta=0.5,\\
+2.50\,g_k+0.0001& W_{1/4},\ \theta=0.7.
+\end{cases}
+\end{equation}
+The slopes exhibit the numerical ratio $2.50/1.79\approx1.40$,
+matching $0.7/0.5=1.4$ to the reported precision; this is evidence for,
+not a proof of, linear dependence on $\theta$. The average
+$\int_1^2 v(v/2+1/4)\,dv=37/24\approx1.542$ is consistent with
+the proposed leading dependence $2\theta\int vq(v)\,dv$, but the
+$O(1)$ terms and other zeros have not been rigorously controlled.
+For the closest reported pair ($k=1{,}115{,}578,1{,}115{,}579$;
+$g_k\approx0.005$), the two defects for $\theta=0.7$ are
+$-0.4883$ and $+0.4846$.
+The 1\% lower-fit intercepts are approximately
+$-0.1395,-0.0642,-0.0246$ for the three rules.
+
+The extrapolation $\theta_{\rm needed}(n)\approx0.21 n^{0.09}$
+uses a GUE-inspired minimum-gap law together with two measured
+choices of $\theta$; it is a heuristic only, not a theorem, and it
+cannot justify applying mean-value estimates beyond their proved
+length ranges. In particular, the weighted cutoff $X=t^{0.5}$ has
+prime-power support $n\le t$, well beyond the $X\le T^{1/4}$
+condition proved for \cref{thm:moderate}, and even the logarithmically
+enlarged range of \cref{thm:moderate-log}. The original IJNT rule
+retains a different prime budget: approximately $\sqrt t$ \emph{primes},
+not weighted prime powers supported up to $t$.
+
+
+\section{The $j=1$ conditional proportion budget: new finite computations}\label{sec:jone-v3}
+The updated repository outputs \cite{CasanaV9} record the exact-defect
+identity at $j=1$ in a form which distinguishes two contributions that
+must \emph{not} be conflated. Here $F=N_0+\Phi_c$, where $\Phi_c$ is the
+specific truncated weighted phase used in the numerical script and
+$D_F(t)=N(t)-F(t)$. Write
+\begin{equation}\label{eq:jone-AB-v3}
+\begin{split}
+M_T&=N(2T)-N(T),\\
+A_T(F)&=\int_T^{2T}D_F(t)^2 N_0'(t)\,dt,\\
+B_T(F)&=\int_T^{2T}D_F(t)^2 \Phi_c'(t)\,dt.
+\end{split}
+\end{equation}
+The derivative $\Phi_c'$ is the almost-everywhere derivative, including
+the derivative of the moving truncation bound on its active portions.
+In particular, \emph{it is not permissible to omit $B_T$}.
+Define
+$\eta_T(F)=M_T^{-1}\sum_{T<\gamma_k\le2T}e_k(F)^2$.
+The exact IJNT identity gives, with its precise endpoint contribution
+$\mathcal E_{\partial}(F;T)$,
+\begin{equation}\label{eq:jone-identity-v3}
+\eta_T(F)=\frac{A_T(F)+B_T(F)}{M_T}-\frac1{12}
++\mathcal E_{\partial}(F;T).
+\end{equation}
+Here the sign of $\mathcal E_{\partial}$ is \emph{defined} by
+\eqref{eq:jone-identity-v3}; the boundary terms in
+\eqref{eq:IJNTidentity} are required if one claims a numerical upper bound for it.
+The numerical comparison between the two sides is a consistency test,
+not an independent analytic control of the endpoint contribution.
+
+\begin{center}\small
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+Dyadic $T$ & $A_T/M_T$ & $B_T/M_T$ & $A_T/M_T+B_T/M_T-1/12$
+& measured $\eta_T$ \\
+\midrule
+$2^{10}$ & $0.04647$ & $+0.03883$ & $0.00196$ & $0.00200$\\
+$2^{15}$ & $0.05064$ & $+0.03546$ & $0.00277$ & $0.00281$\\
+$2^{19}$ & $0.05253$ & $+0.03407$ & $0.00327$ & $0.00330$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The table is copied from \texttt{decomp\_w14\_th0.5.txt}. The phase
+in these computations uses $W_{1/4}$ at support exponent $\theta=1/2$
+and the original $\log\log t$ truncation bound: these numbers are
+\emph{not} measurements for $H(t)$ of MCOM, nor does this table
+establish a bound as $T\to\infty$. The displayed discrepancies are
+at most $5\cdot10^{-5}$ at the reported precision.
+
+\begin{theorem}[Conditional lower bound for the simple critical-line fraction]\label{thm:conditional-proportion-v3}
+Let $F=N_0+\Phi_c$ be locally absolutely continuous, so that the
+exact identity \eqref{eq:jone-identity-v3} holds on dyadic intervals.
+For $T$ sufficiently large, suppose that
+\begin{equation}\label{eq:jone-input-v3}
+\begin{aligned}
+T^{-1}\int_T^{2T}|D_F(t)|^2\,dt&\le a_T,&
+T^{-1}\int_T^{2T}|D_F(t)|^4\,dt&\le b_T,\\
+\frac{\bigl(T^{-1}\int_T^{2T}|\Phi_c'(t)|^2dt\bigr)^{1/2}}
+{T^{-1}\int_T^{2T}N_0'(t)dt}&\le\kappa_T,&
+|\mathcal E_{\partial}(F;T)|&\le r_T.
+\end{aligned}
+\end{equation}
+Then the fraction of indices $k$ with $T<\gamma_k\le2T$
+whose zeros are simple and on $\Re s=1/2$ is at least
+\begin{equation}\label{eq:jone-fraction-v3}
+\boxed{\begin{gathered}
+1-4\max\Bigl(0,\,(1+O(1/\log T))\,[a_T+\kappa_T\sqrt{b_T}]
+-\tfrac1{12}+r_T\Bigr)\\
+-O\!\left(\frac{\log T}{M_T}\right)
+\end{gathered}}
+\end{equation}
+The constants implicit in $O(1/\log T)$ are absolute. This is a
+\emph{conditional estimate on the three explicitly specified moments},
+not an unconditional improvement of any published percentage.
+\end{theorem}
+\begin{proof}
+By \eqref{eq:duplicate-count-v3}, at most $4\sum e_k(F)^2$
+indices in fully contained groups of equal imaginary parts can be
+non-simple or associated with an off-critical zero. The functional
+equation pairs any off-critical zero with a distinct zero at the same
+imaginary part; thus every excluded index belongs to such a group.
+Only the at most two groups intersecting the endpoints of the window
+need separate treatment. Their total multiplicities are $O(\log T)$,
+using the unconditional $S(t)=O(\log t)$ and the zero-counting formula.
+This gives a simple-critical-line fraction at least
+$1-4\eta_T(F)-O(\log T/M_T)$.
+Moreover
+\begin{equation*}
+\frac{A_T(F)}{M_T}\le
+\frac{T\sup_{[T,2T]}N_0'}{M_T}a_T
+=(1+O(1/\log T))a_T.
+\end{equation*}
+By Cauchy--Schwarz,
+\begin{equation*}
+\frac{|B_T(F)|}{M_T}
+\le \frac{T}{M_T}\sqrt{b_T}\left(\frac1T
+\int_T^{2T}|\Phi_c'(t)|^2dt\right)^{1/2}
+=(1+O(1/T))\kappa_T\sqrt{b_T}.
+\end{equation*}
+Insert these estimates and the endpoint bound into
+\eqref{eq:jone-identity-v3}. Since $\eta_T(F)\ge0$, the resulting upper
+bound for $\eta_T(F)$ may be replaced by its positive part.
+\end{proof}
+
+\begin{remark}[Numerical budget and its logical status]\label{rem:jone-budget-v3}
+For the measured block $T=2^{19}$, the outputs
+\texttt{budget\_w14\_th0.5\_j19.txt} and
+\texttt{mv\_dphi\_th0.5\_j19.txt} report
+\begin{equation*}
+ a_{\rm obs}=0.05253,\qquad b_{\rm obs}=0.00813,
+\qquad\kappa_{\rm model}=0.8241.
+\end{equation*}
+Substitution into the leading expression in
+\eqref{eq:jone-fraction-v3} gives approximately $82.6\%$.
+This value is a \emph{numerical conditional budget}; it is neither a
+new verified lower bound at infinite height nor a rigorous finite-height
+certificate. In particular, the cited Montgomery--Vaughan--Preissmann
+calculation treats a fixed-coefficient approximation to $\Phi_c'$.
+The actual dyadic interpolation, the $t$-dependence of the weights,
+the pole compensator (if included), and derivatives of the active
+truncation introduce additional terms that must be bounded before the model
+constant $0.8241$ may be used as a verified bound for $\kappa_T$.
+If in addition one could establish $b_T\le3a_T^2$, $r_T=o(1)$,
+and $\kappa_T\le0.8241+o(1)$ uniformly as $T\to\infty$,
+then exceeding a proportion $0.417$ would follow from
+$a_T<0.09437\ldots$ eventually, while a positive proportion
+would follow from $a_T<0.13732\ldots$. These thresholds are
+\emph{algebraic consequences of the conditional assumptions}.
+The observed $a_{\rm obs}=0.05253$ is not a proof of either bound.
+\end{remark}
+
+\paragraph{Next analytic target.}
+For the actual $W_{1/4}$ family with $\theta=1/2$, derive explicit,
+height-uniform estimates for $a_T,b_T,\kappa_T$ and the endpoint term
+$r_T$ which satisfy \eqref{eq:jone-fraction-v3}. The estimate of the
+fourth moment with an unspecified implied constant is insufficient.
+The new calculation suggests that $B_T$ is about $40\%$ of the sum
+$A_T+B_T$ on the measured high block, so dropping it would be a
+substantial mathematical error. This approach seeks a new result about
+the author's \emph{prime-corrected construction} via its exact defect
+identity, not a stand-alone classical characterization of RH.
+
+%======================================================================
+\section{Neighboring pairs: exact margins and finite-cutoff separation}
+\label{sec:near-v4}
+The difference between a strict spacing at each finite cutoff and a
+nonzero limiting spacing is essential. This section studies that
+question for the arithmetic sublevel points themselves. The symbol
+$e_k(F)$ in \eqref{eq:ek-v3} remains the \emph{evaluation defect};
+here the position error is denoted by $d_k(X;W)$ to avoid a collision.
+For $k$ in the eventually increasing region of $N_0$ set
+\begin{equation}\label{eq:poserror-v4}
+ d_k(X;W):=\tau_k^{\Cms}(X;W)-\gamma_k,\qquad
+ g_k:=\gamma_{k+1}-\gamma_k\ge0.
+\end{equation}
+\begin{proposition}[Exact symmetric-margin identity]
+\label{prop:triangle-v4}
+Define the symmetric margin
+\begin{equation}\label{eq:margin-v4}
+ \mathcal M_k(X;W):=\Delta_k(X;W)-|d_k(X;W)|-|d_{k+1}(X;W)|.
+\end{equation}
+Writing $x_+:=\max(x,0)$, one has exactly
+\begin{equation}\label{eq:margin-exact-v4}
+ \boxed{\ \mathcal M_k(X;W)
+ =g_k-2\bigl[(d_k(X;W))_++(-d_{k+1}(X;W))_+\bigr]\le g_k.\ }
+\end{equation}
+Equality holds precisely when the two sublevel points enclose the
+corresponding imaginary parts, i.e.
+$\tau_k^{\Cms}(X;W)\le\gamma_k$ and
+$\tau_{k+1}^{\Cms}(X;W)\ge\gamma_{k+1}$.
+Consequently $\mathcal M_k(X;W)>0$ implies $g_k>0$.
+Here $g_k$ is the unnormalized gap of \eqref{eq:poserror-v4}, not the
+normalized nearest-neighbour separation of \cref{sec:v9-data}.
+\end{proposition}
+\begin{proof}
+By definition $\Delta_k=g_k+d_{k+1}-d_k$.
+Use $x-|x|=-2(-x)_+$ and $-x-|x|=-2x_+$.
+The criterion for equality follows because both terms subtracted
+from $g_k$ are nonnegative.
+\end{proof}
+\begin{remark}[What a numerical margin does not certify]
+The sublevel points are prime-defined, whereas \eqref{eq:margin-v4}
+uses the true $\gamma_k$. Thus positivity of a margin computed from
+verified zeros is a useful finite test, not by itself a prime-only
+inequality valid at every height. A repeated imaginary part gives
+$g_k=0$ and hence $\mathcal M_k\le0$, even if
+$\Delta_k(X;W)>0$ at every finite $X$.
+\end{remark}
+
+\begin{proposition}[Quantitative separation at a fixed prime cutoff]
+\label{prop:Lipschitz-v4}
+Fix $X>1$ and $k$ sufficiently large for the two barriers in
+\cref{thm:block-sep-v3} to be defined. Set
+\begin{equation}\label{eq:Mbound-v4}
+ \mathscr L_{k,X}:=\operatorname*{ess\,sup}_{t\in[a_k,b_{k+1}]}
+ |(F_X^W)'(t)|.
+\end{equation}
+Then $0<\mathscr L_{k,X}<\infty$ and
+\begin{equation}\label{eq:Lipgap-v4}
+ \boxed{\ \Delta_k(X;W)\ge\mathscr L_{k,X}^{-1}>0.\ }
+\end{equation}
+This bound is finite-cutoff only: the hypotheses do not give an
+upper bound on $\mathscr L_{k,X}$ independent of $X$.
+\end{proposition}
+\begin{proof}
+By the barriers, $F_X^W$ attains a value at or below
+$k-\tfrac12$ in the initial part of $[a_k,b_{k+1}]$ and a value
+at or above $k+\tfrac12$ in its final part. Let $r$ be a point of the
+initial part with $F_X^W(r)\le k-\tfrac12$, put
+$s_1=\inf\{t>r:F_X^W(t)\ge k+\tfrac12\}$ and
+$s_0=\sup\{t\in[r,s_1]:F_X^W(t)\le k-\tfrac12\}$. By continuity and
+these extremal choices, $F_X^W(s_0)=k-\tfrac12$,
+$F_X^W(s_1)=k+\tfrac12$, and $k-\tfrac12<F_X^W<k+\tfrac12$ on
+$(s_0,s_1)$. The Lipschitz bound gives
+$1\le \mathscr L_{k,X}(s_1-s_0)\le\mathscr L_{k,X}\Delta_k$.
+In particular $\mathscr L_{k,X}>0$: a locally absolutely continuous
+function whose derivative vanishes almost everywhere on $[s_0,s_1]$
+would be constant there.
+On a compact interval the prime phase, compensator and $H$ are
+locally Lipschitz for fixed $X$; so is the truncation, hence
+$\mathscr L_{k,X}<\infty$.
+\end{proof}
+
+%======================================================================
+\section{The $W_{1/4}$ two-source kernel: an exact resolution law}
+\label{sec:kernel-v4}
+The following kernel analysis is a \emph{local two-source model};
+it is not an unconditional decomposition of the actual Euler phase
+into individual contributions of zeta zeros. Define
+\begin{equation}\label{eq:q14-v4}
+ q_{1/4}(v)=\frac v2+\frac14\quad (1\le v\le2),\qquad
+ K(z)=\frac12+\frac1\pi\int_1^2q_{1/4}(v)
+ \operatorname{Si}(vz)\,dv,
+\end{equation}
+where $\operatorname{Si}(x)=\int_0^x(\sin y)/y\,dy$ is continuous at
+$x=0$. The index $1/4$ labels the weight, not the real part of any
+zero. For $m\ge0$, write
+\begin{equation}\label{eq:moments-v4}
+ \mu_m:=\int_1^2v^m q_{1/4}(v)\,dv.
+\end{equation}
+In particular $\mu_1=37/24$, $\mu_2=59/24$,
+$\mu_3=323/80$ and $\mu_4=34/5$.
+
+\begin{lemma}[Bounded derivatives of the two-source kernel]
+\label{lem:Kder-v4}
+The function $K$ extends to an entire function of $z$. On the real
+axis,
+\begin{equation}\label{eq:Kder-v4}
+\begin{split}
+ K'(z)&=\frac1\pi\int_1^2q_{1/4}(v)\int_0^v\cos(zy)\,dy\,dv,\\
+ K''(z)&=-\frac1\pi\int_1^2q_{1/4}(v)\int_0^v y\sin(zy)\,dy\,dv,\\
+ K^{(4)}(z)&=\frac1\pi\int_1^2q_{1/4}(v)
+ \int_0^v y^3\sin(zy)\,dy\,dv.
+\end{split}
+\end{equation}
+Thus $K(-z)=1-K(z)$ and
+\begin{equation}\label{eq:Kbounded-v4}
+ \sup_{z\in\mathbb R}|K''(z)|\le\frac{\mu_2}{2\pi},\qquad
+ \sup_{z\in\mathbb R}|K^{(4)}(z)|\le\frac{\mu_4}{4\pi}.
+\end{equation}
+Moreover $K'(z),K''(z)\to0$ as $|z|\to\infty$ through real values,
+and neither is identically zero.
+\end{lemma}
+\begin{proof}
+Since $\operatorname{Si}(x)=\sum_{n\ge0}(-1)^nx^{2n+1}/((2n+1)(2n+1)!)$
+is entire and the $v$-integral is over a compact set, $K$ is entire.
+The identity
+$\operatorname{Si}(vz)=\int_0^v(\sin(zy))/y\,dy$, whose integrand has a
+removable singularity at $y=0$, permits
+termwise differentiation on compact subsets of the complex plane.
+All estimates follow by integrating $y$ and $y^3$ against the
+nonnegative weight. The decay of $K'$ and $K''$ is the
+Riemann--Lebesgue lemma for the integrable, compactly supported
+kernels obtained after interchanging the $v,y$ integrals, namely
+$K'(z)=\frac1\pi\int_0^2w(y)\cos(zy)\,dy$ and
+$K''(z)=-\frac1\pi\int_0^2yw(y)\sin(zy)\,dy$, with $w$ as in the proof
+of \cref{thm:pair-injective-v4}. Finally
+$K'(0)=\mu_1/\pi>0$, while
+$K'''(0)=-\mu_3/(3\pi)<0$.
+\end{proof}
+
+\begin{theorem}[Global quadratic resolution estimate]
+\label{thm:resolution-v4}
+For real $z$ and $h$, put
+$C(z,h):=K(z-h/2)+K(z+h/2)$.
+Then
+\begin{equation}\label{eq:pair-taylor-v4}
+ \boxed{\quad C(z,h)=2K(z)+\frac{h^2}{4}K''(z)
+ +\mathcal R_K(z,h),\qquad
+ |\mathcal R_K(z,h)|\le\frac{\mu_4}{768\pi}|h|^4
+ =\frac{17}{1920\pi}|h|^4.\quad}
+\end{equation}
+In addition,
+\begin{equation}\label{eq:pair-lipschitz-v4}
+ \sup_{z\in\mathbb R}|C(z,h)-C(z,0)|
+ \le\frac{\mu_2}{8\pi}h^2.
+\end{equation}
+Consequently, with $h=L g$ and $L=\log X$, a gap $g$ small
+compared with $1/L$ changes the full two-source profile only at
+quadratic order $L^2g^2$. This is a theorem \emph{about $C$}, not an
+estimate of the contribution of all zeta zeros.
+\end{theorem}
+\begin{proof}
+Apply Taylor's theorem with fourth-order remainder to
+$K(z+h/2)+K(z-h/2)$. Odd powers cancel. The remainder is
+at most $2(|h|/2)^4\sup|K^{(4)}|/4!$, proving
+\eqref{eq:pair-taylor-v4}; the second symmetric-difference
+inequality and \eqref{eq:Kbounded-v4} prove
+\eqref{eq:pair-lipschitz-v4}.
+\end{proof}
+
+\begin{theorem}[Injectivity of the complete local pair profile]
+\label{thm:pair-injective-v4}
+Fix $L>0$ and define, for any center $c\in\mathbb R$ and
+separation $g\ge0$,
+\begin{equation}\label{eq:pair-complete-v4}
+ \mathcal C_{c,g,L}(t):=
+ K\!\left(L(t-c-g/2)\right)+
+ K\!\left(L(t-c+g/2)\right).
+\end{equation}
+If $\mathcal C_{c_1,g_1,L}$ and $\mathcal C_{c_2,g_2,L}$ coincide on
+any nonempty open real interval, then $c_1=c_2$ and $g_1=g_2$.
+Thus, in the exact two-source model, the \emph{complete profile}
+identifies even an arbitrarily small positive gap. This is an
+injectivity statement, not a stable recovery estimate in the
+presence of unknown contributions.
+\end{theorem}
+\begin{proof}
+Define the compactly supported nonnegative function
+\[
+ w(y)=\int_{\max(1,y)}^2q_{1/4}(v)\,dv
+ \quad(0\le y\le2).
+\]
+For $0<y<1$, $w(y)=1$. Interchanging the integrals in
+\eqref{eq:Kder-v4} gives
+\[
+ K'(z)=\frac1\pi\int_0^2w(y)\cos(zy)\,dy.
+\]
+Consequently,
+\begin{equation}\label{eq:pair-transform-v4}
+ \mathcal C'_{c,g,L}(t)=\frac{2L}{\pi}
+ \int_0^2w(y)\cos\bigl(L(t-c)y\bigr)
+ \cos\bigl(Lgy/2\bigr)\,dy.
+\end{equation}
+The profiles are entire in $t$, so agreement on an open real
+interval implies agreement everywhere, and then their derivatives agree.
+Writing $\cos(L(t-c)y)$ as the average of $e^{\pm iL(t-c)y}$ and
+substituting $y\mapsto-y$ in the second term,
+\[
+ \mathcal C'_{c,g,L}(t)=\frac L\pi\int_{-2}^2f_{c,g}(y)e^{iLty}\,dy,
+ \qquad f_{c,g}(y)=w(|y|)\cos(Lg|y|/2)e^{-iLcy},
+\]
+with $f_{c,g}$ integrable and supported in $[-2,2]$. Uniqueness of the
+Fourier transform of $L^1$ functions gives $f_{c_1,g_1}=f_{c_2,g_2}$
+almost everywhere; both are continuous on $0<y<1$, where $w=1$, so
+\[
+ e^{-iLc_1y}\cos(Lg_1y/2)
+ =e^{-iLc_2y}\cos(Lg_2y/2),\qquad 0<y<1.
+\]
+By analyticity this also holds at $y=0$. Differentiate once at
+$y=0$ to get $c_1=c_2$, and twice to get $g_1^2=g_2^2$.
+Since both separations are nonnegative, $g_1=g_2$.
+\end{proof}
+
+\begin{remark}[Why $\theta=0.7$ is effective, without claiming optimality]
+If $X=t^\theta$ for the numerical weighted construction, the
+support of the prime-power phase extends to $n\le t^{2\theta}$.
+The choice $\theta=0.7$ therefore reaches $t^{1.4}$, whereas
+$\theta=0.5$ reaches $t$. This increases the local scale $L$ and hence the scale
+$L^2g^2/4$ of the quadratic term in \eqref{eq:pair-taylor-v4}; the term
+itself still vanishes at the zeros of $K''$.
+The weight has $q_{1/4}(2)=5/4$ and $\mu_1=37/24$; its upper
+endpoint receives more emphasis than in Selberg's constant density
+$q\equiv1$. The observed superiority of $\theta=0.7$ is empirical;
+neither its optimality nor an unconditional arithmetic separation
+theorem at that cutoff follows from this kernel calculation.
+\end{remark}
+
+%======================================================================
+\section{A prime-only spatial filter and its cutoff derivative}
+\label{sec:filter-v4}
+For the rest of this section, $X=e^L$ with $L>0$ is a \emph{fixed}
+cutoff and the phase is \emph{untruncated}:
+$F_L^\circ(t):=N_0(t)+P_{e^L}^W(t)$. This differs from
+$F_{e^L}^W(t)$ in \eqref{eq:Cms}; replacing it by the clipped
+phase in a derivative identity would be an error.
+Here ``prime-only'' means built from prime powers through $\Lambda$,
+the pole compensator and $N_0$, without any information on the zeros.
+For a function $G$ defined near $c>0$ and $r>0$ with $c>r/L$ set
+\begin{equation}\label{eq:Dr-v4}
+ \mathscr D_{L;r}[G](c):=
+ \frac{G(c+r/L)-G(c-r/L)}{2r}.
+\end{equation}
+For $0<r_1<r_2$ set
+\begin{equation}\label{eq:Qdef-v4}
+ \mathscr Q_{L;r_1,r_2}[G](c)
+ :=\mathscr D_{L;r_1}[G](c)-\mathscr D_{L;r_2}[G](c),\qquad
+ \mathscr B_{r_1,r_2}(v):=\frac{\sin(r_1v)}{r_1}
+ -\frac{\sin(r_2v)}{r_2}.
+\end{equation}
+\begin{proposition}[Exact Euler formula for the spatial filter]
+\label{prop:Qexact-v4}
+For any admissible weight $W$ of \eqref{eq:weights}, the spatial
+filter of $F_L^\circ$ satisfies
+\begin{equation}\label{eq:Qprime-v4}
+\begin{split}
+\mathscr Q_{L;r_1,r_2}[F_L^\circ](c)
+={}&\mathscr Q_{L;r_1,r_2}[N_0](c)\\
+&-\frac1\pi\sum_{n\le e^{2L}}
+ W\!\left(\frac{\log n}{L}\right)
+ \frac{\Lambda(n)}{\sqrt n\log n}\cos(c\log n)
+ \mathscr B_{r_1,r_2}\!\left(\frac{\log n}{L}\right)\\
+&-\mathscr Q_{L;r_1,r_2}[\Pi_{e^L}^W](c).
+\end{split}
+\end{equation}
+Thus the right side is determined by the primes and the
+Riemann--von Mangoldt main term; there is no appearance of
+$\beta_k$ or of the actual $\gamma_k$.
+If a background $B$ is five times continuously differentiable on
+$[c-r_2/L,c+r_2/L]$, then
+\begin{equation}\label{eq:Qbackground-v4}
+\begin{split}
+\mathscr Q_{L;r_1,r_2}[B](c)
+={}&\frac{r_1^2-r_2^2}{6L^3}B'''(c)+\mathcal R_B,\\
+|\mathcal R_B|&\le\frac{r_1^4+r_2^4}{120L^5}
+ \sup_{|t-c|\le r_2/L}|B^{(5)}(t)|.
+\end{split}
+\end{equation}
+In particular the constant and affine parts of $B$ are eliminated
+\emph{exactly}, not merely approximately.
+\end{proposition}
+\begin{proof}
+The finite Euler sum has imaginary part
+\[
+-\frac1\pi\sum_n\frac{\Lambda(n)}{\sqrt n\log n}
+ W\!\left(\frac{\log n}{L}\right)\sin(t\log n).
+\]
+Use the sine subtraction identity at $c\pm r/L$, then subtract
+the two radii. The compensator contributes the last term in
+\eqref{eq:Qprime-v4}. Taylor's theorem for the symmetric first
+difference gives
+$\mathscr D_{L;r}[B](c)=B'(c)/L+
+ r^2B'''(c)/(6L^3)+\mathcal R$ with
+$|\mathcal R|\le r^4\sup|B^{(5)}|/(120L^5)$.
+\end{proof}
+
+\begin{proposition}[Cutoff derivative and the moving-point correction]
+\label{prop:dL-v4}
+Suppose $q$ is continuous on $[1,2]$, with $W$ given by
+\eqref{eq:weights}. For $L>0$ away from the discrete values
+$L=\log n$ and $L=\tfrac12\log n$ (that is, $e^L=n$ or $e^{2L}=n$) of prime powers $n\ge2$,
+write $\dot P_L(t):=(\partial/\partial L)
+P_{e^L}^W(t)$ with $t$ \emph{held fixed}. Then
+\begin{equation}\label{eq:dLprime-v4}
+ \boxed{\quad
+ L^2\dot P_L(t)=\frac1\pi\operatorname{Im}
+ \left[\sum_{e^L<n<e^{2L}}
+ q\!\left(\frac{\log n}{L}\right)
+ \frac{\Lambda(n)}{n^{1/2+it}}
+ -\int_{e^L}^{e^{2L}}
+ q\!\left(\frac{\log u}{L}\right)u^{-1/2-it}\,du
+ \right].\quad}
+\end{equation}
+The derivative is taken piecewise at the exceptional values and
+exists almost everywhere in $L$. For any family $G_L(t)$
+differentiable in both variables, with $G_L'$ the derivative in $t$ and
+$\partial_LG_L$ the derivative in $L$, the \emph{total} derivative of the moving spatial filter is
+\begin{equation}\label{eq:commutator-v4}
+\begin{split}
+\frac{d}{dL}\mathscr Q_{L;r_1,r_2}[G_L](c)
+={}&\mathscr Q_{L;r_1,r_2}[\partial_LG_L](c)\\
+&-\frac{1}{2L^2}\Bigl(G_L'(c+r_1/L)+G_L'(c-r_1/L)\\
+&\hspace{32mm}-G_L'(c+r_2/L)-G_L'(c-r_2/L)\Bigr).
+\end{split}
+\end{equation}
+In particular, differentiating at fixed $t$ and then taking the
+spatial filter is \emph{not} interchangeable with differentiating
+the filter as a function of $L$.
+\end{proposition}
+\begin{proof}
+Inside the transition region $1<\log n/L<2$, one has
+\[
+\partial_L W\!\left(\frac{\log n}{L}\right)
+=\frac{\log n}{L^2}\,q\!\left(\frac{\log n}{L}\right);
+\]
+outside this region the derivative is zero. For the pole compensator write
+$\Pi_{e^L}^W(t)=\frac1\pi\operatorname{Im}\int_{\log2}^{\infty}W(v/L)e^{v/2-itv}\,\frac{dv}v$;
+for $L$ in a compact neighbourhood of a non-exceptional value the
+integrand is supported in a fixed compact $v$-interval and its
+$L$-derivative is bounded there, so differentiation under the integral
+sign (dominated convergence) gives the integral term. This proves \eqref{eq:dLprime-v4}.
+For \eqref{eq:commutator-v4}, differentiate
+$G_L(c\pm r/L)$ by the chain rule, retaining the moving-point
+contributions from $\mp r/L^2$, and subtract the two radii.
+\end{proof}
+
+%======================================================================
+\section{Finite-sample identifiability and the remaining arithmetic error}
+\label{sec:identify-v4}
+The kernel calculation can be promoted to a precise \emph{conditional}
+local inverse statement. It does not require GUE. It also does not
+supply, on its own, a decomposition of $F_L^\circ$ when RH is not
+assumed.
+\begin{theorem}[Nondegenerate quadratic local inverse]
+\label{thm:identifiability-v4}
+Fix any nonempty open interval $J\subset\mathbb R$. The six entire
+functions
+\begin{equation}\label{eq:six-v4}
+ 1,\quad z,\quad z^2,\quad z^3,\quad K'(z),\quad K''(z)
+\end{equation}
+are linearly independent. Consequently there exist six distinct
+points $z_1,\dots,z_6\in J$ such that the evaluation matrix of
+\eqref{eq:six-v4} is invertible.
+Let $\mathsf A$ be the $6\times5$ matrix obtained by evaluating
+the first five functions at these points, and let
+$\mathbf v=(K''(z_i))_{i=1}^6$. Let $\mathsf P$ be the orthogonal
+projection onto the orthogonal complement of the range of
+$\mathsf A$, so that $\mathsf P\mathbf v\ne0$.
+If measured prime-phase values, after subtraction of the
+coincident-pair model $2K$, admit the representation
+\begin{equation}\label{eq:vector-v4}
+ \mathbf y=\mathsf A\mathbf b+\frac{h^2}{4}\mathbf v
+   +\mathbf r+\mathbf r_4,
+ \qquad\|\mathbf r_4\|_2\le
+ \frac{\mu_4}{768\pi}\sqrt6\,|h|^4,
+\end{equation}
+where $\mathbf b\in\mathbb R^5$ is an unknown nuisance vector,
+$\mathbf r$ is an unspecified arithmetic residual, and $h=Lg\ge0$,
+then the estimator, observable from the sampled vector $\mathbf y$
+(and prime-observable once $\mathbf y$, the sample points, the centre and
+$L$ are constructed from prime-defined data),
+\begin{equation}\label{eq:estimator-v4}
+ \widehat{h^2}:=4\frac{\langle\mathsf P\mathbf y,
+ \mathsf P\mathbf v\rangle}{\|\mathsf P\mathbf v\|_2^2}
+\end{equation}
+satisfies the rigorous conditional stability estimate
+\begin{equation}\label{eq:estimate-error-v4}
+ \boxed{\quad
+ |\widehat{h^2}-h^2|\le
+ \frac{4}{\|\mathsf P\mathbf v\|_2}
+ \left(\|\mathsf P\mathbf r\|_2+
+ \frac{\mu_4\sqrt6}{768\pi}|h|^4\right).\quad}
+\end{equation}
+A proved bound on the right smaller than a \emph{positive measured}
+$\widehat{h^2}$ would certify $h>0$ \emph{provided} the
+representation \eqref{eq:vector-v4} is valid for the actual phase.
+\end{theorem}
+\begin{proof}
+Suppose a linear combination of \eqref{eq:six-v4} vanishes on $J$.
+By analyticity it vanishes on all of $\mathbb R$. Its odd part gives
+$az+bz^3+cK''(z)=0$; since $K''(z)\to0$ at infinity,
+$a=b=0$, then $c=0$ because $K''\not\equiv0$.
+Its even part gives $d+ez^2+fK'(z)=0$, hence
+$d=e=f=0$ by decay and $K'(0)>0$.
+Linear independence of analytic functions implies that evaluations
+at some six distinct points of any open interval span $\mathbb R^6$;
+otherwise the evaluation vectors would lie in a common proper
+subspace, giving a forbidden linear relation on $J$.
+Thus $\mathsf P\mathbf v\ne0$. Apply $\mathsf P$ to
+\eqref{eq:vector-v4}, take the scalar product with
+$\mathsf P\mathbf v$ and use Cauchy--Schwarz. The bound on
+$\mathbf r_4$ follows from \cref{thm:resolution-v4}.
+\end{proof}
+
+\begin{remark}[Center uncertainty and the limit of the result]
+A small shift of the assumed center changes $2K(z)$ by a term
+proportional to $K'(z)$ at first order, which explains the fifth
+column of $\mathsf A$. Higher powers of the center error must be
+included in $\mathbf r$ or estimated separately. A smooth local
+background is not \emph{automatically} a cubic polynomial, even when
+its derivatives exist; its interpolation residual is also included
+in $\mathbf r$. Most importantly, the off-critical-zero contribution
+to the full Euler phase cannot be declared part of a controlled
+background without proof. Thus \eqref{eq:estimate-error-v4} is
+an exact inverse stability theorem, \emph{not} a proof that the
+actual prime residual satisfies the necessary bound. Explicitly, if a
+proved bound $\mathcal B$ for the right side of
+\eqref{eq:estimate-error-v4} satisfies $\mathcal B<\widehat{h^2}$, then
+$h^2\ge\widehat{h^2}-\mathcal B>0$. The estimator is an algebraic
+quantity and may be negative when a residual is present.
+\end{remark}
+
+\paragraph{Research reduction for the actual weighted constructions.}
+For every fixed $k$ and a sequence of cutoffs $X\to\infty$, the
+new quantitative task is to establish a representation of the
+form \eqref{eq:vector-v4} in a neighborhood selected using only
+the prime-defined sublevel points, together with a bound for
+$\|\mathsf P\mathbf r\|_2$ that is \emph{smaller than the quadratic
+signal} for any positive true separation. Such a bound must be
+proved without imposing that the relevant zeros lie on the critical
+line; if this cannot be achieved, the local inverse gives an effective
+finite-height diagnostic but not RH. It is independent of whether
+any hypothetical off-line zero has a maximal real part.
+
+\section{Local spacing observations: scope}
+\label{sec:observed-v4}
+The following data are included solely to identify the regime
+motivating \cref{sec:kernel-v4,sec:filter-v4,sec:identify-v4}. They are
+not numerically certified.
+Unfolded spacing here means applying $N_0$ to the corresponding
+positive heights, where $N_0$ is increasing. In the index range
+$10^6\le k<2\cdot10^6$, the nearest-neighbor study reported:
+\begin{center}\footnotesize
+\begin{tabular}{@{}p{0.31\linewidth}p{0.15\linewidth}p{0.25\linewidth}p{0.19\linewidth}@{}}
+\toprule
+Prime rule & Minimum gap & Median tauc gap for 122 tight pairs & Median midpoint error\\
+\midrule
+IJNT original & $0.235$ & $0.354$ & $0.0092$\\
+$W_{1/4}$, $\theta=0.5$ & $0.222$ & $0.293$ & $0.0023$\\
+$W_{1/4}$, $\theta=0.7$ & $0.173$ & $0.210$ & $0.0008$\\
+Sharp support, $\theta=1.4$ & $0.144$ & $0.163$ & $0.0023$\\
+\bottomrule
+\end{tabular}
+\end{center}
+These numbers concern the numerical \emph{original clipped phases}
+with the small $\log\log t$ truncation in the supplied scripts; they
+must not be silently reinterpreted as calculations for the
+MCOM-truncated $F_X^W$ with the pole compensator.
+For gaps below $0.05$ unfolded units, the reported Spearman
+correlation between the two tauc gaps and the real gaps was close
+to zero for all tested rules, whereas the midpoint error was much
+smaller than individual point errors. A separate margin study
+reports $\mathcal M_k=g_k$ for the tight pairs in the weighted
+$\theta=0.5,0.7$ constructions, as predicted by
+\eqref{eq:margin-exact-v4} when the two sublevel points enclose the
+actual pair. These observations motivate, but do not establish, the
+local quadratic model. In particular they do not imply that an
+off-line pair can be discriminated by a fixed prime cutoff.
+
+
+
+
+%======================================================================
+\section{Correlated displacement from the Riemann--von Mangoldt points:
+       what proximity does and does not prove}\label{sec:correlated-v5}
+This section gives the precise response to a natural question: since the
+Riemann--von Mangoldt points are strictly separated and the prime-defined
+sublevel points are strictly separated at each finite cutoff, can their
+\emph{proximity} prevent two consecutive sublevel points from colliding as
+$X\to\infty$?  The answer is a conditional yes, provided the \emph{difference
+of consecutive displacements} is controlled.  Neither finite-cutoff
+strictness nor an amplitude bound alone proves the required control.
+The conclusions here concern the author's own constructions and do not
+introduce a separate classical criterion for RH.
+
+\subsection{Exact decomposition into a positive main spacing and a
+           correlated arithmetic displacement}
+Let $\gamma_k^{\mathrm{RvM}}$ be the unique solution greater than $2\pi$ of
+$N_0(\gamma_k^{\mathrm{RvM}})=k-\tfrac12$, and put
+\begin{equation}\label{eq:hrvm-v5}
+ h_k^{\mathrm{RvM}}:=\gamma_{k+1}^{\mathrm{RvM}}-
+ \gamma_k^{\mathrm{RvM}}>0.
+\end{equation}
+The positivity holds for every $k\ge1$ since $N_0$ is strictly
+increasing on $(2\pi,\infty)$ and its range on that interval contains
+every $k-\tfrac12$: indeed $N_0(2\pi)=-1+\frac78=-\frac18$, so the
+range is $(-\frac18,\infty)$.  For the weighted, MCOM-truncated sublevel points
+\eqref{eq:Cms}, define the \emph{RvM displacement}, distinct from the
+true-zero position error $d_k(X;W)$ in \eqref{eq:poserror-v4}, by
+\begin{equation}\label{eq:epsrvm-v5}
+ \varepsilon_k^{\mathrm{RvM}}(X;W):=
+ \tau_k^{\Cms}(X;W)-\gamma_k^{\mathrm{RvM}}.
+\end{equation}
+It is determined by the primes, the pole compensator and $N_0$,
+without using any $\gamma_k$ or $\beta_k$.
+\begin{proposition}[Exact correlated-displacement identity]
+\label{prop:correlated-v5}
+For every $k\ge1$ and every cutoff $X$ for which the defining
+sublevel measures are finite,
+\begin{equation}\label{eq:correlated-v5}
+\boxed{\quad
+ \Delta_k(X;W)=h_k^{\mathrm{RvM}}
+ +\varepsilon_{k+1}^{\mathrm{RvM}}(X;W)
+ -\varepsilon_k^{\mathrm{RvM}}(X;W).
+\quad}
+\end{equation}
+In particular, for a fixed index $k$ the following two properties are
+equivalent:
+\begin{align}
+ &\liminf_{X\to\infty}\Delta_k(X;W)>0,
+ \label{eq:noncollapse-v5}\\
+ &\limsup_{X\to\infty}
+ \bigl[\varepsilon_k^{\mathrm{RvM}}(X;W)-
+       \varepsilon_{k+1}^{\mathrm{RvM}}(X;W)\bigr]
+ <h_k^{\mathrm{RvM}}.
+ \label{eq:coherence-v5}
+\end{align}
+A sufficient quantified form is: for some $\eta_k\in(0,1)$ and
+$X_k>1$,
+\begin{equation}\label{eq:coherence-eta-v5}
+ \varepsilon_k^{\mathrm{RvM}}(X;W)-
+ \varepsilon_{k+1}^{\mathrm{RvM}}(X;W)
+ \le(1-\eta_k)h_k^{\mathrm{RvM}}
+ \qquad(X\ge X_k).
+\end{equation}
+Under \eqref{eq:coherence-eta-v5},
+$\Delta_k(X;W)\ge\eta_k h_k^{\mathrm{RvM}}>0$ for $X\ge X_k$.
+There is no requirement that $\eta_k$ be uniform in $k$.
+\end{proposition}
+\begin{proof}
+Subtract \eqref{eq:epsrvm-v5} at the consecutive indices and
+use \eqref{eq:hrvm-v5}.  Taking upper and lower limits yields
+\[
+ \liminf_{X\to\infty}\Delta_k(X;W)
+ =h_k^{\mathrm{RvM}}-
+ \limsup_{X\to\infty}
+ (\varepsilon_k^{\mathrm{RvM}}-
+  \varepsilon_{k+1}^{\mathrm{RvM}}),
+\]
+with the usual extended-real interpretation if a limit is infinite.
+The quantified conclusion follows by direct substitution.
+\end{proof}
+\begin{remark}[Exact identity, not an independent arithmetic bound]
+Condition \eqref{eq:coherence-v5} is an exact reformulation of
+noncollapse, not a proof of noncollapse.  Its value is to identify
+\emph{which arithmetic difference} one must estimate.  Controlling
+$|\varepsilon_k^{\mathrm{RvM}}|$ and
+$|\varepsilon_{k+1}^{\mathrm{RvM}}|$ separately is sufficient if
+\[
+ |\varepsilon_k^{\mathrm{RvM}}|+
+ |\varepsilon_{k+1}^{\mathrm{RvM}}|
+ \le(1-\eta_k)h_k^{\mathrm{RvM}},
+\]
+but is stronger than necessary.  A large common displacement cancels
+exactly in \eqref{eq:correlated-v5}.  The quantities
+$\varepsilon_k^{\mathrm{RvM}}$ must not be confused either with the
+evaluation defects $e_k(F)$ of \eqref{eq:ek-v3} or with the
+true-zero errors $d_k(X;W)$ of \eqref{eq:poserror-v4}.
+\end{remark}
+
+\subsection{What the existing MCOM truncation actually yields}
+The large-index barriers of \cref{thm:block-sep-v3} provide an
+\emph{individual} proximity estimate.  The asymptotic MCOM coefficient
+$C_{\mathrm H}$ must not be used for the \emph{fixed} truncation $H$;
+the coefficient appropriate to $H$ is computed here.
+\begin{proposition}[Uniform RvM proximity from the fixed truncation]
+\label{prop:rvmbound-v5}
+Let
+\[
+ H(t)=A_{\mathrm M}\log\max(t,e)+B_{\mathrm M},\qquad
+ A_{\mathrm M}=0.08382,\quad B_{\mathrm M}=5.5,
+\]
+and let $a_k,b_k$ be the large-index barriers of
+\cref{thm:block-sep-v3}.  Uniformly in $X\ge2$,
+\begin{equation}\label{eq:rvmbound-v5}
+ -\frac{H(a_k)}{N_0'(\xi_{k,-})}
+ \le\varepsilon_k^{\mathrm{RvM}}(X;W)
+ \le\frac{H(b_k)}{N_0'(\xi_{k,+})},
+\end{equation}
+where $\xi_{k,-}\in(a_k,\gamma_k^{\mathrm{RvM}})$ and
+$\xi_{k,+}\in(\gamma_k^{\mathrm{RvM}},b_k)$ are supplied by the mean-value
+theorem.  Consequently,
+\begin{equation}\label{eq:rvmasympt-v5}
+ \boxed{\quad
+ \sup_{X\ge2}|\varepsilon_k^{\mathrm{RvM}}(X;W)|
+ \le 2\pi A_{\mathrm M}+o(1)
+ \qquad(k\to\infty).
+ \quad}
+\end{equation}
+On the other hand,
+\begin{equation}\label{eq:rvmsmallgap-v5}
+ h_k^{\mathrm{RvM}}\sim
+ \frac{2\pi}{\log\gamma_k^{\mathrm{RvM}}}\to0.
+\end{equation}
+Thus \eqref{eq:rvmasympt-v5} does not imply either
+\eqref{eq:coherence-v5} or \eqref{eq:noncollapse-v5}.
+\end{proposition}
+\begin{proof}
+Set $v_k:=\gamma_k^{\mathrm{RvM}}$.  Since
+\(N_0(a_k)+H(a_k)=N_0(v_k)=N_0(b_k)-H(b_k)\),
+the mean-value theorem gives
+\[
+ v_k-a_k=\frac{H(a_k)}{N_0'(\xi_{k,-})},\qquad
+ b_k-v_k=\frac{H(b_k)}{N_0'(\xi_{k,+})}.
+\]
+The barriers $a_k\le\tau_k^{\Cms}(X;W)\le b_k$ yield
+\eqref{eq:rvmbound-v5}.  Moreover $a_k/v_k\to1$ and $b_k/v_k\to1$.
+For fixed $\delta\in(0,1)$, $N_0(v_k)-N_0((1-\delta)v_k)\gg_\delta
+v_k\log v_k$, whereas $H((1-\delta)v_k)=O(\log v_k)$; hence
+$N_0+H<k-\frac12$ at $(1-\delta)v_k$, and $a_k>(1-\delta)v_k$ for large
+$k$ because $N_0+H$ is increasing there. Similarly
+$N_0((1+\delta)v_k)-N_0(v_k)\gg_\delta v_k\log v_k>H((1+\delta)v_k)$
+gives $b_k<(1+\delta)v_k$. Since $\delta$ is arbitrary, the two ratios
+tend to $1$.
+On this common asymptotic scale,
+$H(t)=A_{\mathrm M}\log v_k+O(1)+o(\log v_k)$ and
+$N_0'(t)=(\log v_k)/(2\pi)+O(1)$, so the two extremal
+differences are $2\pi A_{\mathrm M}+o(1)$.
+Finally, the mean-value theorem between $v_k$ and $v_{k+1}$
+gives \eqref{eq:rvmsmallgap-v5}.
+\end{proof}
+\begin{remark}[The asymptotic MCOM coefficient requires a different $H$]
+Suppose the author's asymptotic bound for $S(t)$ has coefficient
+$C_{\mathrm H}<A_{\mathrm M}$.  For any fixed $c>C_{\mathrm H}$,
+one may \emph{define a different sublevel family} whose truncation
+bound is eventually $\widetilde H_c(t)=c\log t$ and whose
+small-height extension is chosen sufficiently large to contain
+$|N(t)-N_0(t)|$.  For that \emph{different} family, the argument of
+\cref{prop:rvmbound-v5} yields
+$\sup_X|\widetilde\varepsilon_k^{\mathrm{RvM}}|
+\le2\pi c+o(1)$ as $k\to\infty$; one may then take
+$c\downarrow C_{\mathrm H}$ at the level of asymptotic coefficients.
+This does \emph{not} replace $A_{\mathrm M}$ by
+$C_{\mathrm H}$ in \eqref{eq:rvmasympt-v5} for the fixed
+$H(t)=0.08382\log\max(t,e)+5.5$ of the present weighted taucms.
+Nor does the improved individual bound alone imply noncollapse.
+\end{remark}
+
+\subsection{What DBSRH would transfer, and what mean-square proximity cannot}
+\begin{corollary}[Conditional transfer of RvM separation]
+\label{cor:rh-rvm-v5}
+Assume DBSRH$(W)$ as formulated in \eqref{eq:DBSRH} and, for every
+$k\ge1$, condition \eqref{eq:coherence-v5}.  Then all positive
+imaginary parts of the zeros of $\zeta$ are pairwise distinct,
+so RH holds and every nontrivial zero is simple.
+Conversely, \emph{under DBSRH$(W)$}, condition
+\eqref{eq:coherence-v5} for all $k$ is equivalent to RH
+\emph{together with} simplicity.
+\end{corollary}
+\begin{proof}
+By DBSRH$(W)$, at each fixed index
+$\tau_k^{\Cms}(X;W)\to\gamma_k$.  Therefore
+\[
+ \Delta_k(X;W)\longrightarrow\gamma_{k+1}-\gamma_k.
+\]
+\Cref{prop:correlated-v5} makes the limit strictly positive for every
+$k$, hence no imaginary parts repeat.  If a zero
+$\rho=\beta+i\gamma$ has $\beta\ne\tfrac12$, the distinct zero
+$1-\overline\rho=1-\beta+i\gamma$ repeats the same positive
+imaginary part.  A multiple zero does so as well.  Conjugation treats
+negative imaginary parts.  This proves RH and simplicity.  Conversely,
+if RH and simplicity hold, all consecutive $\gamma_k$ are strictly
+increasing, and the displayed limit is positive.  This implies
+\eqref{eq:coherence-v5} by \cref{prop:correlated-v5}.
+Thus, under DBSRH$(W)$: \eqref{eq:coherence-v5} for every $k$ $\iff$
+$\gamma_{k+1}>\gamma_k$ for every $k$ $\iff$ RH and simplicity. This is
+not an equivalence between DBSRH$(W)$ and RH.
+\end{proof}
+\begin{remark}[Exact signature of a repeated imaginary part]
+Under DBSRH$(W)$, a repeated imaginary part at indices $k,k+1$
+would force
+\begin{equation}\label{eq:dup-rvm-v5}
+ \lim_{X\to\infty}
+ \bigl[\varepsilon_k^{\mathrm{RvM}}(X;W)-
+       \varepsilon_{k+1}^{\mathrm{RvM}}(X;W)\bigr]
+ =h_k^{\mathrm{RvM}}.
+\end{equation}
+Thus the entire positive RvM spacing would be consumed by a
+\emph{difference} of arithmetic displacements.  This is a precise
+target for a prime-based non-collapse estimate; it is not, without
+such an estimate, a contradiction.
+Mean-square bounds such as \eqref{eq:oldMS} or their taucm analogue
+control an \emph{average over indices in height windows}; they do not
+exclude a single exceptional pair at a fixed $k$, even if the
+average RMS is comparable to the RvM mean spacing.
+\end{remark}
+
+\subsection{A derivative-based sufficient condition, and why it is too strong}
+The local Lipschitz inequality of \cref{prop:Lipschitz-v4}
+illustrates one way to obtain a cutoff-independent spacing, but
+its required uniform derivative control is not available for the
+Euler phase.  The following sharpened criterion also identifies an
+\emph{obstruction to using that particular proof strategy}.
+\begin{proposition}[Sobolev sufficient condition on a fixed index band]
+\label{prop:sobolev-v5}
+Fix a sufficiently large $k$ and let
+$J_k=[a_k,b_{k+1}]$, with the barriers from
+\cref{thm:block-sep-v3}.  If, for some $p>1$ and
+$K_k\in(0,\infty)$,
+\begin{equation}\label{eq:uniform-derivative-v5}
+ \sup_{X\ge X_k}\bigl\|(F_X^W)'\bigr\|_{L^p(J_k)}\le K_k,
+\end{equation}
+then, for every $X\ge X_k$,
+\begin{equation}\label{eq:sobolev-spacing-v5}
+ \boxed{\quad\Delta_k(X;W)\ge
+ K_k^{-p/(p-1)}>0.\quad}
+\end{equation}
+\end{proposition}
+\begin{proof}
+For each cutoff the barrier values yield a passage within $J_k$
+from the level $k-\tfrac12$ to $k+\tfrac12$.  Choose $s_0<s_1$ in
+$J_k$ by the extremal construction in the proof of
+\cref{prop:Lipschitz-v4}, so that the passage occurs without leaving
+the open level band on $(s_0,s_1)$.  It is part of the
+set counted by $\Delta_k$, and absolute continuity and H\"older's
+inequality give
+\[
+ 1\le\int_{s_0}^{s_1}|(F_X^W)'(t)|\,dt
+ \le K_k(s_1-s_0)^{1-1/p}
+ \le K_k\Delta_k(X;W)^{1-1/p}.
+\]
+Rearranging proves the claimed bound.
+\end{proof}
+\begin{remark}[Why uniform derivatives are not the proposed solution]
+The hypothesis \eqref{eq:uniform-derivative-v5} is much stronger
+than the occupation condition of \cref{prop:occupation-v3} and is
+\emph{not} a consequence of the mean-value bounds of this note.
+Moreover, if an arithmetic family converges pointwise away from
+the zero heights to a function with jumps on $J_k$, a uniform
+$W^{1,p}(J_k)$ bound with $p>1$, together with the fixed MCOM
+amplitude bounds, is impossible: the one-dimensional Morrey
+inequality would make the family equicontinuous, and the uniform bound
+$|F_X^W|\le|N_0|+H$ on $J_k$ then makes it compact in $C(J_k)$ by
+Arzel\`a--Ascoli, whereas a continuous subsequential limit cannot agree
+on both sides of a jump with the discontinuous pointwise limit.
+Thus controlling all derivatives uniformly in the cutoff is not the
+plausible path.  A more local prime-only occupation or correlated
+\emph{increment} estimate is required; the obstruction is to this
+strong regularity strategy, not to the taucm(s) programme itself.
+\end{remark}
+
+\subsection{Why the numerically accurate pair centers do not close the proof}
+For clarity, define
+\begin{equation}\label{eq:center-v5}
+ c_k(X;W):=\tfrac12\bigl(\tau_k^{\Cms}(X;W)
+ +\tau_{k+1}^{\Cms}(X;W)\bigr),\qquad
+ s_k(X;W):=\Delta_k(X;W).
+\end{equation}
+Knowledge of $c_k$ and $s_k$ is equivalent to knowledge of the
+ordered pair, but an accurate center does not bound $s_k$ from below:
+$c_k\pm s_k/2$ may approach the same limit with $s_k\downarrow0$.
+The accurate numerical centers in \cref{sec:observed-v4} are therefore
+valuable for choosing sampling windows for the untruncated Euler
+phase, not a proof of separation.  The quadratic inverse theorem
+\cref{thm:identifiability-v4} and the prime-only occupation inequality
+\eqref{eq:occup-v3} are two possible ways to attack the missing
+arithmetic estimate.  Neither currently provides the uniform error
+control for all indices or the fixed-index limit $X\to\infty$.
+
+\paragraph{Precise research target.}
+For every fixed $k$, find a statement proved directly for the
+weighted prime phase $P_X^W$ and the MCOM-truncated sublevel measures
+that yields one of the equivalent inequalities
+\eqref{eq:noncollapse-v5}--\eqref{eq:coherence-v5}, preferably through
+positive occupation of the level band or a controlled correlation of
+consecutive arithmetic displacements.  Such a theorem must allow the
+phase derivative to grow with $X$, respect the full weight support
+$n\le X^2$, and not assume information about $\beta_k$ or the
+absence of repeated $\gamma_k$.  Together with an independently
+proved DBSRH$(W)$ it would give RH and simplicity; without DBSRH,
+it does not by itself locate the genuine imaginary parts.
+
+% ======================================================================
+% V7 ADDITIONS.  All results below distinguish proved statements,
+% consequences depending on the cited IJNT input, and open reductions.
+% ======================================================================
+\section{Arithmetic scope and source attribution}\label{sec:v7-scope}
+This section integrates the deductions developed in the present research
+conversation with the author's public working notes at commit
+\texttt{38aac7c} \cite{CasanaV10Notes,CasanaV10Transport}.
+The sources are not identical in status. The earlier taucs
+$\tau_k^{\mathrm C}$ and taucm $\tau_k^{\Cm}$ use the author's
+interpolated \emph{first-prime Euler phase} $\Phi^\circ$; the taucms
+$\tau_k^{\Cms}(X;W)$ use a \emph{different, compensated, weighted}
+prime-power phase. In particular the weight $W_{1/4}$ is a chosen
+external smooth weight and is \emph{not} presented as an invention
+of the author. The elementary sublevel, projection, Fourier,
+complex-analysis and moment inequalities used below are mathematical
+techniques, not separately claimed discoveries. The possible novelty
+lies in the combination with the author's ordinal objects and the
+specific MCOM coefficient. None of the present deductions is a
+proof of RH.
+
+Three different assertions must remain separate:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item strict positivity of $\tau_{k+1}^{\Cms}(X;W)-\tau_k^{\Cms}(X;W)$
+for each finite $X$;
+\item the noncollapse condition $\limsup_{X\to\infty}
+[\tau_{k+1}^{\Cms}(X;W)-\tau_k^{\Cms}(X;W)]>0$ for a fixed index;
+\item convergence of the \emph{same} sublevel points to the
+corresponding imaginary parts of zeros (DBSRH).
+\end{enumerate}
+For every sufficiently large index the first follows from the
+continuity and coercive MCOM barriers; for the initial indices
+it requires checking that the corresponding two levels are
+attained. The
+second plus the third, for all indices, would imply RH and simplicity;
+none follows from a bound for $S(t)$ alone.
+
+\section{The genuine MCOM margin, and the distinction from moment inputs}
+\label{sec:v7-mcom}
+Write $A_{\mathrm M}=0.08382$, $C_{\mathrm H}=0.0748596142711$
+and keep the \emph{fixed, effective} truncation $H$ of
+\eqref{eq:MCOMH}; the asymptotic coefficient is not silently substituted
+into that definition. For $t$ outside zero heights write
+$G(t)=N(t)-N_0(t)$, with the right-continuous convention at the heights.
+
+\begin{proposition}[MCOM interior margin]\label{prop:v7-margin}
+Assume the two inequalities of the author's MCOM manuscript,
+\eqref{eq:MCOM} and \eqref{eq:asymptMCOM}. For every fixed
+$0<\eta<A_{\mathrm M}-C_{\mathrm H}$ there exists $T_\eta$ such that
+\begin{equation}\label{eq:v7-margin}
+ H(t)-|G(t)|\ge\eta\log t\qquad(t\ge T_\eta)
+\end{equation}
+away from zero heights and, by right limits, at the heights.
+\end{proposition}
+\begin{proof}
+Choose $c$ strictly between $C_{\mathrm H}$ and
+$A_{\mathrm M}-\eta$. The asserted limsup implies
+$|S(t)|\le c\log t$ eventually. Since $G=S+R$ and $R(t)=O(t^{-1})$,
+choose a slightly larger intermediate coefficient, still below
+$A_{\mathrm M}-\eta$, to absorb $R(t)$. The $5.5$ in $H$ is
+nonnegative, and \eqref{eq:v7-margin} follows.
+\end{proof}
+
+The margin is a mathematically concrete use of the \emph{two}
+MCOM estimates. It is not, by itself, a new Selberg--Fujii moment
+bound. The inequality $|G|\le H$ also supplies the exact projection
+identity, for any real prime phase $P$,
+\begin{equation}\label{eq:v7-exact-projection}
+ |P-G|-|\clip_H(P)-G|=(|P|-H)_+.
+\end{equation}
+The right side is zero on nonsaturated points and equals the distance
+removed by the truncation on saturated points. The explicit MCOM
+bound makes the target $G$ lie inside the interval $[-H,H]$; the
+asymptotic refinement gives the stronger margin
+\eqref{eq:v7-margin}. Neither property implies pointwise
+convergence of the prime phases.
+
+\begin{proposition}[Crossing budget localized by the MCOM barriers]
+\label{prop:v7-crossing}
+Let $F_X^W$ be the actual taucms function from \eqref{eq:Cms},
+$P_X^W$ its \emph{untruncated} phase, and
+$\lambda_k=k-\tfrac12$. For every $k$ sufficiently large, let
+$a_k<b_k$ be the MCOM barriers specified in
+\cref{thm:block-sep-v3} by
+$N_0(a_k)+H(a_k)=\lambda_k$ and
+$N_0(b_k)-H(b_k)=\lambda_k$.
+Then, for every $X\ge2$ and $W\in\mathcal W$,
+\begin{equation}\label{eq:v7-crossing}
+ |\tau_k^{\Cms}(X;W)-\gamma_k|
+ \le \meas\bigl\{t\in[a_k,b_k]:
+ |P_X^W(t)-G(t)|\ge\tfrac12\bigr\}.
+\end{equation}
+The same statement holds for $\tau_k^{\Cm}$ with $P_X^W$
+replaced by $\Phi^\circ$.
+\end{proposition}
+\begin{proof}
+The sublevel indicator of $N(t)$ at $\lambda_k$ equals
+$\mathbf1_{\{t<\gamma_k\}}$ a.e., even for repeated imaginary parts,
+because the zeros are counted with multiplicity. For any integer $n$
+and real $x$, differing indicators of $x<k-\frac12$ and
+$n<k-\frac12$ imply $|x-n|\ge\frac12$.
+The MCOM bound $|G|\le H$ and projection contractivity yield
+$|F_X^W-N|\le|P_X^W-G|$. Finally, the MCOM barrier inequalities
+place both sublevel boundaries in $[a_k,b_k]$ up to null sets;
+outside this interval the two indicators agree. Integration
+proves the claim. The constants here are \emph{not} claimed to
+be sharp enough to force the right side to vanish.
+\end{proof}
+
+\begin{remark}[What the $1/2$ crossing does and does not do]
+The asymptotic MCOM coefficient yields
+$\limsup_{k\to\infty}|\gamma_k-\gamma_k^{\mathrm{RvM}}|
+\le2\pi C_{\mathrm H}<1/2$ under the MCOM assertion.
+This strict numerical threshold is not supplied by the earlier
+coefficients discussed in the source notes. It is a proximity
+statement in \emph{physical units of the imaginary part}; it is not a bound by
+half the RvM spacing, which is $\asymp1/\log k$ and tends to zero.
+The equality ``limsup $=2\pi\mathfrak a$'' quoted in the exploratory
+notes is \emph{not} used: the necessary consequence here is the
+inequality $\le$. Neither this threshold nor
+\eqref{eq:v7-crossing} excludes repeated imaginary parts on its own.
+\end{remark}
+
+\section{Quantitative ordinal transport under the cited fourth moment}
+\label{sec:v7-transport}
+The following is an audited formulation of the transport statement
+first written in the conversation and saved in
+\cite{CasanaV10Transport}. It does not improve the fourth moment
+of Selberg or Fujii. It improves the \emph{consequence for the
+ordinal points} relative to what the moment statement alone says.
+
+\begin{definition}[Auxiliary untruncated sublevels]
+\label{def:v7-untruncated}
+Define, solely for comparison,
+\begin{equation}\label{eq:v7-untruncated}
+ u_k^\circ:=\meas\{t>0:N_0(t)+\Phi^\circ(t)<k-\tfrac12\}.
+\end{equation}
+These are neither the original taucs nor the taucm(s). Let
+$\mathcal K_T=\{k:T\le\gamma_k^{\mathrm{RvM}}\le2T\}$.
+\end{definition}
+
+\begin{theorem}[Transport of an MCOM-clipped Euler phase]
+\label{thm:v7-transport}
+Assume the untruncated fourth-moment input \eqref{eq:IJNTinput}
+from the author's IJNT manuscript and both MCOM estimates
+\eqref{eq:MCOM} and \eqref{eq:asymptMCOM}. Then, as $T\to\infty$,
+\begin{align}
+ \sum_{k\in\mathcal K_T}|\tau_k^{\Cm}-u_k^\circ|
+ &\ll\frac{T}{(\log T)^3},\label{eq:v7-transport}\\
+ \frac1{\#\mathcal K_T}\sum_{k\in\mathcal K_T}
+ |\tau_k^{\Cm}-u_k^\circ|
+ &\ll\frac1{(\log T)^4}.\label{eq:v7-transport-avg}
+\end{align}
+For fixed $\epsilon>0$, the fraction of indices satisfying
+$|\tau_k^{\Cm}-u_k^\circ|>
+\epsilon(\gamma_{k+1}^{\mathrm{RvM}}-
+\gamma_k^{\mathrm{RvM}})$ is
+$O_\epsilon((\log T)^{-3})$.
+The analogous total $L^1$ bound for the difference of consecutive
+spacings holds with both indices in $\mathcal K_T$.
+\end{theorem}
+\begin{proof}
+Let $P(t)=\Phi^\circ(t)$ and
+$D(t)=(|P(t)|-H(t))_+$.
+By \cref{prop:v7-margin}, on $[T/2,3T]$, for $T$ sufficiently
+large, the set $E_T=\{D>0\}$ satisfies
+$|P-G|\ge D+c\log T$, with $c>0$ fixed. Thus
+\begin{equation}\label{eq:v7-local-D}
+ \meas(E_T)\ll\frac{1}{(\log T)^4}
+ \int_{T/2}^{3T}|P-G|^4dt\ll\frac{T}{(\log T)^4},
+ \quad
+ \int_{T/2}^{3T}D\,dt\ll\frac{T}{(\log T)^3}.
+\end{equation}
+The last inequality follows from
+$D\le |P-G|^4/(c\log T)^3$ on $E_T$.
+The cited IJNT fourth moment applies on the requisite finite
+collection of dyadic blocks.
+
+To justify localization independently of clipping, expand the finite
+Euler logarithms and sum the elementary bounds:
+$|\Phi^\circ(t)|\ll (1+t)^{1/4}\sqrt{\log(3+t)}$.
+Consequently $N_0+P$ and $N_0+\clip_H P$ are both below every
+level with $k\in\mathcal K_T$ when $t\le T/2$ and above it when
+$t\ge3T$, for all large $T$. The initial compact interval is
+absorbed by the same asymptotic comparison.
+
+For fixed $t$ the sublevel indicators for these two functions
+can disagree only at levels $k-\frac12$ within an interval of
+length $D(t)$. If $D(t)>0$, that interval contains at most
+$D(t)+1$ such half-integer levels. Therefore
+\begin{align*}
+\sum_{k\in\mathcal K_T}|\tau_k^{\Cm}-u_k^\circ|
+&\le\int_{T/2}^{3T}
+\bigl[D(t)+\mathbf1_{E_T}(t)\bigr]dt
+\ll T(\log T)^{-3}.
+\end{align*}
+The cardinality of $\mathcal K_T$ is $\asymp T\log T$.
+The pointwise triangle inequality for two consecutive
+spacings proves their $L^1$ comparison; Markov's inequality and
+$\gamma_{k+1}^{\mathrm{RvM}}-
+\gamma_k^{\mathrm{RvM}}\asymp(\log T)^{-1}$
+give the stated exceptional proportion.
+\end{proof}
+
+\begin{corollary}[Uniform transport over the proved weighted cutoff range]
+\label{cor:v7-weighted-transport}
+Assume the uniform fourth-moment theorem of
+\cref{sec:moderate}, with its stated Fujii--IJNT input, and the
+MCOM estimates. For a fixed $0<\epsilon<1/4$ define the
+\emph{auxiliary} untruncated points
+\[
+ u_k^\circ(X;W)=\meas\{t>0:N_0(t)+P_X^W(t)<k-\tfrac12\}.
+\]
+Uniformly for $W\in\mathcal W$ and
+$T^\epsilon\le X\le T^{1/4}$,
+\begin{equation}\label{eq:v7-weighted-transport}
+ \sum_{k\in\mathcal K_T}
+ |\tau_k^{\Cms}(X;W)-u_k^\circ(X;W)|
+ \ll_\epsilon\frac{T}{(\log T)^3}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+The uniform moment input replaces the fixed $\Phi^\circ$
+input in \eqref{eq:v7-local-D}. The finite weighted Euler sum
+has the absolute bound $O(X)$, while the pole compensator has the
+bound $O(X/t)$ for $t\ge1$; at $0<t<1$ it has the trivial bound
+$O(X)$ as well. For $X\le T^{1/4}$ these bounds are
+$o(T\log T)$, enough to localize the relevant sublevel
+indicators to $[T/2,3T]$. The preceding level-counting argument
+then gives the bound uniformly.
+\end{proof}
+
+\begin{remark}[No improvement of Selberg--Fujii itself]
+Neither \eqref{eq:v7-transport} nor
+\eqref{eq:v7-weighted-transport} improves a fourth-moment
+exponent, constant or allowed prime cutoff in Selberg--Fujii.
+Further, the \emph{rate} $T/(\log T)^3$ follows from a positive
+logarithmic margin and the cited fourth moment; once those inputs
+are assumed, that elementary step does not uniquely require the
+specific decimal $0.08382$. The particular MCOM estimates are
+what justify the margin and the covered projection for the
+\emph{specified} taucm construction. The auxiliary points
+$u_k^\circ$ are \emph{not} the true imaginary parts, and these results
+do not imply noncollapse for a fixed $k$ as $X\to\infty$.
+\end{remark}
+
+\begin{remark}[The asymptotic estimate \eqref{eq:asymptMCOM} is not needed for the rate]
+\label{rem:v8-transport-noasympt}
+The conclusions of \cref{thm:v7-transport} and
+\cref{cor:v7-weighted-transport} hold with the explicit bound
+\eqref{eq:MCOM} alone, provided Selberg's unconditional moment
+estimate $\int_T^{3T}|S(t)|^{6}\,dt\ll T(\log\log T)^3$
+\cite{Selberg1946} is added. Split $[T/2,3T]$ into
+$B_1=\{|G|\le H/2\}$ and $B_2=\{|G|>H/2\}$. On $E_T\cap B_1$ one has
+$|P-G|\ge D+H/2\ge D+\tfrac12A_{\mathrm M}\log(T/2)$, and the Markov
+step of the proof applies verbatim with $c=\tfrac12A_{\mathrm M}$.
+On $B_2$, $|S|\ge H/2-|R|\ge\tfrac12A_{\mathrm M}\log T+2$ for large
+$T$, so $\meas(B_2)\ll T(\log\log T)^3(\log T)^{-6}$. Since $|G|\le H$,
+$D\le|P-G|$ pointwise, and H\"older's inequality with the fourth
+moment gives
+$\int_{B_2}D\,dt\le\bigl(\int|P-G|^4\bigr)^{1/4}\meas(B_2)^{3/4}
+\ll T(\log\log T)^{9/4}(\log T)^{-9/2}\ll T(\log T)^{-3}$,
+while $\meas(E_T\cap B_2)\le\meas(B_2)\ll T(\log T)^{-4}$.
+Thus the only property of the truncation used by the transport rate
+is $H\asymp\log t$ together with the covering $|G|\le H$; the
+asymptotic coefficient $C_{\mathrm H}$ removes the factor
+$(\log\log T)^{O(1)}$ from the exceptional set but does not change
+the order $T(\log T)^{-3}$.
+\end{remark}
+
+\section{A prime-by-prime inequality and its exact limitation}
+\label{sec:v7-prime-step}
+For the original Euler phase \eqref{eq:Phi-m}, adding a prime
+$p$ changes the finite phase by
+\begin{equation}\label{eq:v7-single-prime}
+ \phi_p(t)=-\frac1\pi\arg(1-p^{-1/2-it}),\qquad
+ |\phi_p(t)|\le\frac{\arcsin(p^{-1/2})}{\pi}=:\alpha_p.
+\end{equation}
+The bound is elementary geometry of the circle centered at $1$
+of radius $p^{-1/2}$. It is independent of MCOM; MCOM enters only
+when these phases are used with the fixed, covered truncation $H$.
+If an \emph{auxiliary} phase at a fixed number of primes is called
+$B_m(t)=N_0(t)+\clip_{H(t)}\Phi_m(t)$, then
+$|B_{m+1}-B_m|\le\alpha_{p_{m+1}}$. Consequently
+\begin{equation}\label{eq:v7-persistence-one-step}
+\begin{split}
+&\meas\{k-\tfrac12\le B_{m+1}<k+\tfrac12\}\\
+&\quad\ge \meas\{k-\tfrac12+\alpha_{p_{m+1}}
+\le B_m<k+\tfrac12-\alpha_{p_{m+1}}\}.
+\end{split}
+\end{equation}
+This is a finite-step interior-band inclusion, not persistence
+for an infinite sequence of prime cutoffs. The bounds
+$\alpha_p\sim1/(\pi\sqrt p)$ are not summable over primes.
+The structural saturation model of \cref{sec:saturation} also
+shows why pointwise clipping and diminishing step sizes cannot
+alone rule out a band collapsing in a limit. The compensated
+weighted family $P_X^W$ is \emph{not} the same as the discrete
+family $\Phi_m$, and \eqref{eq:v7-persistence-one-step} is not
+claimed as a theorem about its increments.
+
+\section{A zero-free Euler transform: a conditional RH criterion}
+\label{sec:v7-transform}
+This alternative route refines the transform idea in
+\cite{CasanaV10Notes}. It uses the \emph{actual compensated
+weighted prime phase} $P_X^W$, not a new approximation or a
+relabeling of $S(t)$. The transform itself is elementary
+Fourier--Laplace analysis; only its application to this ordinal
+program is under discussion. This is an \emph{alternative
+analytic route}, not an established prime-band persistence
+result, and not a proof of RH.
+
+Fix $W\in\mathcal W$ once and for all. For $\Re s>1/2$ put
+\begin{equation}\label{eq:v7-ks}
+ k_s(t)=\frac1{(s-\frac12-it)^2}+
+        \frac1{(s-\frac12+it)^2},\qquad
+ \mathcal T[f](s)=-\int_0^\infty f(t)\partial_t k_s(t)\,dt.
+\end{equation}
+For every compact $K\Subset\{\Re s>1/2\}$,
+$|\partial_t k_s(t)|\le C_K(1+t)^{-3}$,
+so the transform is holomorphic whenever
+$\int_0^\infty|f(t)|(1+t)^{-3}dt<\infty$.
+
+\begin{lemma}[Exact finite-cutoff Euler transform]
+\label{lem:v7-euler-transform}
+For $X\ge2$ and $\Re s>1/2$,
+\begin{equation}\label{eq:v7-euler-transform}
+\mathcal T[P_X^W](s)
+=-\sum_{n\ge2} W\!\left(\frac{\log n}{\log X}\right)
+\frac{\Lambda(n)\log n}{n^s}
++\int_2^\infty W\!\left(\frac{\log u}{\log X}\right)
+\frac{\log u}{u^s}\,du.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The sum and integral defining $P_X^W$ have compact support
+in their $n,u$ variables for fixed $X$. For $a>0$ and
+$\Re(s-\frac12)>0$, Fourier--Laplace inversion gives
+$\int_0^\infty k_s(t)\cos(at)dt=\pi a e^{-(s-\frac12)a}$.
+Apply integration by parts to each term of $P_X^W$; every
+sine term vanishes at $t=0$ and its derivative contributes
+$-a\cos(at)/\pi$. Set $a=\log n$ or $\log u$.
+\end{proof}
+
+\begin{theorem}[Weighted $L^2$ normality implies RH]
+\label{thm:v7-normality}
+Fix a weight $W\in\mathcal W$. Suppose that for some unbounded
+sequence of cuts $X_j\to\infty$,
+\begin{equation}\label{eq:v7-normality-assumption}
+\sup_j \int_0^\infty
+\frac{|P_{X_j}^W(t)|^2}{(1+t)^3}\,dt<\infty.
+\end{equation}
+Then all nontrivial zeros of $\zeta$ lie on $\Re s=\tfrac12$.
+No Cauchy-in-measure hypothesis is needed.
+\end{theorem}
+\begin{proof}
+Cauchy--Schwarz and the bound following \eqref{eq:v7-ks}
+show that the holomorphic family
+$\{\mathcal T[P_{X_j}^W]\}_j$ is locally bounded on
+$\Re s>1/2$. It is therefore normal by Montel's theorem.
+For $\Re s>1$, dominated convergence in
+\eqref{eq:v7-euler-transform}, using $0\le W\le1$ and
+$W(v)=1$ for $v\le1$, gives the pointwise limit
+\begin{equation}\label{eq:v7-meromorphic-limit}
+ Q(s):=-\left(\frac{\zeta'}\zeta\right)'(s)
+ +\int_2^\infty\frac{\log u}{u^s}\,du,
+ \qquad\Re s>1.
+\end{equation}
+The integral equals
+$2^{1-s}\bigl(\log2/(s-1)+(s-1)^{-2}\bigr)$;
+its double pole at $s=1$ cancels the double pole of the
+first summand. Thus $Q$ admits a meromorphic continuation
+to $\Re s>1/2$, with a nonremovable double pole at any
+zero $\rho$ in that half-plane. Any locally uniform
+subsequential limit provided by Montel is holomorphic on the
+whole half-plane and agrees with $Q$ for $\Re s>1$.
+Uniqueness of analytic continuation therefore forbids
+such a $\rho$. By the functional-equation symmetry
+$\rho\mapsto 1-\overline\rho$, the absence of zeros to
+the right of $1/2$ implies RH.
+\end{proof}
+
+\begin{corollary}[MCOM excess criterion: an exact sufficient route]
+\label{cor:v7-excess}
+For the fixed effective MCOM truncation $H(t)$,
+let the \emph{untruncated excess} be
+\begin{equation}\label{eq:v7-excess}
+ E_X(t)=\bigl(|P_X^W(t)|-H(t)\bigr)_+.
+\end{equation}
+If for some $X_j\to\infty$
+\begin{equation}\label{eq:v7-excess-criterion}
+ \sup_j\int_0^\infty\frac{E_{X_j}(t)^2}{(1+t)^3}\,dt<\infty,
+\end{equation}
+then RH holds. Contrapositively, if RH is false, then for
+every fixed $W\in\mathcal W$,
+\begin{equation}\label{eq:v7-excess-diverges}
+ \lim_{X\to\infty}\int_0^\infty
+ \frac{\bigl(|P_X^W(t)|-H(t)\bigr)_+^2}{(1+t)^3}\,dt=+\infty.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Pointwise, $|P_X^W|\le H+E_X$. As
+$\int_0^\infty H(t)^2(1+t)^{-3}dt<\infty$, the triangle
+inequality in weighted $L^2$ converts
+\eqref{eq:v7-excess-criterion} to
+\eqref{eq:v7-normality-assumption}. For the contrapositive,
+if the limit did not diverge, there would be an unbounded
+sequence $X_j$ with bounded excess norm, contradicting
+the theorem.
+\end{proof}
+
+\begin{remark}[How MCOM enters and what remains open]
+The last proof uses $H(t)$ as an explicit \emph{scale}, but
+uses only $H\in L^2((1+t)^{-3}dt)$; its logical implication
+to RH is therefore not a new theorem that relies numerically
+on the coefficient $0.08382$. To exploit the \emph{sharpness}
+of MCOM one must actually establish
+\eqref{eq:v7-excess-criterion} from the arithmetic coefficients
+or an MCOM-sensitive inequality. This has \emph{not} been done.
+The normal-family technique is classical; the finite Euler
+identity \eqref{eq:v7-euler-transform} and the precise
+weighted-excess condition are recorded to identify a
+sharply formulated open task. There is no demonstrated
+improvement over Selberg--Fujii, nor is the converse ``RH
+implies \eqref{eq:v7-excess-criterion}'' established.
+\end{remark}
+
+\section{Identification of the limit phase, and the first index}
+\label{sec:v8-limit}
+The criterion of \cref{thm:v7-normality} uses no convergence of the
+prime phases. If convergence in measure is added, the limit phase is
+identified exactly, and the first sublevel point of \eqref{eq:Cms} is
+seen \emph{not} to converge to $\gamma_1$. The deductions of this
+section were made in the research conversation of 2 November 2026;
+their external inputs are Malmst\'en's integral for $\log\Gamma$
+\cite[\S12.31]{WhittakerWatson}, the boundary formula for Cauchy
+integrals of $L^2$ functions \cite[Thm.~93]{TitchmarshFI}, the Hadamard
+product of $\xi$, and the explicit bound $|R(t)|\le0.53/(\pi t)$
+already used in \eqref{eq:MCOMH}. Throughout, $N_\vartheta=\vartheta/\pi+1$,
+so that $N=N_\vartheta+S$ for every $t>0$ by \eqref{eq:RVM}, $b:=s-\frac12$,
+and $\psi=\Gamma'/\Gamma$.
+
+\begin{lemma}[Transforms of the smooth terms]\label{lem:v8-smooth}
+Let $\Re s>\frac12$.
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item For $a>0$, $\mathcal T[\sin(a\,\cdot)](s)=\pi a^2e^{-ab}$;
+ moreover $\mathcal T[1](s)=2/b^2$ and $\mathcal T[t](s)=0$.
+\item $\mathcal T[N_\vartheta](s)=2/b^2-\tfrac14\psi'(s/2)$.
+\item Put
+\begin{equation}\label{eq:v8-r0}
+ J(t)=\int_0^{\log2}e^{v/2}\frac{\sin(tv)}{v}\,dv,\qquad
+ r_0(t)=-1+\frac1\pi\arctan(2t)+\frac1\pi J(t).
+\end{equation}
+Then $r_0$ is real-analytic, $r_0(0)=-1$, $J(t)>0$ and
+$|r_0(t)|\le1.46/t$ for $t>0$, and
+\begin{equation}\label{eq:v8-E}
+ \mathcal T[r_0](s)=E(s):=\frac1{s^2}-\frac2{b^2}
+ +\int_1^2(\log u)\,u^{-s}\,du .
+\end{equation}
+\item For $\Re s>1$ the limit $Q$ of \eqref{eq:v7-meromorphic-limit}
+ satisfies $Q(s)=-(\xi'/\xi)'(s)-E(s)-\mathcal T[N_\vartheta](s)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) Integrating by parts,
+$\mathcal T[\sin(a\,\cdot)](s)=a\int_0^\infty\cos(at)k_s(t)\,dt
+=\frac a2\int_{\mathbb R}e^{iat}k_s(t)\,dt$, since $k_s$ is even.
+For $a>0$ and $\Re b>0$, residues give
+$\int_{\mathbb R}e^{iat}(b+it)^{-2}dt=2\pi ae^{-ab}$ and
+$\int_{\mathbb R}e^{iat}(b-it)^{-2}dt=0$. Next,
+$\mathcal T[1]=k_s(0)-k_s(\infty)=2/b^2$, and
+$\mathcal T[t]=\int_0^\infty k_s\,dt=\frac12\int_{\mathbb R}k_s\,dt=0$
+because each of $(b\pm it)^{-2}$ integrates to zero over $\mathbb R$.
+
+(ii) Malmst\'en's formula gives, for $\Re z>0$,
+$\log\Gamma(z)=\int_0^\infty\bigl[(z-1)e^{-u}
+-\frac{e^{-u}-e^{-zu}}{1-e^{-u}}\bigr]\frac{du}u$. With
+$z=\frac14+\frac{it}2$,
+$\Im\log\Gamma(z)=\int_0^\infty\bigl[\frac t2e^{-u}
+-\frac{e^{-u/4}\sin(tu/2)}{1-e^{-u}}\bigr]\frac{du}u$,
+whose integrand is $O(t+ut^3)$ as $u\to0^+$; hence Fubini's theorem
+allows $\mathcal T$ to be applied under the integral. By (i),
+the term linear in $t$ contributes nothing and
+$\mathcal T[\sin(\tfrac u2\,\cdot)]=\pi\tfrac{u^2}4e^{-bu/2}$, so
+$\mathcal T[\Im\log\Gamma(\tfrac14+\tfrac{i\cdot}2)]
+=-\frac\pi4\int_0^\infty\frac{u\,e^{-su/2}}{1-e^{-u}}\,du
+=-\frac\pi4\psi'(s/2)$. Since
+$\vartheta(t)=\Im\log\Gamma(\frac14+\frac{it}2)-\frac t2\log\pi$ and
+$\mathcal T[t]=0$, (ii) follows.
+
+(iii) From $\arctan(2t)=\int_0^\infty e^{-v/2}\sin(tv)\,dv/v$ and (i),
+$\mathcal T[\pi^{-1}\arctan(2\,\cdot)]=\int_0^\infty ve^{-sv}dv=s^{-2}$
+and $\mathcal T[\pi^{-1}J]=\int_0^{\log2}ve^{(1-s)v}dv
+=\int_1^2(\log u)u^{-s}du$; with $\mathcal T[-1]=-2/b^2$ this is
+\eqref{eq:v8-E}. Analyticity and $r_0(0)=-1$ are clear. For the
+bounds write $J(t)=\operatorname{Si}(t\log2)+\int_0^{\log2}\varphi(v)\sin(tv)\,dv$
+with $\varphi(v)=(e^{v/2}-1)/v$ increasing from $\frac12$ to $0.598$.
+Integration by parts gives $|\int_0^{\log2}\varphi\sin(tv)\,dv|\le2\varphi(\log2)/t\le1.2/t$,
+and also $\le\varphi(\log2)\,t(\log2)^2/2\le0.144\,t$. For $t\le2.9$,
+$\operatorname{Si}(t\log2)\ge0.79\,t\log2$ by concavity of $\operatorname{Si}$ on
+$[0,\pi]$, so $J(t)\ge0.40\,t>0$; for $t\ge2.9$,
+$\operatorname{Si}(t\log2)\ge\operatorname{Si}(2\pi)>1.41$ and $1.2/t\le0.42$, so $J(t)>0$.
+Finally $r_0=\pi^{-1}\bigl[J-\frac\pi2-\arctan\frac1{2t}\bigr]$ and
+$|\operatorname{Si}(x)-\frac\pi2|\le2/x$ give
+$|r_0(t)|\le\pi^{-1}(2/\log2+1.2+\tfrac12)/t\le1.46/t$.
+
+(iv) From $\xi(s)=\frac12s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$,
+$(\xi'/\xi)'=(\zeta'/\zeta)'-s^{-2}-(s-1)^{-2}+\frac14\psi'(s/2)$.
+Using (ii), (iii) and $\int_1^\infty(\log u)u^{-s}du=(s-1)^{-2}$,
+\[
+-(\xi'/\xi)'-E-\mathcal T[N_\vartheta]
+=-(\zeta'/\zeta)'+\int_1^\infty(\log u)u^{-s}du-\int_1^2(\log u)u^{-s}du
+=Q(s).\qedhere
+\]
+\end{proof}
+
+\begin{lemma}[Uniqueness for the transform]\label{lem:v8-unique}
+Let $g$ be measurable on $(0,\infty)$ with
+$\int_0^\infty|g(t)|^2(1+t)^{-3}dt<\infty$ and $\mathcal T[g](s)=0$
+for all $\Re s>\frac12$. Then $g=0$ almost everywhere.
+\end{lemma}
+\begin{proof}
+Let $g_o$ be the odd extension of $g$ to $\mathbb R$. Since
+$\partial_tk_s$ is odd, $\mathcal T[g](s)=-\frac12\int_{\mathbb R}g_o\,\partial_tk_s\,dt$,
+and $\partial_tk_s(t)=2(t+ib)^{-3}+2(t-ib)^{-3}$. Put
+$C(z)=\int_{\mathbb R}g_o(t)(t-z)^{-3}dt$ for $z\notin\mathbb R$
+(absolutely convergent and holomorphic). Oddness gives $C(-z)=C(z)$,
+so $\mathcal T[g](s)=-2C(ib)$, and the hypothesis says $C\equiv0$ on
+$\{\Im z>0\}$, hence on $\{\Im z<0\}$ as well. Let
+$C_1(z)=\int_{\mathbb R}g_o(t)\bigl[(t-z)^{-1}-(t-i)^{-1}-(z-i)(t-i)^{-2}\bigr]dt$;
+the bracket is $O(|t|^{-3})$, $C_1$ is holomorphic off $\mathbb R$ and
+$C_1''=2C\equiv0$, so $C_1$ is a quadratic polynomial $p_\pm$ on each
+half-plane. The bracket equals $(z-i)^2(t-z)^{-1}(t-i)^{-2}$, so
+$C_1(z)=(z-i)^2\int_{\mathbb R}w(t)(t-z)^{-1}dt$ with
+$w(t)=g_o(t)(t-i)^{-2}\in L^2(\mathbb R)$. By the boundary formula for
+Cauchy integrals of $L^2$ functions \cite[Thm.~93]{TitchmarshFI},
+$2\pi i\,w(x)=\lim_{y\to0^+}[C_1(x+iy)-C_1(x-iy)](x-i)^{-2}
+=(p_+(x)-p_-(x))(x-i)^{-2}$ for almost every $x$. Hence $g_o$ agrees
+a.e. with a polynomial of degree at most two; being odd, $g_o(t)=ct$,
+and $\int_0^\infty c^2t^2(1+t)^{-3}dt<\infty$ forces $c=0$.
+\end{proof}
+
+\begin{proposition}[Limit phase and the first index]\label{prop:v8-first}
+Fix $W\in\mathcal W$. Suppose that a sequence $X_j\to\infty$
+satisfies \eqref{eq:v7-normality-assumption} and that
+$P_{X_j}^W$ converges in measure on every compact subset of
+$(0,\infty)$ to a function $P_\infty$. Then:
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item RH holds and $P_\infty=S-r_0$ almost everywhere on $(0,\infty)$,
+ with $r_0$ from \eqref{eq:v8-r0};
+\item $|P_\infty(t)|<H(t)$ for every $t>0$: the MCOM truncation is
+ inactive in the limit, and $F_\infty:=N_0+\clip_H(P_\infty)=N-R-r_0$;
+\item $\lim_{j\to\infty}\tau_k^{\Cms}(X_j;W)=\gamma_k$ for every $k\ge2$;
+\item $\lim_{j\to\infty}\tau_1^{\Cms}(X_j;W)=\gamma_1-t_\sharp$, where
+\begin{equation}\label{eq:v8-tsharp}
+ t_\sharp:=\meas\{0<t<\gamma_1:\ R(t)+r_0(t)\le-\tfrac12\}>0 .
+\end{equation}
+\end{enumerate}
+Consequently $\mathrm{DBSRH}(W)$ in the form \eqref{eq:DBSRH} is
+incompatible with the two hypotheses. With the sublevel points
+measured from $2\pi$, the minimum of $N_0$,
+\begin{equation}\label{eq:v8-flat}
+ \tau_k^\flat(X;W):=2\pi+\meas\{t\ge2\pi:\ F_X^W(t)<k-\tfrac12\},
+\end{equation}
+one has $\lim_j\tau_k^\flat(X_j;W)=\gamma_k$ for every $k\ge1$.
+\end{proposition}
+\begin{proof}
+(a) RH is \cref{thm:v7-normality}. By Fatou's lemma $P_\infty$
+satisfies the weighted $L^2$ bound; the bound gives uniform
+integrability on compact sets and, by Cauchy--Schwarz, uniformly small
+contributions of $(0,\delta)\cup(B,\infty)$ to
+$\int|P_{X_j}^W|(1+t)^{-3}dt$, so $\mathcal T[P_{X_j}^W](s)\to\mathcal T[P_\infty](s)$
+for every $\Re s>\frac12$. Hence $\mathcal T[P_\infty]$ is the
+holomorphic continuation of $Q$ obtained in the proof of
+\cref{thm:v7-normality}. Integrating by parts,
+$\mathcal T[N](s)=\sum_kk_s(\gamma_k)=\sum_\rho(s-\rho)^{-2}$ under RH,
+which equals $-(\xi'/\xi)'(s)$ by the Hadamard product. By
+\cref{lem:v8-smooth}(iv), on $\Re s>\frac12$ (where both sides are
+holomorphic under RH),
+$\mathcal T[S-r_0]=\mathcal T[N]-\mathcal T[N_\vartheta]-\mathcal T[r_0]
+=-(\xi'/\xi)'-\mathcal T[N_\vartheta]-E=Q=\mathcal T[P_\infty]$.
+\Cref{lem:v8-unique} applied to $g=P_\infty-S+r_0$, which satisfies
+the weighted $L^2$ bound since $|S|\ll\log(2+t)$ and $r_0$ is bounded,
+proves (a).
+
+(b) For $0<t<\gamma_1$ we have $N=0$, so $S=-1-\vartheta/\pi\in[-1,0.13]$
+because $\vartheta\ge-3.531$ on $(0,\infty)$; also
+$|J(t)|\le t\int_0^{\log2}e^{v/2}dv\le0.83\,t$, so for $t<2$,
+$|r_0|\le1.53$ and $|S-r_0|\le2.6<5.5\le H(t)$. For $t\ge2$,
+\eqref{eq:MCOM} (extended to zero heights by right limits) and
+$|r_0|\le0.73$ give $|S-r_0|\le0.08382\log t+5.18<H(t)$.
+Thus $\clip_H(P_\infty)=P_\infty$ and $F_\infty=N_0+S-r_0=N-R-r_0$.
+
+(c), (d) Since $F_X^W\ge N_0-H$, every sublevel set at level
+$\lambda_k=k-\frac12$ lies in $(0,B_k]$ with
+$B_k:=\sup\{N_0-H<\lambda_k\}$ independent of $X$. The truncation is
+$1$-Lipschitz, so $F_{X_j}^W\to F_\infty$ in measure on compact subsets
+of $(0,B_k]$. On each interval between consecutive distinct zero heights,
+$F_\infty-\lambda_k$ is real-analytic and not constant (as
+$R+r_0\to0$ at infinity and $R+r_0\to\frac18-1$ as $t\to0^+$), so
+$\meas\{F_\infty=\lambda_k\}=0$. Therefore, for each $\delta>0$,
+$\meas(\{F_{X_j}^W<\lambda_k\}\cap[\delta,B_k])\to\meas(\{F_\infty<\lambda_k\}\cap[\delta,B_k])$,
+while the part in $(0,\delta)$ has measure at most $\delta$; letting
+$\delta\to0$, $\lim_j\tau_k^{\Cms}(X_j;W)=\meas\{F_\infty<\lambda_k\}$.
+We compute this set. For $t\ge\gamma_1$, $|R|\le0.53/(\pi\gamma_1)<0.012$
+and $|r_0|\le1.46/\gamma_1<0.104$, so $|R+r_0|<\frac12$ and, $N$ being
+an integer, $N-R-r_0<k-\frac12$ holds exactly when $N\le k-1$, that is
+for $t<\gamma_k$. For $0<t<\gamma_1$, $F_\infty=-R-r_0$; since $J>0$,
+$-r_0\le1-\pi^{-1}\arctan(2t)<1$, and $R>-\frac12$ there (for
+$t\ge1$ by $|R|\le0.53/\pi$; for $t<1$ by $\vartheta(t)\ge\vartheta(1)>-1.8$
+and $N_0(t)\le\frac78$, which give $R(t)>-0.45$), so $F_\infty<\frac32$.
+Hence $\{F_\infty<\lambda_k\}=(0,\gamma_k)$ up to a null set for every
+$k\ge2$, proving (c), while
+$\{F_\infty<\frac12\}=\{t<\gamma_1:\ R+r_0>-\frac12\}$, whose measure is
+$\gamma_1-t_\sharp$. Since $R(t)+r_0(t)\to-\frac78<-\frac12$ as
+$t\to0^+$ and both functions are continuous on $(0,\gamma_1)$, the set in
+\eqref{eq:v8-tsharp} contains an interval $(0,\epsilon)$, so $t_\sharp>0$.
+For \eqref{eq:v8-flat}: on $[2\pi,\gamma_1)$, $|R|\le0.53/(2\pi^2)<0.03$
+and $-r_0\le\pi^{-1}\arctan(1/(2t))\le1/(4\pi^2)$, so $F_\infty<\frac12$
+there, giving $\lim_j\tau_1^\flat=2\pi+(\gamma_1-2\pi)=\gamma_1$; for
+$k\ge2$ the interval $(0,2\pi)$ lies inside $\{F_\infty<\lambda_k\}$, so
+$\tau_k^\flat$ and $\tau_k^{\Cms}$ have the same limit.
+\end{proof}
+
+\begin{remark}[Scope]
+The two hypotheses of \cref{prop:v8-first} concern only the compensated
+weighted prime phase. The proposition does not prove RH; it shows that,
+in the only scenario in which the transform criterion applies, the
+limit of the prime phase is $S-r_0$ and not $S$, that the correction
+$r_0$ is invisible at every zero height above $\gamma_1$ (where
+$|R+r_0|<\frac12$), and that it displaces the first sublevel point by a
+positive amount $t_\sharp$. The numerical observation $P_X^W(0)=0$ versus
+$N_0(0^+)=\frac78$ in \cref{sec:v7-complex} is the finite-cutoff trace of
+the same fact. The conditional statements of
+\cref{cor:rh-rvm-v5} and \cref{sec:v7-open} remain as formulated;
+whenever DBSRH is assumed there, the first index should be read with
+\eqref{eq:v8-flat}.
+\end{remark}
+
+\begin{proposition}[Transform criterion for the normalized sublevel points]
+\label{prop:v8-criterion}
+Fix $W\in\mathcal W$ and put, for $\Re s>\frac12$,
+\begin{equation}\label{eq:v8-KX}
+ \mathcal K_X(s):=\sum_{k\ge1}k_s\bigl(\tau_k^\flat(X;W)\bigr),
+\end{equation}
+which converges absolutely and locally uniformly, uniformly in $X\ge2$,
+because $\tau_k^\flat\ge a_k$ for $k\ge k_0$ (\cref{thm:block-sep-v3})
+and $\sum_ka_k^{-2}<\infty$, while $2\pi\le\tau_k^\flat\le B_k$ for
+$k<k_0$. Let $\Sigma\subset\{\Re s>\frac12\}$ have an accumulation point
+in that half-plane. Then
+\begin{equation}\label{eq:v8-criterion}
+ \lim_{X\to\infty}\mathcal K_X(s)=-\Bigl(\frac{\xi'}{\xi}\Bigr)'(s)
+ \ \ \text{for every }s\in\Sigma
+ \quad\Longleftrightarrow\quad
+ \mathrm{RH}\ \text{and}\ \lim_{X\to\infty}\tau_k^\flat(X;W)=\gamma_k
+ \ \text{for every }k\ge1 .
+\end{equation}
+For $\Sigma\subset\{\Re s>1\}$ the right side of the limit is the
+convergent prime expression
+$-(\zeta'/\zeta)'(s)-s^{-2}-(s-1)^{-2}+\frac14\psi'(s/2)$, so the
+criterion compares the sublevel points with Euler, $\Gamma$ and the
+pole only; for $s=\frac12+d+iT$ the real and imaginary parts of
+$k_s(\tau)$ are the kernels of order $j=2$ used in \cite{CasanaMCOM}.
+\end{proposition}
+\begin{proof}
+($\Leftarrow$) Under RH, $-(\xi'/\xi)'(s)=\sum_\rho(s-\rho)^{-2}=\sum_kk_s(\gamma_k)$,
+and dominated convergence with the bound
+$|k_s(\tau)|\le C_s\min(1,\tau^{-2})$ gives the limit.
+($\Rightarrow$) Let $X_n\to\infty$. As $\tau_k^\flat(X_n)\in[2\pi,B_k]$
+is nondecreasing in $k$, a diagonal subsequence satisfies
+$\tau_k^\flat(X_{n_i})\to\lambda_k$ for every $k$, with
+$2\pi\le\lambda_k\le\lambda_{k+1}$ and $\lambda_k\ge a_k$ for $k\ge k_0$.
+By dominated convergence $\mathcal K_{X_{n_i}}\to\mathcal K_\infty:=\sum_kk_s(\lambda_k)$
+locally uniformly on $\Re s>\frac12$; the same series converges locally
+uniformly on $\mathbb C$ away from the points $\frac12\pm i\lambda_k$, so
+$\mathcal K_\infty$ is meromorphic on $\mathbb C$ with double poles
+exactly at $\frac12\pm i\lambda_k$, the leading coefficient at
+$\frac12+i\mu$ being the number of $k$ with $\lambda_k=\mu$. The
+hypothesis and the identity theorem for meromorphic functions give
+$\mathcal K_\infty=-(\xi'/\xi)'$ on $\Re s>\frac12$; as
+$\mathcal K_\infty$ is holomorphic there, $\xi$ has no zero in that
+half-plane, which is RH. Then $-(\xi'/\xi)'=\sum_kk_s(\gamma_k)$, and
+comparing the double poles and their coefficients of the two meromorphic
+functions shows that the multisets $\{\lambda_k\}$ and $\{\gamma_k\}$
+coincide; both being enumerated in nondecreasing order,
+$\lambda_k=\gamma_k$ for every $k$. Since this holds along a subsequence
+of every sequence $X_n\to\infty$, the full limits exist.
+\end{proof}
+
+\begin{remark}
+\Cref{prop:v8-criterion} is the precise content of the
+Laguerre--P\'olya proposal in \cite{CasanaV10Notes}: the finite-cutoff
+points are real by construction, so the only way the limit identity can
+fail is through a defect in the \emph{positions} of the $\lambda_k$,
+never through a non-real limit. A repeated imaginary part is
+\emph{not} excluded by the right side of \eqref{eq:v8-criterion}: if
+$\gamma_k=\gamma_{k+1}$, RH still forces $\lambda_k=\lambda_{k+1}$ and the
+identity holds. Simplicity therefore has to come from the arithmetic
+noncollapse of \cref{prop:correlated-v5}, exactly as in
+\cref{cor:rh-rvm-v5}.
+\end{remark}
+
+\section{A box-transform and a parity-sensitive multiplicity test}
+\label{sec:v7-parity}
+This section formalizes the third route in
+\cite{CasanaV10Notes} \emph{without} importing a zero-free
+claim or assuming RH. The identity is deterministic and holds
+for an arbitrary locally absolutely continuous real function
+$F$, including the actual taucm and taucms functions where
+their stated local regularity is available.
+
+\begin{theorem}[Finite-interval box identity, with the endpoint term]
+\label{thm:v7-box}
+Let $0<a<b$ not be imaginary parts of zeros. Suppose $F$ is
+absolutely continuous on $[a,b]$. For a continuous test
+function $g$ with a primitive $A_g$ ($A_g'=g$), put
+$e_k(F)=k-\frac12-F(\gamma_k)$ and
+$\Psi_g(z)=\int_{z-1/2}^{z+1/2}g(v)\,dv$. Then
+\begin{equation}\label{eq:v7-box}
+\begin{split}
+\sum_{a<\gamma_k<b}\Psi_g(e_k(F))
+={}&\int_a^b g(N(t)-F(t))F'(t)\,dt\\
+ &+A_g\bigl(N(b)-F(b)\bigr)
+   -A_g\bigl(N(a)-F(a)\bigr).
+\end{split}
+\end{equation}
+The sum counts imaginary parts of zeros with multiplicity.
+\end{theorem}
+\begin{proof}
+On every interval between consecutive distinct zero heights,
+$N$ is constant, and with $x=N-F$ we have
+$g(N-F)F'=-\frac d{dt} A_g(N-F)$ a.e. Sum these
+identities over the finitely many pieces in $[a,b]$.
+At an imaginary part with multiplicity $m$, the missing telescopic
+contribution is
+$A_g(x^-+m)-A_g(x^-)$, which equals
+$\sum_{i=0}^{m-1}\Psi_g(e_{k+i}(F))$ because the boxes
+$[e_{k+i}-1/2,e_{k+i}+1/2]$ tessellate $[x^-,x^-+m]$.
+The remaining terms are exactly the two endpoint values
+shown in \eqref{eq:v7-box}.
+\end{proof}
+
+For $\xi\ne0$, taking $g(v)=e^{i\xi v}$ yields the exact
+finite-interval Fourier form
+\begin{equation}\label{eq:v7-fourier-box}
+\begin{split}
+ \frac{2\sin(\xi/2)}{\xi}
+ \sum_{a<\gamma_k<b}e^{i\xi e_k(F)}
+={}&\int_a^b e^{i\xi(N-F)}F'(t)\,dt\\
+ &+\frac{e^{i\xi(N(b)-F(b))}
+          -e^{i\xi(N(a)-F(a))}}{i\xi}.
+\end{split}
+\end{equation}
+No ``boundary terms are negligible'' statement is assumed.
+
+\begin{proposition}[Parity bound for repeated heights]
+\label{prop:v7-parity}
+Let $\mathcal I$ be a union of complete repeated-height
+groups in the index list, and let $r(\mathcal I)$ be the number
+of distinct imaginary parts represented. For any real $c$
+and any single-valued real function $F$,
+\begin{equation}\label{eq:v7-parity}
+\#\mathcal I-r(\mathcal I)
+\le\sum_{k\in\mathcal I}
+  \bigl[1-\cos\pi(e_k(F)-c)\bigr].
+\end{equation}
+\end{proposition}
+\begin{proof}
+For a group of multiplicity $m$ we have
+$e_{k+i}=e_k+i$, $0\le i<m$; its right side is
+$m-\cos(\pi(e_k-c))\sum_{i=0}^{m-1}(-1)^i\ge m-1$.
+Sum over disjoint complete groups.
+\end{proof}
+
+The familiar relation $(-1)^{N(t)}=-\operatorname{sgn}Z(t)$
+outside zeros, with the Hardy $Z$ function normalized by
+$Z(0)<0$, illustrates the information carried by the parity
+observable; it is \emph{not} a new detection algorithm for
+off-line zeros. The box identity alone cannot make the
+right side of \eqref{eq:v7-parity} vanish, and the sign of
+$F'$ in \eqref{eq:v7-fourier-box} prevents discarding the
+oscillatory integral. This is therefore a separate exact
+potential tool, not an unconditional simplicity theorem.
+
+\section{Complex signed-pair kernel and proposed zero formula:
+       status and limitations}\label{sec:v7-complex}
+In the external notes, a conditional complex continuation of the
+two-source kernel from \cref{sec:kernel-v4} was proposed to
+separate a small real spacing from two mirror-symmetric
+zeros with the same imaginary part. It is important not to import
+this weighted model as if it were the author's \emph{original}
+taucs or as if it supplied the full zero-explicit formula.
+
+For the already defined entire kernel $K$ and any complex $h$,
+$C(z,h):=K(z-h/2)+K(z+h/2)$ is entire and even in $h$.
+The Taylor expansion and its global remainder for real $h$
+are established in \cref{sec:kernel-v4}. Algebraically a
+real pair has $h^2\ge0$, a repeated imaginary part has $h^2=0$,
+and a formal transverse pair at $\gamma\mp id$ corresponds
+to $h^2=-4L^2d^2$. The analytic continuation of the
+\emph{model} is rigorous; the identification of its complex
+arguments with terms in the \emph{actual weighted prime
+explicit formula} remains unproved. In particular, no
+infinite zero sum $\sum_\rho K(L(t-u_\rho))$ is asserted
+here as an unconditional identity. The contour deformation,
+branch constants, uniform convergence and contributions of
+the noncentral zeros must all be controlled first.
+
+\begin{proposition}[Signed central slope for an auxiliary weight]
+\label{prop:v7-signed-slope}
+Let $q\ge0$ be any nonzero, integrable weight on $[1,2]$,
+normalized by $\int_1^2q(v)\,dv=1$, and let
+$K_q(z)=\frac12+\pi^{-1}\int_1^2q(v)\operatorname{Si}(vz)\,dv$.
+For the \emph{model} $C_q(z,h)=K_q(z-h/2)+K_q(z+h/2)$,
+its derivative at the pair center is
+\[
+ \mathscr S_q(h)=\frac2\pi\int_1^2q(v)
+ \frac{\sin(vh/2)}{h/2}\,dv
+ \quad(\mathscr S_q(0)=\tfrac2\pi\int_1^2vq(v)\,dv).
+\]
+For every real $h\ne0$, $\mathscr S_q(h)<\mathscr S_q(0)$;
+for every real $d>0$,
+$\mathscr S_q(2id)>\mathscr S_q(0)$.
+These comparisons classify the \emph{model} parameter with a
+sign; they are not a criterion about actual off-line zeta
+zeros without a validated zero-explicit formula.
+\end{proposition}
+\begin{proof}
+For real $x\ne0$, $\sin x/x<1$; for real $x\ne0$,
+$\sinh x/x>1$. Substitute into the integral, with $q\ge0$.
+\end{proof}
+The symmetry $K_q(-z)=1-K_q(z)$ makes the derivative of
+$C_q$ at the center stationary under a first-order shift of
+the sampling center, a useful \emph{model} fact; the
+uncontrolled influence of neighboring contributions remains.
+The special weight $q(v)=v/2+1/4$ used in earlier numerical
+sections is one \emph{borrowed choice} and is not needed for
+this auxiliary proposition.
+
+The inverse estimator from \cref{sec:identify-v4} measures a
+signed algebraic quadratic parameter only if its sampling
+points and center are independently specified and the
+projected arithmetic residual is rigorously bounded.
+No such prime-only bound is currently known. The small-gap
+numerical experiments cannot supply one. For these reasons
+the signed-pair model is recorded as an \emph{auxiliary
+exploratory route}, not as the main proposed RH mechanism.
+
+A separate Laguerre--P\'olya proposal in the public notes
+forms an even entire product from the real $\tau_k^{\Cms}$.
+Reality of finite-cutoff sublevel points and normality of such
+products cannot by themselves exclude a multiple real zero
+in a limit, so this is not an independent RH route. Any
+product-normality assertion also requires its stated uniform
+tail bounds and control of the initial factors.
+
+The public notes also flag a lower-endpoint defect
+for the naive ``DBSRH for every $k\ge1$'' statement: the
+Euler phase satisfies $P_X^W(0)=0$, whereas the fixed main
+term extends to $N_0(0^+)=7/8>1/2$. \Cref{prop:v8-first} makes
+this precise: under the hypotheses of the transform criterion
+together with convergence in measure, $\tau_1^{\Cms}$ converges to
+$\gamma_1-t_\sharp$ with $t_\sharp>0$, while the points
+$\tau_k^\flat=2\pi+\meas\{t\ge2\pi:F_X^W(t)<k-\frac12\}$ of
+\eqref{eq:v8-flat} converge to $\gamma_k$ for every $k\ge1$.
+Finite-cutoff strictness of $\tau_k^\flat$ in the initial indices is
+not established here. We therefore retain the original definitions
+for existing theorems and do not silently replace
+$\mathrm{DBSRH}(W)$ by its corrected variant.
+
+\section{Open tasks after merging the research routes}\label{sec:v7-open}
+The routes now have the following precise mathematical status.
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\item \textbf{Prime-band arithmetic persistence (open).}
+ Prove $\limsup_{X\to\infty}\Delta_k(X;W)>0$ for each
+ $k$ from the \emph{compensated} prime-power phase, not merely
+ from the shrinking single-prime perturbations or a saturating
+ auxiliary model. Under the unproved DBSRH hypothesis this
+ would imply RH and simplicity.
+\item \textbf{MCOM-critical local inequalities (open).}
+ Seek a bound in which the actual constants
+ $A_{\mathrm M}=0.08382$ or $C_{\mathrm H}<1/(4\pi)$ cross
+ a threshold \emph{derived from the ordinal equations}. The
+ proximity $2\pi C_{\mathrm H}<1/2$ is not itself such a theorem.
+\item \textbf{Compensated excess (open).}
+ Prove \eqref{eq:v7-excess-criterion} for an unbounded
+ sequence of cutoffs, or a sufficiently strong uniform
+ prime-band estimate implying it. By
+ \cref{cor:v7-excess}, this would imply RH, without needing
+ a separate Cauchy-in-measure statement. It is a one-way
+ sufficient criterion, \emph{not} an established bound.
+\item \textbf{Parity and local pair residual (open).}
+ Exploit the exact Fourier-box identity
+ \eqref{eq:v7-fourier-box} or bound the residual in the
+ signed-pair model without assuming off-line zero control.
+ The current identities alone do not yield the required
+ positivity or vanishing.
+\item \textbf{Endpoint and analytic inputs (open).}
+ Verify the weighted zero-explicit formula including
+ branch conventions and the exact IJNT/Fujii ranges (the
+ first-index normalization is settled, under the hypotheses of
+ \cref{prop:v8-first}, by \eqref{eq:v8-flat}); no claims about
+ $X\to\infty$ at fixed height follow from moment estimates
+ established only for $X\le T^{1/4}$.
+\end{enumerate}
+
+
+\section{Research priorities and exclusions}\label{sec:scope-v3}
+The current research problem is the \emph{arithmetic structure of the
+prime-corrected sublevel constructions}; a stand-alone equivalence with
+RH via the Hadamard product, $\xi'/\xi$, a Littlewood integral or
+another classical reformulation is \emph{not} proposed as a route.
+Traditional analytic techniques remain admissible when they yield new
+bounds on the prime phases, local occupation tests, their sublevel
+measures, or the evaluation defect \eqref{eq:ek-v3}.
+
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+\item Establish the \emph{actual} weighted explicit formula for
+$P_X^W$, retaining the compensation at $u=2$, with an error uniform
+in the range needed for $X\to\infty$ at fixed height. In particular,
+a hypothetical off-line zero cannot be treated as an isolated
+maximal-$\beta$ zero unless that property is proved.
+\item Prove a prime-only remainder estimate for the spatial-filter inverse in \cref{thm:identifiability-v4}, or derive noncollapse via the local occupation quantities in
+\cref{prop:occupation-v3}, or obtain a stronger direct arithmetic
+bound on $\Delta_k(X;W)$. The separation of the
+$\gamma_k^{\mathrm{RvM}}$ is a structural input but not a substitute
+for this estimate.
+\item Derive an unconditional second-order bound for
+$\sum e_k(F)^2$ on growing index windows for a specified prime
+budget. The numerical values of $1-4\eta$ do not prove an improved
+asymptotic proportion of zeros on the critical line.
+\item Close the explicit $j=1$ budget at $\theta=1/2$ for the actual chosen family, including the $B_T$ term and all endpoint corrections; the reported $82.6\%$ is a numerical conditional estimate, not a theorem.
+\item Treat moments of growing order separately from fixed-order
+Selberg--Fujii estimates. In particular, numerical successes for
+$2j\le14$ at finite heights give no uniform estimate as
+$T\to\infty$.
+\item Do not substitute the model $C(z,Lg)$ for an unconditional zero decomposition of the Euler phase. When differentiating in $L$, retain the moving-evaluation correction \eqref{eq:commutator-v4}, and use the untruncated phase for derivatives.
+\item Study the \emph{consecutive difference} of RvM-relative arithmetic displacements in \eqref{eq:correlated-v5}; do not infer its strict upper bound from individual MCOM proximity or from window-averaged mean-square estimates. The coefficient $C_{\mathrm H}$ belongs to a redefined asymptotic truncation, not to the present fixed $H$.
+\item Do not conflate the three different limits: $X\to\infty$
+with $k$ fixed (DBSRH), $T\to\infty$ with $X=X(T)$ (mean-value
+results), and $j\to\infty$ (strict cell criteria).
+\end{enumerate}
+
+\paragraph{Related cell-departure draft.}
+The separate source \texttt{teorema\_salida\_celda\_v1.tex} provides
+conditional, near-neighbor sufficient conditions for leaving a prescribed
+index interval. Its proposed explicit formula is written under RH and
+contains steps marked as sketches. It therefore cannot serve as an
+unconditional bridge from the finite prime phases to RH. Its local
+kernel analysis can nevertheless motivate a direct study of the
+occupation sets in \cref{prop:occupation-v3}, with all errors
+and quantifiers retained.
+
+\paragraph{Disputed bridges that are not established.}
+The implication RH $\Rightarrow$ DBSRH in the separate DBSRH draft
+relies on a weighted explicit-formula argument that is not fully
+audited here. The unbounded-$X$ uniform fourth moment, the
+isolated-maximum-free saturation assertion, and an $L^4$ Cauchy bound
+for every $\sqrt T\le X<X'$ are all \emph{open}; no statement that
+``only the diagonal term of Montgomery--Vaughan remains'' is justified.
+The estimate in \cref{thm:moderate-log} uses the weighted support
+$X^2$, so the IJNT prime-index cutoff and $X\asymp\sqrt T$ are not
+interchangeable. A classical identity for the evaluation defects
+is an exact tool for studying the proposed constructions, not an
+independent established route to RH.
+
+\section{Conclusions and theorem-status table}\label{sec:conclusion}
+\begingroup\footnotesize
+\setlength{\LTpre}{5pt}\setlength{\LTpost}{8pt}
+\begin{longtable}{@{}p{0.38\linewidth}p{0.16\linewidth}p{0.35\linewidth}@{}}
+\toprule
+Statement & Status & What the proof uses \\
+\midrule
+\endfirsthead
+\toprule
+Statement & Status & What the proof uses \\
+\midrule
+\endhead
+MCOM-margin and localized crossing budget & Conditional on MCOM manuscript & MCOM effective and asymptotic constants; sublevel comparison, no RH.\\
+Quantitative ordinal transport $O(T/(\log T)^3)$ & Conditional on IJNT/Fujii input & MCOM interior margin plus cited fourth moment; does not improve Selberg--Fujii moments.\\
+Exact finite Euler--pole transform & Unconditional identity & Fourier--Laplace inversion of actual weighted prime phase.\\
+Weighted-$L^2$ normal-family criterion for RH & Proved implication; hypothesis open & Montel, Euler--pole transform; no measure convergence assumption.\\
+Fourier-box identity and parity test & Exact & Finite-interval integration by parts and endpoint terms; no simplicity claim.\\
+Limit phase $P_\infty=S-r_0$ and first-index defect $t_\sharp>0$ & Conditional on weighted-$L^2$ bound and convergence in measure & Transforms of $N_\vartheta$ and $r_0$, Hadamard product, uniqueness via Cauchy integrals; MCOM bound for inactivity of the truncation.\\
+Transform criterion for $\tau_k^\flat$ & Proved equivalence; hypothesis open & Normality from the MCOM barriers, identity theorem, pole comparison; RH together with convergence of all $\tau_k^\flat$.\\
+Signed transverse two-source identification & Exploratory only & Analytic continuation of a model; missing weighted zero-explicit formula.\\
+Failure of eventual neighboring-zero containment for $h=\log\log t$ & Unconditional & Tsang's $\Omega_\pm$ theorem and an elementary counting argument.\\
+Fourth moment and mean-square approximation for taucm & Unconditional subject to the cited IJNT inputs & MCOM bound, projection, IJNT fourth moment, gaps, and sublevel transfer.\\
+Structural saturation model & Unconditional & Explicit continuous functions; no Euler phase.\\
+Saturation incompatible with a uniform $O(T)$ fourth moment & Unconditional for the model & Weak equidistribution and the identity $\tfrac12(H-G)^4+\tfrac12(-H-G)^4$.\\
+Failure for $X=T^{o(1)}$ & Unconditional subject to the Fujii input & Selberg approximation and Montgomery--Vaughan.\\
+Uniform bound for $T^\varepsilon\le X\le T^{1/4}$ & Unconditional subject to the Fujii input & Weighted prime-power decomposition and MCOM truncation.\\
+Smoothed zero-sum bound for $\log X\ge\varepsilon\log T$ & Unconditional subject to the Fujii increment input & Zero-count increments and Minkowski.\\
+Improved range $X\le T^{1/4}(\log T)^{3/2}$ for two weights & Unconditional with Fujii input & Endpoint decay of the weights and Montgomery--Vaughan.\\
+Exact finite-cutoff margin and Lipschitz spacing & Unconditional & Triangle identity and local Lipschitz regularity; not a uniform lower bound in $X$.\\
+Correlated RvM displacement and fixed-$H$ proximity & Exact / unconditional & RvM mean-value theorem, the existing MCOM barrier, and difference of consecutive shifts.\\
+Noncollapse criterion under DBSRH & Conditional & Strict one-sided bound on the correlated shifts; requires an additional prime-only proof.\\
+Uniform local derivative sufficient condition & Conditional & A uniform $W^{1,p}$ bound; generally incompatible with a discontinuous pointwise phase limit.\\
+Two-source kernel: quadratic resolution, global error and full-profile injectivity & Exact for the model & Positive $W_{1/4}$ weight, Taylor remainder and Fourier uniqueness.\\
+Spatial filter and cutoff derivative & Exact & Finite Euler sum, compensator, and full chain rule.\\
+Quadratic pair inverse from finite samples & Conditional on a model residual & Linear independence, orthogonal projection, and explicit error estimate.\\
+Separation of distant indices & Unconditional & $N_0\pm H$ barriers and sublevel measure.\\
+Local arithmetic occupation criterion & Exact & Saturated parts of the weighted prime phase.\\
+Evaluation defects $e_k$ and repeated heights & Exact & Consecutive index arithmetic and convexity.\\
+2,001,052-zero computations & Numerical only & Repository text outputs; no independent interval certification.\\
+Conditional $j=1$ simple-critical-line fraction & Exact conditional inequality & $A_T$, $B_T$, fourth moment, derivative moment and boundary control.\\
+Uniform estimate for all $X\ge T^\varepsilon$ & Open & Requires additional arithmetic cancellation.\\
+DBSRH$\Leftrightarrow$RH & Open & Requires a uniform explicit formula and non-cancellation, and careful handling of repeated imaginary parts.\\
+\bottomrule
+\end{longtable}
+\endgroup
+The RvM-relative identity \eqref{eq:correlated-v5} expresses adjacent spacings through correlated prime displacements; \cref{prop:rvmbound-v5} shows that the actual fixed truncation gives the coefficient $2\pi\cdot0.08382$ rather than $2\pi C_{\mathrm H}$ for individual RvM deviations. Neither control establishes noncollapse. The author's MCOM estimate removes the truncation-scale defect of the original construction, and the Selberg--Fujii--Montgomery--Vaughan argument supplies a genuine, nontrivial uniform range of prime cutoffs. The structural objection is valid only at the level of the properties it explicitly assumes; it cannot replace analysis of the actual Euler phase. The unconditional local quadratic kernel theorem does not yet bound the residual from the actual Euler phase. The interval $X\ge T^\varepsilon$ without an upper restriction is the appropriate remaining \emph{problem}, not an established theorem. The results here do not prove RH; neither the correlated-shift criterion nor the local inverse bounds have been established for every cutoff and every index.
+
+\section*{Source note}
+The IJNT manuscript and the MCOM submission are used as cited inputs and are not modified here. The publicly accessible route notes and the saved ordinal-transport text from commit \texttt{38aac7c} are distinguished from the unpublished manuscripts. The new normal-family criterion is a mathematical derivation in this revision, not a result represented as already proved by the external notes. The numerical tables were cross-checked against the repository text outputs listed in \cite{CasanaV9,CasanaNotes}.
+
+\begin{thebibliography}{99}
+
+\bibitem{CasanaIJNT}
+V.~Casa\~na-Giner, \emph{A prime-corrected Riemann--von Mangoldt approximation of the zeros of the Riemann zeta function}, IJNT manuscript, 2026, source \texttt{casanya\_ordinal\_primes\_ijnt\_v5\_final.tex}; especially the sublevel-transfer theorem, Fujii--Selberg input and fourth moment of the untruncated phase.
+
+\bibitem{CasanaMCOM}
+V.~Casa\~na-Giner, \emph{Explicit and asymptotic estimates for the zero-counting function of the Riemann zeta-function}, Mathematics of Computation submission, corrected manuscript (2 November 2026), source \texttt{casanya\_turing\_jensen\_mcom\_CORREGIDO.tex}; explicit $S(t)$ bounds.
+
+\bibitem{CasanaDBSRH}
+V.~Casa\~na-Giner, \emph{Deep Blue Sea Riemann Hypothesis: convergence of prime-corrected sublevel points and the Riemann hypothesis}, research draft \texttt{teorema\_DBSRH\_v1.tex}, 2 November 2026; proposed weighted explicit formula and partial converse, with analytic steps still indicated as sketches.
+
+\bibitem{Titchmarsh}
+E.~C.~Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 2nd edition, revised by D.~R.~Heath-Brown, Oxford University Press (1986).
+
+\bibitem{TitchmarshFI}
+E.~C.~Titchmarsh, \emph{Introduction to the Theory of Fourier Integrals}, 2nd edition, Oxford University Press (1948); Theorem~93 (boundary values of the Cauchy integral of an $L^2$ function).
+
+\bibitem{WhittakerWatson}
+E.~T.~Whittaker and G.~N.~Watson, \emph{A Course of Modern Analysis}, 4th edition, Cambridge University Press (1927), \S12.31 (Binet's and Malmst\'en's integrals for $\log\Gamma$), \href{https://doi.org/10.1017/CBO9780511608759}{doi:10.1017/CBO9780511608759}.
+
+\bibitem{Tsang1986}
+K.-M.~Tsang, \emph{Some $\Omega$-theorems for the Riemann zeta-function}, \emph{Acta Arith.} \textbf{46} (1986), 369--395, \href{https://doi.org/10.4064/aa-46-4-369-395}{doi:10.4064/aa-46-4-369-395}.
+
+\bibitem{Dobner2024}
+A.~Dobner, \emph{Large deviations of the argument of the Riemann zeta function}, \emph{Mathematika} \textbf{70} (2024), e12251, \href{https://doi.org/10.1112/mtk.12251}{doi:10.1112/mtk.12251}; arXiv:2101.01747, \href{https://doi.org/10.48550/arXiv.2101.01747}{doi:10.48550/arXiv.2101.01747}.
+
+\bibitem{Selberg1946}
+A.~Selberg, \emph{Contributions to the theory of the Riemann zeta-function}, \emph{Arch. Math. Naturvid.} \textbf{48} (1946), 89--155.
+
+\bibitem{Fujii1974}
+A.~Fujii, \emph{On the zeros of Dirichlet $L$-functions. I}, \emph{Trans. Amer. Math. Soc.} \textbf{196} (1974), 225--235, \href{https://doi.org/10.1090/S0002-9947-1974-0349603-2}{doi:10.1090/S0002-9947-1974-0349603-2}.
+
+\bibitem{Fujii1981}
+A.~Fujii, \emph{On the zeros of Dirichlet $L$-functions. II (with corrections to ``On the zeros of Dirichlet $L$-functions. I'' and the subsequent papers)}, \emph{Trans. Amer. Math. Soc.} \textbf{267} (1981), 33--40, \href{https://doi.org/10.1090/S0002-9947-1981-0621970-5}{doi:10.1090/S0002-9947-1981-0621970-5}.
+
+\bibitem{MontgomeryVaughan}
+H.~L.~Montgomery and R.~C.~Vaughan, \emph{Hilbert's inequality}, \emph{J. London Math. Soc.} (2) \textbf{8} (1974), 73--82, \href{https://doi.org/10.1112/jlms/s2-8.1.73}{doi:10.1112/jlms/s2-8.1.73}.
+
+\bibitem{Mertens1874}
+F.~Mertens, \emph{Ein Beitrag zur analytischen Zahlentheorie}, \emph{J. Reine Angew. Math.} \textbf{78} (1874), 46--62, \href{https://doi.org/10.1515/crll.1874.78.46}{doi:10.1515/crll.1874.78.46}.
+
+\bibitem{Gonek2012}
+S.~M.~Gonek, \emph{Finite Euler products and the Riemann hypothesis},
+\emph{Trans. Amer. Math. Soc.} \textbf{364} (2012), 2157--2191,
+\href{https://doi.org/10.1090/S0002-9947-2011-05546-7}{doi:10.1090/S0002-9947-2011-05546-7}.
+The use of Selberg smoothing and Euler products is not claimed as new;
+the sublevel-measure constructions and the associated transfer results
+are mathematically distinct from the zeros of his functions.
+
+\bibitem{CasanaV9}
+V.~Casa\~na-Giner, \emph{Evaluation defects at 2,001,052 zeros},
+text outputs and code in
+\href{https://github.com/vcasana1/prueba/tree/kc-tauC-2026-11-02/KC_tauC_2026-11-02/v8_identidad_en_ordenadas}{repository directory \texttt{v8\_identidad\_en\_ordenadas}},
+2 November 2026; \texttt{draft\_analysis.txt},
+\texttt{w14\_th0.5\_analysis.txt}, \texttt{w14\_th0.7\_analysis.txt},
+\texttt{gap\_margin\_v9.txt}, \texttt{decomp\_w14\_th0.5.txt},
+\texttt{budget\_w14\_th0.5\_j19.txt}, \texttt{mv\_dphi\_th0.5\_j19.txt},
+\texttt{tight\_pairs\_v13.txt}, \texttt{margin\_triangle\_v14.txt};
+repository commit \texttt{2b24f67dc5348788714bafaf4a4c566aa041a877}.
+
+\bibitem{CasanaNotes}
+V.~Casa\~na-Giner, \emph{Notes on the $\tau_k^{\mathrm C}$ research, 1--2 November 2026}, \href{https://github.com/vcasana1/prueba/blob/kc-tauC-2026-11-02/KC_tauC_2026-11-02/NOTAS_investigacion.md}{GitHub branch \texttt{kc-tauC-2026-11-02}}, numerical table and qualifications.
+
+\bibitem{CasanaV10Notes}
+V.~Casa\~na-Giner, \emph{Rutas hacia RH desde taucm/taucms --- notas de sesi\'on},
+public research notes, 2 November 2026,
+\href{https://github.com/vcasana1/prueba/blob/38aac7c/KC_tauC_2026-11-02/v10_rutas_RH/NOTAS_rutas_RH_v1.md}{\texttt{NOTAS\_rutas\_RH\_v1.md}},
+commit \texttt{38aac7c}; exploratory statements are not treated as externally verified theorems.
+
+\bibitem{CasanaV10Transport}
+V.~Casa\~na-Giner, \emph{Transporte ordinal: texto de la sesi\'on},
+2 November 2026,
+\href{https://github.com/vcasana1/prueba/blob/38aac7c/KC_tauC_2026-11-02/v10_rutas_RH/transporte_ordinal_texto_externo.txt}{\texttt{transporte\_ordinal\_texto\_externo.txt}},
+commit \texttt{38aac7c}. The manuscript above specifies exactly which deductions depend on the IJNT input.
+
+\end{thebibliography}
+\end{document}

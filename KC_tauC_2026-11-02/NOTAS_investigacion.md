@@ -52,6 +52,21 @@ W_b(u) = 1 (u ≤ 1); 1 − v + b v(1 − v), v = u − 1 (1 < u < 2); 0 (u ≥ 
 [DED, verificado] W(u) = ∫_1^2 q(v) 1{u ≤ v} dv con q = −W′; W_{1/4}: q(v) = v/2 + 1/4 > 0, ∫q = 1.
 [DED] Para W continuo el término del polo es O(X/(t² log² X)), no √X/(t log X) como en el corte agudo.
 
+### Resultados en todo el rango (2 001 052 ceros), pesos por potencia de primo n = p^r [MED]
+
+| regla | RMS global | máx | pareja 4765 | pareja 6709 | \|D_N\| en 2·10⁶ |
+|---|---|---|---|---|---|
+| agudo p ≤ 2^{1.4L} | 0.01456 | 0.089 | 0.151 | 0.147 | 3.95 |
+| Selberg X = 200 | 0.03938 | 0.217 | 0.222 | 0.230 | 6.97 |
+| W_{1/4} X = 200 | 0.03847 | 0.211 | 0.216 | 0.225 | 6.72 |
+| Selberg X = 2^{0.5L} | 0.02858 | 0.164 | 0.272 | 0.272 | 1.57 |
+| W_{1/4} X = 2^{0.5L} | 0.02770 | 0.159 | 0.263 | 0.263 | 1.40 |
+| Selberg X = 2^{0.7L} | 0.01456 | 0.110 | 0.198 | 0.199 | 1.91 |
+| **W_{1/4} X = 2^{0.7L}** (`zTaucs2e6_v3.bin`) | **0.01376** | 0.106 | 0.194 | 0.194 | 1.79 |
+
+Con el mismo presupuesto de primos (n ≤ t^{1.4}): W_{1/4} mejora el RMS un 5.5 % respecto al corte agudo y reduce
+|D_N| a menos de la mitad, pero resuelve peor las parejas cercanas (0.194 frente a 0.151).
+
 ## 5. DBSRH
 
 DBSRH(W): lim_{X→∞} tauc_k(X) = γ_k para todo k, con recorte H(t) ≥ |S(t)| (H = 0.08382 log t + 4.444).

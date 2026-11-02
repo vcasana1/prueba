@@ -56,3 +56,5 @@ K=2001052 Tmax=1132497.212379 gmax=36239911 jmax=20 scheme=wsize 0.7 primes siev
   c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
 /home/claude/KC_v2/nufft_phi_v7.py:47: RuntimeWarning: overflow encountered in exp
   c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  block j= 20  primes 14630843->36665650  points 156032061  t=159s
+done 158.67562699317932

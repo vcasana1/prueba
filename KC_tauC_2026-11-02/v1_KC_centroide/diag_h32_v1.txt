@@ -1,0 +1,29 @@
+S_n(gamma)  max|.| = 4.743940977830531   S_n(tau) max|.| = 3.7059112016619817   S_n(tauC) max|.| = 32.59522597166594
+n=    1000  S(tauC)-S(tau)=   +0.635   -1.013i   first-order=   +1.432   +1.279i   |S(g)|=0.301 |S(tau)|=0.859
+n=   10000  S(tauC)-S(tau)=   -1.733   -3.394i   first-order=   -0.851   -1.271i   |S(g)|=1.712 |S(tau)|=1.397
+n=  100000  S(tauC)-S(tau)=   +5.388   +0.924i   first-order=  +10.741   +0.642i   |S(g)|=2.646 |S(tau)|=0.916
+n=  500000  S(tauC)-S(tau)=   +5.837   +2.674i   first-order=   +1.624  -16.215i   |S(g)|=2.867 |S(tau)|=1.302
+n= 1000000  S(tauC)-S(tau)=  +13.552   +3.146i   first-order=   +6.972   +2.271i   |S(g)|=2.295 |S(tau)|=0.820
+n= 2001052  S(tauC)-S(tau)=  +26.679   -2.047i   first-order=  +17.542   -3.910i   |S(g)|=1.421 |S(tau)|=3.674
+k in [0,10000): mean delta=-0.00031  rms delta=0.29990  rms(tauC-g)=0.04459  rms(tau-g)=0.28377
+k in [100000,110000): mean delta=-0.00011  rms delta=0.22315  rms(tauC-g)=0.03507  rms(tau-g)=0.21282
+k in [1000000,1010000): mean delta=+0.00009  rms delta=0.19121  rms(tauC-g)=0.03109  rms(tau-g)=0.18317
+k in [1991052,2001052): mean delta=-0.00007  rms delta=0.18331  rms(tauC-g)=0.02995  rms(tau-g)=0.17578
+
+half-range sums  sum_k delta_k e^{i tau_k}:
+  k in [0,10000): -1.271+0.851j   (rms term*sqrt(n) = 29.990)
+  k in [10000,100000): 1.913-11.592j   (rms term*sqrt(n) = 71.293)
+  k in [100000,1000000): 1.629+3.769j   (rms term*sqrt(n) = 190.748)
+  k in [1000000,2001052): -6.181-10.570j   (rms term*sqrt(n) = 186.613)
+Traceback (most recent call last):
+  File "/home/claude/KC_v1/diag_v1.py", line 21, in <module>
+    x=act[::50]; X=np.abs(np.fft.rfft((x-x.mean()).astype(np.complex128))); fr=np.fft.rfftfreq(len(x),d=50)
+                          ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/numpy/fft/_pocketfft.py", line 417, in rfft
+    output = _raw_fft(a, n, axis, True, True, norm, out=out)
+  File "/usr/local/lib/python3.13/site-packages/numpy/fft/_pocketfft.py", line 101, in _raw_fft
+    return ufunc(a, fct, axes=[(axis,), (), (axis,)], out=out)
+TypeError: ufunc 'rfft_n_even' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+  k in [1000000,2001052): -6.181-10.570j   (rms term*sqrt(n) = 186.613)
+
+dominant slow frequencies of S^C-S^0 (cycles per zero): [(4.997251511668582e-07, 147744.33419522818), (9.994503023337164e-07, 117519.61938521164), (1.998900604667433e-06, 61205.69058755348), (2.9983509070011493e-06, 35426.31130191762), (3.4980760581680075e-06, 34042.138470353406)]

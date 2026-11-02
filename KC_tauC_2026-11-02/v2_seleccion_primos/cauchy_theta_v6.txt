@@ -1,0 +1,6 @@
+RMS en espaciados (k>=2), solo primos:  ||tauC(th)-tauC(th')||
+  paper -> 1.0: 0.06533
+    1.0 -> 1.2: 0.02962
+    1.2 -> 1.4: 0.02046
+prediccion si RMS(tauC(th)-gamma) = c/th^2 y errores encajados: c(1/1.0^2-1/1.2^2)=0.00859  c(1/1.2^2-1/1.4^2)=0.00518  (c=0.0281)
+RMS(tauC(th)-gamma)*th^2: {'1.0': np.float64(0.02814), '1.2': np.float64(0.02833), '1.4': np.float64(0.02854)}

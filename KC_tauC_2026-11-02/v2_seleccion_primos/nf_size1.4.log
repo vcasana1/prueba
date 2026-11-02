@@ -1,0 +1,40 @@
+K=2001052 Tmax=1132497.212379 gmax=36239911 jmax=20 scheme=size 1.4 primes sieved=36665650 n_jmax+1=36665650
+  block j= -1  primes 0->0  points 0  t=0s
+  block j=  0  primes 0->1  points 86  t=0s
+  block j=  1  primes 1->3  points 179  t=0s
+  block j=  2  primes 3->7  points 282  t=0s
+  block j=  3  primes 7->15  points 425  t=0s
+  block j=  4  primes 15->31  points 647  t=0s
+  block j=  5  primes 31->68  points 1070  t=0s
+  block j=  6  primes 68->154  points 1890  t=0s
+  block j=  7  primes 154->349  points 3512  t=0s
+  block j=  8  primes 349->807  points 6840  t=0s
+  block j=  9  primes 807->1900  points 13933  t=0s
+  block j= 10  primes 1900->4514  points 29617  t=0s
+  block j= 11  primes 4514->10799  points 62121  t=0s
+  block j= 12  primes 10799->26090  points 138576  t=0s
+  block j= 13  primes 26090->63565  points 305850  t=0s
+  block j= 14  primes 63565->155611  points 674034  t=1s
+  block j= 15  primes 155611->382984  points 1583526  t=1s
+  block j= 16  primes 382984->946870  points 3839070  t=2s
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  block j= 17  primes 946870->2350230  points 8121981  t=7s
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  block j= 18  primes 2350230->5854641  points 18635214  t=27s
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  block j= 19  primes 5854641->14630843  points 44963820  t=87s
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v2/nufft_phi_v6.py:34: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  block j= 20  primes 14630843->36665650  points 111068241  t=130s
+done 131.8105480670929

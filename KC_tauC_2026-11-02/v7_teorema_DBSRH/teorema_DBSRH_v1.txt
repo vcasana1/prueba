@@ -1,0 +1,301 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage[pagebackref=true,colorlinks=true,linkcolor=MidnightBlue,citecolor=OliveGreen,urlcolor=MidnightBlue]{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfcomment}
+\numberwithin{equation}{section}
+
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{\ifcase #1 \or\ \textit{(Citado en p.~#2.)}\else\ \textit{(Citado en pp.~#2.)}\fi}
+
+\makeatletter
+\let\CG@origref\ref
+\let\CG@origeqref\eqref
+\newcommand{\CG@gettip}[1]{\@ifundefined{CGTip@#1}{#1}{\csname CGTip@#1\endcsname}}
+\newcommand{\CG@getbib}[1]{\@ifundefined{CGBib@#1}{#1}{\csname CGBib@#1\endcsname}}
+\DeclareRobustCommand{\CGref}[1]{\pdftooltip{\CG@origref{#1}}{\CG@gettip{#1}}}
+\DeclareRobustCommand{\CGeqref}[1]{\pdftooltip{\CG@origeqref{#1}}{\CG@gettip{#1}}}
+\DeclareRobustCommand{\CGcite}[2][]{\pdftooltip{\if\relax\detokenize{#1}\relax\cite{#2}\else\cite[#1]{#2}\fi}{\CG@getbib{#2}}}
+\newcommand{\tip}[2]{\expandafter\gdef\csname CGTip@#1\endcsname{#2}}
+\newcommand{\bibtip}[2]{\expandafter\gdef\csname CGBib@#1\endcsname{#2}}
+\makeatother
+
+\tip{eq:RvM}{Ec. (2.1): N(t) = N0(t) + S(t) + varpi(t)/pi, |varpi(t)| <= 0.53/t (lema de varpi del borrador IJNT).}
+\tip{eq:Sbound}{Ec. (2.2): |S(T)| <= 0.08382 log T + 4.444 para T >= 1 (preprint de Zenodo); H(t) = 0.08382 log max(t,e) + 5.5.}
+\tip{eq:Wclass}{Ec. (2.3): W(u) = int\_1\^{}2 q(v) 1\{u <= v\} dv, q >= 0 de variacion acotada, int q = 1; Selberg q = 1, W\_\{1/4\}: q(v) = v/2 + 1/4.}
+\tip{eq:PhiW}{Ec. (2.4): Phi\^{}W\_X(t) = (1/pi) Im sum\_n W(log n / log X) Lambda(n) n\^{}(-1/2-it) / log n; Pi\^{}W\_X(t) = (1/pi) Im int\_2\^{}inf W(log u/log X) u\^{}(-1/2-it) du / log u.}
+\tip{eq:FW}{Ec. (2.5): F\^{}W\_X = N0 + clip(Phi\^{}W\_X - Pi\^{}W\_X, -H, H); tauc\^{}W\_k(X) = meas\{t>0 : F\^{}W\_X(t) < k - 1/2\}.}
+\tip{eq:DBSRH}{Ec. (2.6): DBSRH(W): para todo k, lim\_\{X->inf\} tauc\^{}W\_k(X) = gamma\_k.}
+\tip{eq:transfer}{Ec. (3.1): teorema de transferencia por subniveles del borrador IJNT: sum (x\^{}f\_k - gamma\_k)\^{}2 <= 2*24\^{}(1/3) (sum D\^{}3)\^{}(1/2) (int q\_f\^{}4)\^{}(1/2).}
+\tip{eq:explW}{Ec. (4.1): Phi\^{}W\_X - Pi\^{}W\_X - S = - sum*\_rho K\_W(rho, t; X) + E\_X(t).}
+\tip{eq:Kon}{Ec. (4.2): cero en la recta: K\_W = int\_1\^{}2 q(v) [1\{gamma <= t\} - sigma((t-gamma) v log X)] dv, |K\_W| <= C min(1, 1/((t-gamma) log X)\^{}2).}
+\tip{eq:Koff}{Ec. (4.3): cero fuera de la recta, d = beta - 1/2 > 0: -K\_W = (q(2)/2pi) Re[ i X\^{}(2(rho-s)) / (log\^{}2 X (rho-s)\^{}2) ] + O(X\^{}(2d)/(log\^{}3 X |rho-s|\^{}3)) + O(X\^{}d / log X).}
+\tip{eq:binlimit}{Ec. (6.1): con saturacion, tauc\_\{k+1\} - tauc\_k -> (1/2)[Delta phi\_+\^{}(-1) + Delta phi\_-\^{}(-1)], phi\_pm = N0 pm H.}
+\tip{thm:transferDBSRH}{Teorema 1.1: si meas\{floor(F+1/2) != N\} -> 0 en cada compacto, entonces DBSRH(W).}
+\tip{thm:RHimplies}{Teorema 1.2: RH implica DBSRH(W) para todo W de la clase.}
+\tip{thm:converse}{Teorema 1.3: si los ceros fuera de la recta tienen un maximo aislado de beta alcanzado por finitos ceros, DBSRH(W) es falsa (q(2) != 0).}
+\tip{cor:main}{Corolario 1.4: RH => DBSRH(W) => (RH o el conjunto de ceros fuera de la recta no tiene maximo aislado de beta).}
+\tip{prop:explW}{Proposicion 4.1: formula explicita ponderada.}
+\tip{lem:trunc}{Lema 3.1: truncamiento uniforme en X.}
+\tip{lem:sat}{Lema 6.1: saturacion con signos equidistribuidos.}
+
+\bibtip{CasanyaIJNT}{V. Casana-Giner, Bounds for the argument of the Riemann zeta function and a prime-corrected Riemann-von Mangoldt approximation of its zeros, borrador v55, github.com/vcasana1/IJNT20261030.}
+\bibtip{CasanyaZenodo}{V. Casana-Giner, Explicit and asymptotic estimates for the zero-counting function of the Riemann zeta-function, preprint (Zenodo), version corregida.}
+\bibtip{CasanyaCorpus}{V. Casana-Giner, corpus RVM: centroides exponenciales y criterio de altura finita L\_H vs M\_H (borradores propios).}
+\bibtip{CasanyaCelda}{V. Casana-Giner, Salida de celda de los taucs del borrador bajo RH y una hipotesis de tipo GUE, v1, 2 nov 2026.}
+\bibtip{Davenport}{H. Davenport, Multiplicative Number Theory, 3a ed., GTM 74, Springer, 2000, doi:10.1007/978-1-4757-5927-3.}
+\bibtip{Titchmarsh}{E. C. Titchmarsh, The Theory of the Riemann Zeta-Function, 2a ed. (rev. Heath-Brown), Oxford, 1986.}
+\bibtip{Tsang}{K.-M. Tsang, Some Omega-theorems for the Riemann zeta-function, Acta Arith. 46 (1986) 369-395, doi:10.4064/aa-46-4-369-395.}
+
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corolario}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definición}
+\newtheorem{remark}[theorem]{Observación}
+\newtheorem{problem}[theorem]{Problema abierto}
+\DeclareMathOperator{\meas}{meas}
+\DeclareMathOperator{\Si}{Si}
+\newcommand{\Nz}{N_0}
+
+\title{Deep Blue Sea Riemann Hypothesis:\\ convergencia ordinal de los taucs y la hipótesis de Riemann}
+\author{Víctor Casaña-Giner}
+\date{2 de noviembre de 2026 \quad (versión 1)}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Se formula la DBSRH para una familia de perfiles de peso primo $W$. La DBSRH afirma que los taucs $\tau^W_k(X)$, construidos con primos y la fórmula de Riemann--von Mangoldt mediante la medida de subnivel del borrador \CGcite{CasanyaIJNT}, convergen a las ordenadas $\gamma_k$ cuando $X\to\infty$. Se demuestran tres resultados:
+\begin{enumerate}[label=(\roman*),nosep]
+\item un criterio de convergencia incondicional, que se deduce del teorema de transferencia por subniveles de \CGcite{CasanyaIJNT};
+\item que RH implica DBSRH$(W)$ para todo perfil de la clase $\mathcal W$;
+\item que DBSRH$(W)$ es falsa si existen ceros fuera de la recta cuyo valor máximo de $\beta$ es aislado y lo alcanza un número finito de ellos.
+\end{enumerate}
+El mecanismo de (iii) es la saturación: un cero con $\beta>\frac12$ aporta a la fase prima un término de tamaño $X^{2(\beta-1/2)}/\log^2X$, que crece sin límite. El recorte a la altura $H(t)$ de la cota explícita de $S$ \CGcite{CasanyaZenodo} lo convierte en una alternancia $\Nz\pm H$ que borra el orden ordinal. Este mecanismo es la versión con $X\to\infty$ del defecto positivo $L_H-M_H$ del corpus \CGcite{CasanyaCorpus}. A diferencia de los criterios de frecuencia fija, su sensibilidad a $\beta$ es exponencial en $(\beta-\frac12)\log X$, no cuadrática. No se usa la DRH. Las partes analíticas que se apoyan en la fórmula explícita están esbozadas y se indica en cada caso qué falta.
+\end{abstract}
+\tableofcontents
+
+\section{Enunciados}\label{sec:stat}
+
+Las definiciones están en la Sección~\ref{sec:def}.
+
+\begin{theorem}[criterio de transferencia, incondicional]\label{thm:transferDBSRH}
+Sea $W\in\mathcal W$. Si para todo compacto $[a,b]\subset(0,\infty)$
+\begin{equation*}
+\meas\bigl\{t\in[a,b]:\ \lfloor F^W_X(t)+\tfrac12\rfloor\ne N(t)\bigr\}\xrightarrow[X\to\infty]{}0,
+\end{equation*}
+entonces se cumple DBSRH$(W)$.
+\end{theorem}
+
+\begin{theorem}[RH implica DBSRH]\label{thm:RHimplies}
+Supongamos RH. Entonces DBSRH$(W)$ se cumple para todo $W\in\mathcal W$.
+\end{theorem}
+
+\begin{theorem}[recíproco parcial]\label{thm:converse}
+Sea $W\in\mathcal W$ con $q(2)\ne0$, por ejemplo Selberg o $W_{1/4}$. Supongamos que existe algún cero con $\beta>\frac12$, que $D=\sup\{\beta-\frac12\}>0$ lo alcanza un número finito de ceros, y que existe $\varepsilon>0$ tal que todos los demás ceros cumplen $\beta-\frac12\le D-\varepsilon$. Entonces DBSRH$(W)$ es falsa.
+\end{theorem}
+
+\begin{corollary}\label{cor:main}
+Para $W\in\mathcal W$ con $q(2)\ne0$,
+\begin{equation*}
+\text{RH}\ \Longrightarrow\ \text{DBSRH}(W)\ \Longrightarrow\ \text{RH, o bien el máximo de }\beta\text{ fuera de la recta no es aislado o no se alcanza.}
+\end{equation*}
+\end{corollary}
+
+\begin{problem}\label{prob:open}
+Eliminar la hipótesis de máximo aislado del Teorema~\CGref{thm:converse}. Para ello hace falta un lema de no cancelación, de tipo Landau, para la suma $\sum_{\beta>1/2}c_\rho(t)X^{2(\rho-\frac12)}$ cuando hay infinitos ceros fuera de la recta y $\beta$ se acumula en su supremo.
+\end{problem}
+
+\section{Definiciones}\label{sec:def}
+
+Sea $N(t)$ el número de ceros no triviales con $0<\gamma\le t$, contados con multiplicidad. Del borrador \CGcite{CasanyaIJNT} se toma
+\begin{equation}\label{eq:RvM}
+N(t)=\Nz(t)+S(t)+\frac{\varpi(t)}\pi,\qquad \Nz(t)=\frac t{2\pi}\log\frac t{2\pi e}+\frac78,\qquad |\varpi(t)|\le\frac{0.53}{t}.
+\end{equation}
+Del preprint \CGcite{CasanyaZenodo} se toma la cota explícita, de la que sale la altura de recorte $H$:
+\begin{equation}\label{eq:Sbound}
+|S(T)|\le0.08382\log T+4.444\quad(T\ge1),\qquad H(t)=0.08382\log\max(t,e)+5.5 .
+\end{equation}
+Así $|S|\le H-1.05$ en todo $t>0$, y $\Nz\pm H$ son crecientes para $t$ grande.
+
+\paragraph{Perfiles.} $\mathcal W$ es la clase de funciones $W:[0,\infty)\to[0,1]$ de la forma
+\begin{equation}\label{eq:Wclass}
+W(u)=\int_1^2q(v)\,\mathbf 1_{\{u\le v\}}\,dv,\qquad q\ge0\ \text{de variación acotada en }[1,2],\quad \int_1^2q=1 .
+\end{equation}
+Toda $W\in\mathcal W$ vale $1$ en $[0,1]$, $0$ en $[2,\infty)$, y es no creciente con $q=-W'$: es una media positiva de cortes agudos en $X^v$, $1\le v\le2$. Dos ejemplos:
+\begin{itemize}[nosep]
+\item el peso de Selberg, $q\equiv1$;
+\item el peso $W_{1/4}$, con $q(v)=\frac v2+\frac14$, que es el candidato numérico propio con $b=\tfrac14$.
+\end{itemize}
+
+\paragraph{Fase prima, compensador del polo y taucs.} Para $X\ge2$ y $s=\frac12+it$,
+\begin{equation}\label{eq:PhiW}
+\Phi^W_X(t)=\frac1\pi\operatorname{Im}\sum_{n\ge2}W\Bigl(\frac{\log n}{\log X}\Bigr)\frac{\Lambda(n)}{n^{s}\log n},\qquad
+\Pi^W_X(t)=\frac1\pi\operatorname{Im}\int_2^\infty W\Bigl(\frac{\log u}{\log X}\Bigr)\frac{u^{-s}\,du}{\log u}.
+\end{equation}
+\begin{equation}\label{eq:FW}
+F^W_X=\Nz+\max\bigl(-H,\min(H,\Phi^W_X-\Pi^W_X)\bigr),\qquad \tau^W_k(X)=\meas\{t>0:F^W_X(t)<k-\tfrac12\}.
+\end{equation}
+$\Pi^W_X$ es el término principal, de tipo polo, de la suma prima ponderada; $\Phi^W_X$ pesa cada potencia $p^r$ por $W(r\log p/\log X)$.
+
+\begin{definition}[DBSRH]
+\begin{equation}\label{eq:DBSRH}
+\text{DBSRH}(W):\qquad \lim_{X\to\infty}\tau^W_k(X)=\gamma_k\quad\text{para todo }k\ge1 .
+\end{equation}
+\end{definition}
+
+\section{El criterio de transferencia}\label{sec:transfer}
+
+\begin{lemma}[truncamiento uniforme en $X$]\label{lem:trunc}
+Para cada $k$ existen $a_k<b_k$, independientes de $X$, tales que
+\begin{equation*}
+\tau^W_k(X)=a_k+\meas\bigl([a_k,b_k]\cap\{F^W_X<k-\tfrac12\}\bigr)\qquad\text{para todo }X.
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Por el recorte, $\Nz-H\le F^W_X\le\Nz+H$ para todo $X$. Se toma $a_k$ con $\Nz+H<k-\frac12$ en $(0,a_k]$, y $b_k$ con $\Nz-H>k-\frac12$ en $[b_k,\infty)$. Esto es el argumento de la proposición de orden y truncamiento de \CGcite{CasanyaIJNT}, con $h$ sustituido por $H$.
+\end{proof}
+
+\begin{proof}[Demostración del Teorema~\CGref{thm:transferDBSRH}]
+Sea $k$ fijo y $[a,b]=[a_k,b_k]$. El teorema de transferencia por subniveles de \CGcite{CasanyaIJNT}, aplicado con $f=F^W_X$ en $[a,b]$, da
+\begin{equation}\label{eq:transfer}
+\sum_{a<\gamma_j\le b}\bigl(x^f_j-\gamma_j\bigr)^2\le2\cdot24^{1/3}\Bigl(\sum_\ell D_\ell^3\Bigr)^{1/2}\Bigl(\int_a^bq_f^4\Bigr)^{1/2},\qquad q_f=\bigl|\lfloor f+\tfrac12\rfloor-N\bigr|,
+\end{equation}
+donde $x^f_j=a+\meas([a,b]\cap\{f<j-\frac12\})$. Por el Lema~\CGref{lem:trunc}, $x^f_j=\tau^W_j(X)$ para los $j$ cuyo truncamiento cabe en $[a,b]$. La suma $\sum D_\ell^3$ es un número fijo. Además $q_f\le2H(b)+2$, de modo que $\int_a^bq_f^4\le(2H(b)+2)^4\meas\{q_f\ne0\}$, que tiende a $0$ por hipótesis. Luego $\tau^W_k(X)\to\gamma_k$.
+\end{proof}
+
+\section{La fórmula explícita ponderada}\label{sec:expl}
+
+Sean $\sigma(y)=\frac12+\Si(y)/\pi$ y $L=\log X$.
+
+\begin{proposition}\label{prop:explW}
+Para $t>0$ que no sea ordenada,
+\begin{equation}\label{eq:explW}
+\Phi^W_X(t)-\Pi^W_X(t)-S(t)=-\sideset{}{^*}\sum_\rho K_W(\rho,t;X)+E_X(t),\qquad E_X(t)\xrightarrow[X\to\infty]{}0,
+\end{equation}
+donde la suma recorre los ceros no triviales en el sentido simétrico. Los núcleos son los siguientes.
+\begin{enumerate}[label=(\alph*),nosep]
+\item Para $\rho=\frac12+i\gamma$ en la recta:
+\begin{equation}\label{eq:Kon}
+K_W(\rho,t;X)=\int_1^2q(v)\Bigl[\mathbf 1_{\{\gamma\le t\}}-\sigma\bigl((t-\gamma)vL\bigr)\Bigr]dv,\qquad |K_W|\le C_q\min\Bigl(1,\frac1{(t-\gamma)^2L^2}\Bigr).
+\end{equation}
+\item Para $\rho=\frac12+d+i\gamma$ con $d>0$ y $z=\rho-s$:
+\begin{equation}\label{eq:Koff}
+-K_W(\rho,t;X)=\frac{q(2)}{2\pi}\operatorname{Re}\frac{i\,X^{2z}}{L^2z^2}+O\Bigl(\frac{X^{2d}}{L^3|z|^3}\Bigr)+O\Bigl(\frac{X^{d}}{L|z|}\Bigr).
+\end{equation}
+\item Para $\rho$ con $\beta<\frac12$, el núcleo tiende a $0$, de tamaño $O(X^{-(1/2-\beta)}/L)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Esbozo]
+Por \CGeqref{eq:Wclass}, $\Phi^W_X=\int_1^2q(v)\,P_{X^v}\,dv$ con $P_x=\frac1\pi\operatorname{Im}\sum_{n<x}\Lambda(n)n^{-s}/\log n$, y lo mismo para $\Pi^W_X$.
+
+\emph{Corte agudo.} Para cada corte agudo $x$, la fórmula de Landau con $s$ desplazado se obtiene por Perron y desplazamiento de contorno \CGcite[cap.~17]{Davenport} (variante sin comprobar en la referencia). Da
+\begin{equation*}
+\pi(S-P_x)'(t)=\operatorname{Re}\Bigl[\frac{x^{1-s}}{1-s}\Bigr]-\sideset{}{^*}\sum_\rho\operatorname{Re}\frac{x^{\rho-s}}{\rho-s}+\text{(ceros triviales)}.
+\end{equation*}
+El término de polo es exactamente $-\pi(\Pi^{\rm agudo}_x)'$, salvo $O(1/t)$. Se integra en $t$ con salto $+1$ en cada ordenada, como en la Proposición~3.1 de \CGcite{CasanyaCelda}. La constante de integración es nula por las medias de $S$ \CGcite[\S9.9]{Titchmarsh} (paso esbozado).
+
+\emph{Ceros en la recta.} El término de cada cero es $\mathbf 1_{\{\gamma\le t\}}-\sigma((t-\gamma)\log x)$. Al mezclar con $q$ se obtiene (a). La cota sale de $\mathbf 1_{\{y\ge0\}}-\sigma(y)=\mp\frac1\pi\int_{|y|}^\infty\frac{\sin u}u\,du=\frac{\cos y}{\pi y}+O(y^{-2})$ e integrando por partes en $v$, lo que es posible porque $q$ es de variación acotada. A diferencia del corte agudo, aquí la suma sobre $\gamma$ converge absolutamente.
+
+\emph{Ceros fuera de la recta.} La primitiva en $t$ de $\operatorname{Re}[x^{z}/z]$ es $\operatorname{Re}[i\,x^{z}/(z\log x)]$ más un término $O(|x^z|/(\log^2x\,|z|^2))$. Mezclando con $x=X^v$ y $q(v)$, e integrando por partes en $v$:
+\begin{equation*}
+\int_1^2\frac{q(v)}{v}e^{vLz}dv=\Bigl[\frac{q(v)\,e^{vLz}}{v\,Lz}\Bigr]_1^2+O\Bigl(\frac{X^{2d}}{L^2|z|^2}\Bigr).
+\end{equation*}
+El extremo $v=2$ domina, con $|X^{2z}|=X^{2d}$. Eso da \CGeqref{eq:Koff}. El extremo $v=1$ aporta el término $O(X^d/(L|z|))$.
+
+\emph{Error.} $E_X$ reúne los ceros triviales y $O(1/t)$ de las primitivas; tiende a $0$ para $t$ fijo.
+\end{proof}
+
+\section{Demostración de que RH implica DBSRH}\label{sec:RH}
+
+\begin{proof}[Demostración del Teorema~\CGref{thm:RHimplies}]
+Bajo RH todos los ceros están en la recta. Fijemos $t$ que no sea ordenada. Cada término \CGeqref{eq:Kon} tiende a $0$ cuando $L\to\infty$, porque $\sigma(yvL)\to\mathbf 1_{\{y>0\}}$. Además está dominado por $C_q\min(1,(t-\gamma)^{-2})$ para $L\ge1$, que es sumable en $\gamma$ porque $N(T+1)-N(T)\ll\log T$. Por convergencia dominada, la suma tiende a $0$, y con $E_X\to0$:
+\begin{equation*}
+\Phi^W_X(t)-\Pi^W_X(t)\to S(t)\quad\text{para todo }t\text{ fuera de las ordenadas}.
+\end{equation*}
+Como $|S|\le H-1.05$ por \CGeqref{eq:Sbound}, el recorte acaba inactivo y $F^W_X(t)\to\Nz+S=N-\varpi/\pi$. Como $|\varpi/\pi|<\frac12$ y $N$ es entero, $\lfloor N-\varpi/\pi+\frac12\rfloor=N$ y el argumento no es entero en casi todo punto. Así $\lfloor F^W_X+\frac12\rfloor\to N$ en casi todo punto. Por convergencia dominada en $[a,b]$, $\meas\{\lfloor F^W_X+\frac12\rfloor\ne N\}\to0$. El Teorema~\CGref{thm:transferDBSRH} concluye.
+\end{proof}
+
+\section{El recíproco: saturación}\label{sec:conv}
+
+\begin{lemma}[saturación con signos equidistribuidos]\label{lem:sat}
+Bajo las hipótesis del Teorema~\CGref{thm:converse}, sean $I$ un intervalo compacto y $\Delta_X=\Phi^W_X-\Pi^W_X-S$. Existe una sucesión $X_n\to\infty$ tal que:
+\begin{enumerate}[label=(\alph*),nosep]
+\item $\meas\{t\in I:|\Delta_{X_n}(t)|\le3H(t)\}\to0$;
+\item para todo subintervalo $I'\subset I$, $\meas\{t\in I':\Delta_{X_n}(t)>0\}\to\frac12|I'|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Esbozo]
+Sean $\rho_1,\dots,\rho_m$ los ceros con $\beta-\frac12=D$ y $L=\log X$. Por \CGeqref{eq:Koff},
+\begin{equation*}
+\Delta_X(t)=\frac{X^{2D}}{L^2}\operatorname{Re}\Bigl[e^{-2iLt}B_L(t)\Bigr]+O\Bigl(\frac{X^{2D}}{L^3}\Bigr)+O\Bigl(\frac{X^{2D-2\varepsilon}}{L^2}\Bigr)+O(1),
+\end{equation*}
+con
+\begin{equation*}
+B_L(t)=\frac{q(2)}{2\pi}\sum_{j=1}^m\frac{i\,e^{2iL\gamma_j}}{(\rho_j-s)^2}.
+\end{equation*}
+Los ceros con $\beta-\frac12\le D-\varepsilon$ aportan como mucho $X^{2D-2\varepsilon}\sum_\rho|\rho-s|^{-2}/L^2$, y esa suma converge. Los ceros de la recta aportan $O(1)$, por \CGeqref{eq:Kon}. Los de $\beta<\frac12$ tienden a $0$.
+
+La función $t\mapsto B_{L}(t)$ es racional en $t$ con coeficientes $e^{2iL\gamma_j}$. Se fija $L_0$ con $B_{L_0}\not\equiv0$ en $I$; existe porque los $\gamma_j$ son distintos y los $(\rho_j-s)^{-2}$ son linealmente independientes. Por el teorema de Kronecker hay $L_n\to\infty$ con $e^{2iL_n\gamma_j}\to e^{2iL_0\gamma_j}$ para todo $j$, y entonces $B_{L_n}\to B_{L_0}$ uniformemente en $I$. Como $B_{L_0}$ solo se anula en un número finito de puntos de $I$, el conjunto donde $|B_{L_n}|<\delta$ tiene medida pequeña, y con el factor $X^{2D}/L^2\to\infty$ se obtiene (a).
+
+Para (b): $\operatorname{Re}[e^{-2iL_nt}B_{L_n}(t)]=|B_{L_n}(t)|\cos(2L_nt-\arg B_{L_n}(t))$, con una envolvente que varía despacio y una frecuencia $2L_n\to\infty$. Por Riemann--Lebesgue, el signo está equidistribuido en cada subintervalo.
+\end{proof}
+
+\begin{proof}[Demostración del Teorema~\CGref{thm:converse}]
+Supongamos DBSRH$(W)$ y fijemos $k$ grande. Sea $I$ un intervalo compacto que contiene $\{t:|\Nz(t)-k|\le H(t)+2\}$. Fuera de $I$, $F^W_X\notin[k-\frac12,k+\frac12)$ para todo $X$, porque $|F^W_X-\Nz|\le H$. En $I$, a lo largo de la sucesión $X_n$ del Lema~\CGref{lem:sat}, $F^W_{X_n}=\Nz\pm H$ salvo en un conjunto de medida que tiende a $0$, con cada signo en la mitad de cada subintervalo. Sea $\varphi_\pm=\Nz\pm H$, creciente. Entonces
+\begin{equation}\label{eq:binlimit}
+\tau^W_{k+1}(X_n)-\tau^W_k(X_n)=\meas\{k-\tfrac12\le F^W_{X_n}<k+\tfrac12\}\ \longrightarrow\ s_k:=\frac12\Bigl[\Delta\varphi_+^{-1}(k)+\Delta\varphi_-^{-1}(k)\Bigr],
+\end{equation}
+con $\Delta\varphi^{-1}(k)=\varphi^{-1}(k+\frac12)-\varphi^{-1}(k-\frac12)$. Por DBSRH, $\gamma_{k+1}-\gamma_k=s_k$ para todo $k\ge k_0$. Esto tiene dos consecuencias.
+\begin{enumerate}[label=(\arabic*),nosep]
+\item \emph{Ordenadas dobles.} $s_k>0$, así que las ordenadas con $k\ge k_0$ son simples. Si algún $\rho_j$ tiene $\gamma_j$ en ese rango, contradice que $\rho_j$ y $1-\bar\rho_j$ comparten ordenada, que es la ordenada doble.
+\item \emph{$S$ acotada.} Sumando, $\gamma_k=\frac12[\varphi_+^{-1}(k-\frac12)+\varphi_-^{-1}(k-\frac12)]+C=\Nz^{-1}(k-\frac12)+C+o(1)$, porque $\Nz^{-1}(\lambda\mp H)$ promedia a $\Nz^{-1}(\lambda)+O(H^2|(\Nz^{-1})''|)$ y $H^2|(\Nz^{-1})''|\ll\log t/t\to0$. Por \CGeqref{eq:RvM}, $S(\gamma_k^+)=\frac12-C\,\Nz'(\gamma_k)+o(1)$, y en cada celda $S$ decrece con pendiente $-\Nz'$. Si $C\ne0$, la media de $S$ en $[T,2T]$ sería $\asymp-C\log T/(2\pi)$, lo que contradice $\int_0^TS=O(\log T)$ \CGcite[\S9.9]{Titchmarsh}. Si $C=0$, $S$ está acotada, lo que contradice que $S$ no está acotada (resultados $\Omega_\pm$ de Selberg y Tsang \CGcite{Tsang}, citados de memoria).
+\end{enumerate}
+En los dos casos se llega a contradicción, luego DBSRH$(W)$ es falsa.
+\end{proof}
+
+\section{Relación con los trabajos propios}\label{sec:rel}
+
+\begin{remark}[defecto positivo y techo de segundo orden]
+En el corpus \CGcite{CasanyaCorpus}, el par $\rho,1-\bar\rho$ separa $L_H(x)=\frac1N\sum x^{\rho-1/2}$ de $M_H(x)=\frac1N\sum x^{i\gamma}$ en un defecto positivo $2(\cosh(d\log x)-1)$. A frecuencia fija ese defecto es cuadrático en $d$: es el techo de segundo orden, y por eso una sola frecuencia no es un criterio de RH. En la DBSRH el parámetro $X$ tiende a $\infty$ y el término que manda es $X^{2d}=e^{2dL}$, exponencial en $dL$. El Teorema~\CGref{thm:converse} es la versión con altura y frecuencia infinitas del criterio $L_H$ frente a $M_H$: la familia de frecuencias con punto de acumulación se sustituye por el límite $X\to\infty$.
+\end{remark}
+
+\begin{remark}[ceguera a $\beta$]
+Las ordenadas no ven $\beta$; la única huella ordinal de un cero fuera de la recta es la ordenada doble. En la DBSRH, $\beta$ se ve en la convergencia, no en las posiciones límite. Si hay un cero dominante fuera de la recta, los taucs no convergen a las ordenadas: tienden a la red RvM promediada, ecuación \CGeqref{eq:binlimit}.
+\end{remark}
+
+\begin{remark}[regla fija frente a $X\to\infty$]
+Para la regla del borrador, con $X\asymp\sqrt t\log t$ ligado a la altura, \CGcite{CasanyaCelda} muestra, bajo RH y una hipótesis de tipo GUE, que los taucs salen de su celda infinitas veces. La DBSRH evita ese mecanismo porque $X\to\infty$ a altura fija. La resolución $1/\log X$ tiende a $0$, y los núcleos \CGcite[(a)]{CasanyaCelda} dejan de ver los bloques de ceros apretados.
+\end{remark}
+
+\begin{remark}[soporte numérico]
+Con $X=t^\theta$ y $\theta\in[1,1.4]$, en $k\le2\,001\,052$, se mide $\mathrm{RMS}(\tau-\gamma)\,\theta^2\approx0.028$ espaciados. Los perfiles Selberg y $W_{1/4}$ con $X=2^{0.7L}$ dan RMS de $0.0146$ y $0.0138$. Las diferencias de Cauchy en $\theta$, calculadas solo con primos, decrecen. Todo está en el repositorio \texttt{vcasana1/prueba}, rama \texttt{kc-tauC-2026-11-02}. Es coherente con el Teorema~\CGref{thm:RHimplies} a alturas $\le10^6$, donde RH está verificada.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{CasanyaIJNT} V.~Casaña-Giner, \emph{Bounds for the argument of the Riemann zeta function and a prime-corrected Riemann--von Mangoldt approximation of its zeros}, borrador v55, \href{https://github.com/vcasana1/IJNT20261030}{github.com/vcasana1/IJNT20261030}.
+
+\bibitem{CasanyaZenodo} V.~Casaña-Giner, \emph{Explicit and asymptotic estimates for the zero-counting function of the Riemann zeta-function}, preprint (Zenodo), versión corregida (DOI de Zenodo no incluido en el fuente).
+
+\bibitem{CasanyaCorpus} V.~Casaña-Giner, corpus RVM: centroides exponenciales de las ordenadas y criterio de altura finita $L_H$ frente a $M_H$ (borradores propios, sin publicar).
+
+\bibitem{CasanyaCelda} V.~Casaña-Giner, \emph{Salida de celda de los taucs del borrador bajo RH y una hipótesis de tipo GUE}, versión 1, 2 de noviembre de 2026, repositorio \texttt{vcasana1/prueba}.
+
+\bibitem{Davenport} H.~Davenport, \emph{Multiplicative Number Theory}, 3.ª ed., GTM~74, Springer, 2000, \href{https://doi.org/10.1007/978-1-4757-5927-3}{doi:10.1007/978-1-4757-5927-3}.
+
+\bibitem{Titchmarsh} E.~C.~Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 2.ª ed., revisada por D.~R.~Heath-Brown, Oxford University Press, 1986 (sin DOI).
+
+\bibitem{Tsang} K.-M.~Tsang, Some $\Omega$-theorems for the Riemann zeta-function, \emph{Acta Arith.} \textbf{46} (1986) 369--395, \href{https://doi.org/10.4064/aa-46-4-369-395}{doi:10.4064/aa-46-4-369-395}.
+
+\end{thebibliography}
+\end{document}

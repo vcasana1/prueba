@@ -1,0 +1,16 @@
+t ~ 1e6 (k 1.5e6-2e6): N=501050  RMS total=0.0574
+   hueco min en [0.0,0.2):    7272 (  1.5 %)  RMS=0.1111
+   hueco min en [0.2,0.4):   48224 (  9.6 %)  RMS=0.0518
+   hueco min en [0.4,0.6):  108249 ( 21.6 %)  RMS=0.0418
+   hueco min en [0.6,0.8):  142323 ( 28.4 %)  RMS=0.0667
+   hueco min en [0.8,1.0):  114737 ( 22.9 %)  RMS=0.0645
+   hueco min en [1.0,1.5):   78552 ( 15.7 %)  RMS=0.0406
+   hueco min en [1.5,10.0):    1693 (  0.3 %)  RMS=0.0272
+t ~ 2.7e11: N=97374  RMS total=0.0679
+   hueco min en [0.0,0.2):    1666 (  1.7 %)  RMS=0.1437
+   hueco min en [0.2,0.4):   10092 ( 10.4 %)  RMS=0.0782
+   hueco min en [0.4,0.6):   21473 ( 22.1 %)  RMS=0.0439
+   hueco min en [0.6,0.8):   26993 ( 27.7 %)  RMS=0.0639
+   hueco min en [0.8,1.0):   21128 ( 21.7 %)  RMS=0.0802
+   hueco min en [1.0,1.5):   15641 ( 16.1 %)  RMS=0.0643
+   hueco min en [1.5,10.0):     381 (  0.4 %)  RMS=0.0375

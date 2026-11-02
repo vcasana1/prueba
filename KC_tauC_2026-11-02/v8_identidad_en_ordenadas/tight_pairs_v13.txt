@@ -1,0 +1,13 @@
+# k in [1000000,2001052): 122 zero pairs with gap < 0.05  (median gap 0.0401)
+# rule        floor(min s)  median s(pairs)  Spearman(s,g)   median|mid err|  median|indiv err|  RMS indiv err (all k)
+draft         0.2352        0.3539           +0.078          0.00918          0.1576            0.0567
+w14_0.5       0.2215        0.2932           +0.080          0.00228          0.1277            0.0281
+w14_0.7       0.1730        0.2098           +0.090          0.00079          0.0848            0.0141
+sharp1.0      0.1787        0.2236           +0.029          0.00462          0.0933            0.0286
+sharp1.2      0.1547        0.1908           -0.080          0.00386          0.0767            0.0200
+sharp1.4      0.1443        0.1632           +0.036          0.00226          0.0627            0.0148
+# k in [1000000,2001052): 3097 zero pairs with gap < 0.15  (median gap 0.1182)
+# rule        floor(min s)  median s(pairs)  Spearman(s,g)   median|mid err|  median|indiv err|  RMS indiv err (all k)
+draft         0.2352        0.3558           +0.044          0.01094          0.1225            0.0567
+w14_0.7       0.1730        0.2176           +0.785          0.00082          0.0501            0.0141
+sharp1.4      0.1443        0.1705           +0.472          0.00251          0.0273            0.0148

@@ -1,0 +1,7 @@
+phi file: scheme wsize_w14 0.5  gmax 36239911
+K=2001052  Tmax=1132497.212379  gmax=36239911  h=1/32  max primes=0  threads=2  nophi=0
+  tasks 4000 / 17703
+  tasks 8000 / 17703
+  tasks 10000 / 17703
+  tasks 14000 / 17703
+  tasks 16000 / 17703

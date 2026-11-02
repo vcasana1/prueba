@@ -1,0 +1,6 @@
+block 2^19:  mean D^2 = 0.05253   mean D^4 = 0.00813  (Gaussian would be 0.00828)
+  RMS Phi_c' / mean N0' = 0.7926
+  B/DN measured = +0.03407    Cauchy-Schwarz bound = 0.07147
+  A/DN + B/DN measured = 0.08660  (= 1/12 + eta)
+  record 41.7%: need A/DN + B/DN < 0.2291;  with CS for B: need mean D^2 < 0.1576
+  positive proportion: need A/DN + B/DN < 0.3333;  with CS for B: need mean D^2 < 0.2619

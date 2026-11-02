@@ -1,0 +1,2 @@
+TH=0.5 block 2^19: MV diagonal mean Phi'^2 = 2.1827;  explicit MV error <= 0.1795;  mean N0' = 1.8650
+  RMS Phi'/N0': diagonal 0.7922,  upper bound (diag+err) 0.8241

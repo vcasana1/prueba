@@ -1,0 +1,463 @@
+Resultado demostrable: una mejora para el transporte ordinal que utiliza MCOM y Selberg–Fujii
+
+He examinado las estimaciones de la RN v6. Hay una distinción que debo mantener: mejorar los propios teoremas de momentos de Selberg o Fujii no es lo mismo que demostrar un resultado más fuerte sobre tus taucm utilizando esos teoremas y MCOM.
+
+No he encontrado una demostración de una cota de momento superior a las de Selberg–Fujii. Sí puedo demostrar una consecuencia cuantitativa para tus medidas de subnivel que no aparece en sus estimaciones de momentos.
+
+Teorema de transporte ordinal con ahorro logarítmico
+
+Utilizamos exactamente tu fase prima interpolada:
+
+\Phi^\circ(t)=
+\left(2-\frac{t}{2^j}\right)\Phi_{m_j}(t)
++\left(\frac{t}{2^j}-1\right)\Phi_{m_{j+1}}(t),
+
+donde
+
+\Phi_m(t)=-\frac1\pi\sum_{\nu\le m}
+\arg(1-p_\nu^{-1/2-it}),
+\qquad m_j=\lfloor2^{j/2}\rfloor.
+
+Tus taucm están definidos por
+
+\tau_k^{\mathrm{Cm}}
+=
+\operatorname{meas}\left\{
+t>0:
+N_0(t)+\operatorname{clip}_{H(t)}\Phi^\circ(t)
+<k-\frac12
+\right\},
+
+con tu truncamiento MCOM
+
+H(t)=0.08382\log\max(t,e)+5.5.
+
+Para estudiar exclusivamente el efecto del truncamiento, introduzco los puntos auxiliares no truncados
+
+u_k^\circ=
+\operatorname{meas}\left\{
+t>0:N_0(t)+\Phi^\circ(t)<k-\frac12
+\right\}.
+
+Estos u_k^\circ no son tus taucs ni un objeto que atribuya a tu manuscrito.
+
+Finalmente, sea
+
+\mathcal K_T=
+\{k:T\le\gamma_k^{\mathrm{RvM}}\le2T\}.
+
+Afirmación:
+
+\boxed{
+\sum_{k\in\mathcal K_T}
+\left|\tau_k^{\mathrm{Cm}}-u_k^\circ\right|
+\ll
+\frac{T}{(\log T)^3}.
+}
+\tag{A}
+
+La constante implícita depende de la estimación de cuarto momento citada en IJNT.
+
+Como
+
+\#\mathcal K_T\asymp T\log T,
+
+obtenemos
+
+\boxed{
+\frac1{\#\mathcal K_T}
+\sum_{k\in\mathcal K_T}
+\left|\tau_k^{\mathrm{Cm}}-u_k^\circ\right|
+\ll\frac1{(\log T)^4}.
+}
+\tag{B}
+
+Esto compara dos sucesiones ordinales completas, no simplemente los valores de dos funciones primas en promedio.
+
+La escala media de separación RvM es 1/\log T. Por tanto, la diferencia media entre ambas sucesiones es tres potencias logarítmicas menor que esa escala.
+
+El resultado es incondicional respecto de RH, pero depende de que sea válida la estimación de cuarto momento de IJNT invocada en la v6. No lo presento como una nueva demostración independiente del teorema de Fujii.
+
+Demostración completa
+
+1. El margen que aporta MCOM
+
+Escribimos
+
+G(t)=N(t)-N_0(t).
+
+Tu resultado efectivo establece
+
+|S(t)|\le0.08382\log t+4.444,
+\qquad t\ge1,
+
+y tu refinamiento asintótico establece
+
+\limsup_{t\to\infty}\frac{|S(t)|}{\log t}
+<0.0748596142711.
+
+Por tanto, para cualquier constante
+
+0.0748596142711<c<0.08382,
+
+existe T_c tal que
+
+|G(t)|\le c\log t
+\qquad(t\ge T_c),
+
+fuera de las ordenadas, donde utilizamos que G=S+R y R(t)=O(t^{-1}).
+
+En consecuencia,
+
+\begin{aligned}
+H(t)-|G(t)|
+&\ge0.08382\log t+5.5-c\log t\\
+&\ge(0.08382-c)\log t.
+\end{aligned}
+
+Definamos
+
+\delta=0.08382-c>0.
+
+Hemos demostrado
+
+\boxed{H(t)-|G(t)|\ge\delta\log t.}
+\tag{1}
+
+Este paso sí depende de la mejora cuantitativa de MCOM. Con un coeficiente asintótico superior a 0.08382, no dispondríamos de este margen para tu truncamiento fijo.
+
+2. Control de los puntos donde actúa el truncamiento
+
+Introducimos únicamente como abreviaturas de la demostración
+
+P(t)=\Phi^\circ(t),
+\qquad
+D(t)=|P(t)-\operatorname{clip}_{H(t)}P(t)|.
+
+Así,
+
+D(t)=\bigl(|P(t)|-H(t)\bigr)_+.
+
+Sea
+
+E_T=\{t\in[T/2,3T]:D(t)>0\}.
+
+Cuando t\in E_T,
+
+|P(t)-G(t)|
+\ge |P(t)|-|G(t)|.
+
+Por (1),
+
+|P(t)-G(t)|\ge D(t)+\delta\log t.
+
+Para T suficientemente grande, esto implica
+
+\boxed{
+|P(t)-G(t)|
+\ge D(t)+\frac{\delta}{2}\log T.
+}
+\tag{2}
+
+En particular,
+
+\mathbf1_{E_T}(t)
+\le
+\frac{16|P(t)-G(t)|^4}{\delta^4(\log T)^4}.
+
+También,
+
+D(t)
+\le
+\frac{8|P(t)-G(t)|^4}{\delta^3(\log T)^3}
+\qquad(t\in E_T).
+
+La v6 utiliza como resultado externo de IJNT
+
+\int_U^{2U}|\Phi^\circ(t)-G(t)|^4\,dt\ll U
+
+para bloques diádicos suficientemente grandes.
+
+Cubriendo [T/2,3T] con un número acotado de esos bloques, obtenemos
+
+\int_{T/2}^{3T}|P(t)-G(t)|^4\,dt\ll T.
+
+Por tanto,
+
+\boxed{
+\operatorname{meas}(E_T)
+\ll\frac{T}{(\log T)^4}
+}
+\tag{3}
+
+y
+
+\boxed{
+\int_{T/2}^{3T}D(t)\,dt
+\ll\frac{T}{(\log T)^3}.
+}
+\tag{4}
+
+El resultado (4) es el que necesitamos para las medidas de subnivel. Controla la cantidad total de fase eliminada, no solamente el conjunto donde actúa el truncamiento.
+
+3. Paso de las fases a todos los índices ordinales
+
+Aquí interviene específicamente tu definición mediante medidas de subnivel.
+
+Para cada índice k, ponemos
+
+\ell_k=k-\frac12.
+
+Por definición,
+
+\begin{aligned}
+\tau_k^{\mathrm{Cm}}-u_k^\circ
+={}&
+\int_0^\infty
+\Bigl[
+\mathbf1_{\{N_0+\operatorname{clip}_HP<\ell_k\}}\\
+&\hspace{30mm}
+-\mathbf1_{\{N_0+P<\ell_k\}}
+\Bigr]\,dt.
+\end{aligned}
+
+La suma prima original satisface, por una estimación elemental de sus factores de Euler,
+
+|\Phi^\circ(t)|
+\ll(1+t)^{1/4}\sqrt{\log(2+t)}.
+
+Esto, junto con el crecimiento N_0(t)\asymp t\log t, garantiza que para los índices con
+
+\gamma_k^{\mathrm{RvM}}\in[T,2T],
+
+los dos indicadores anteriores coinciden fuera de [T/2,3T], siempre que T sea suficientemente grande.
+
+Por tanto,
+
+|\tau_k^{\mathrm{Cm}}-u_k^\circ|
+\le
+\int_{T/2}^{3T}
+\left|
+\mathbf1_{\{N_0+\operatorname{clip}_HP<\ell_k\}}
+-
+\mathbf1_{\{N_0+P<\ell_k\}}
+\right|dt.
+
+Sumamos sobre \mathcal K_T.
+
+Para cada t, los indicadores difieren únicamente si el nivel k-\tfrac12 se encuentra entre
+
+N_0(t)+P(t)
+
+y
+
+N_0(t)+\operatorname{clip}_{H(t)}P(t).
+
+Estos dos números están separados exactamente por D(t).
+
+Un intervalo real de longitud D contiene como máximo D+1 niveles de la forma k-\tfrac12. Si D=0, no hay ninguno que cambie de indicador.
+
+Así,
+
+\begin{aligned}
+\sum_{k\in\mathcal K_T}
+|\tau_k^{\mathrm{Cm}}-u_k^\circ|
+&\le
+\int_{T/2}^{3T}
+\bigl(D(t)+\mathbf1_{E_T}(t)\bigr)\,dt\\
+&\ll
+\frac{T}{(\log T)^3}
++
+\frac{T}{(\log T)^4}.
+\end{aligned}
+
+Queda demostrado
+
+\boxed{
+\sum_{k\in\mathcal K_T}
+|\tau_k^{\mathrm{Cm}}-u_k^\circ|
+\ll\frac{T}{(\log T)^3}.
+}
+
+Este paso aprovecha una propiedad concreta de tus subniveles ordinales: sus umbrales están separados exactamente una unidad.
+
+⸻
+
+4. Consecuencia adicional: estabilidad de los espaciamientos en densidad
+
+El teorema anterior también controla la diferencia entre los espaciamientos consecutivos de ambas construcciones.
+
+Para los índices interiores de \mathcal K_T,
+
+\begin{aligned}
+&\left|
+(\tau_{k+1}^{\mathrm{Cm}}-\tau_k^{\mathrm{Cm}})
+-(u_{k+1}^\circ-u_k^\circ)
+\right|\\
+&\qquad\le
+|\tau_{k+1}^{\mathrm{Cm}}-u_{k+1}^\circ|
++
+|\tau_k^{\mathrm{Cm}}-u_k^\circ|.
+\end{aligned}
+
+Sumando,
+
+\boxed{
+\sum_{\substack{k\\k,k+1\in\mathcal K_T}}
+\left|
+(\tau_{k+1}^{\mathrm{Cm}}-\tau_k^{\mathrm{Cm}})
+-(u_{k+1}^\circ-u_k^\circ)
+\right|
+\ll\frac{T}{(\log T)^3}.
+}
+\tag{5}
+
+Como los espaciamientos RvM en esa ventana satisfacen
+
+h_k^{\mathrm{RvM}}
+=\gamma_{k+1}^{\mathrm{RvM}}-\gamma_k^{\mathrm{RvM}}
+\asymp\frac1{\log T},
+
+para cualquier \varepsilon>0 fijo obtenemos
+
+\boxed{
+\frac{
+\#\left\{
+k\in\mathcal K_T:
+|\tau_k^{\mathrm{Cm}}-u_k^\circ|
+>\varepsilon h_k^{\mathrm{RvM}}
+\right\}
+}{
+\#\mathcal K_T
+}
+\ll_\varepsilon
+\frac1{(\log T)^3}.
+}
+\tag{6}
+
+Interpretación: salvo una proporción O_\varepsilon((\log T)^{-3}) de índices, el truncamiento MCOM desplaza los puntos de la construcción auxiliar en menos de una fracción arbitrariamente pequeña del espaciamiento RvM.
+
+Esto sí es una afirmación cuantitativa sobre el transporte ordinal, obtenida combinando MCOM, el cuarto momento citado y tu construcción de subniveles.
+
+No demuestra que los puntos estén igual de cerca de los ceros verdaderos.
+
+⸻
+
+5. Extensión a tus taucms ponderados
+
+También podemos obtener la misma conclusión para
+
+\tau_k^{\mathrm{Cms}}(X;W)
+=
+\operatorname{meas}
+\left\{
+N_0(t)+\operatorname{clip}_{H(t)}
+\bigl(\Phi_X^W(t)-\Pi_X^W(t)\bigr)
+<k-\frac12
+\right\},
+
+sin atribuirte la invención de los pesos de Selberg.
+
+Definimos, solo para efectuar la comparación, los puntos auxiliares sin truncamiento
+
+u_k^\circ(X;W)
+=
+\operatorname{meas}
+\left\{
+N_0(t)+\Phi_X^W(t)-\Pi_X^W(t)
+<k-\frac12
+\right\}.
+
+La v6 contiene la estimación
+
+\sup_{\substack{W\in\mathcal W\\
+T^\varepsilon\le X\le T^{1/4}}}
+\int_T^{2T}
+|\Phi_X^W(t)-\Pi_X^W(t)-G(t)|^4\,dt
+\ll_\varepsilon T.
+
+El argumento anterior se aplica uniformemente en ese rango. Las fases no truncadas tienen además una cota elemental O(X), suficiente para localizar los subniveles correspondientes.
+
+Obtenemos el siguiente corolario condicionado al input de Fujii utilizado en la v6:
+
+\boxed{
+\sup_{\substack{W\in\mathcal W\\
+T^\varepsilon\le X\le T^{1/4}}}
+\sum_{k\in\mathcal K_T}
+\left|
+\tau_k^{\mathrm{Cms}}(X;W)
+-u_k^\circ(X;W)
+\right|
+\ll_\varepsilon
+\frac{T}{(\log T)^3}.
+}
+\tag{7}
+
+La misma prueba permite utilizar el rango logarítmicamente ampliado de la v6 para los pesos específicos allí tratados.
+
+Esta extensión es relevante porque controla uniformemente toda una familia de tus aproximaciones ordinales, no una única elección del corte primo.
+
+Pero esa uniformidad continúa restringida al rango de X para el que disponemos del cuarto momento. No autoriza tomar X\to\infty con T fijo.
+
+⸻
+
+6. ¿Hemos mejorado realmente a Selberg y Fujii?
+
+La respuesta exige distinguir el resultado obtenido de lo que pedías demostrar.
+
+Objetivo	Resultado
+Mejorar el exponente del cuarto momento de Selberg–Fujii	No demostrado
+Mejorar su constante universal	No demostrado
+Ampliar incondicionalmente el rango de cortes primos usando únicamente MCOM	No demostrado
+Obtener una desigualdad más fuerte para la cantidad de fase eliminada por MCOM	Demostrado
+Transferir ese ahorro a toda la sucesión ordinal	Demostrado, condicionado al cuarto momento citado
+Obtener estabilidad de espaciamientos para casi todos los índices	Demostrado en la comparación entre construcciones ordinales
+Demostrar ausencia de colapso para todos los taucms	Pendiente
+
+Hay una razón matemática para que no pueda proclamar una mejora de los propios momentos.
+
+Las hipótesis
+
+|G(t)|\le H(t)-\delta\log t
+
+y
+
+\int_T^{2T}|P(t)-G(t)|^4dt\ll T
+
+no implican, por sí solas,
+
+\int_T^{2T}|P(t)-G(t)|^4dt=o(T).
+
+Basta considerar abstractamente G(t)=0 y P(t)=1. Para alturas grandes, P permanece dentro del truncamiento, su cuarto momento es exactamente T y MCOM no produce ninguna reducción.
+
+Por tanto, mejorar el orden O(T) del cuarto momento requiere una nueva propiedad de las fases primas, no solamente combinar un mayorante puntual con la estimación de Fujii.
+
+Ese contraejemplo no se refiere a tus fases reales; demuestra que la mejora no puede inferirse exclusivamente de las dos desigualdades utilizadas.
+
+7. Qué resultado necesitamos ahora para avanzar hacia RH
+
+El teorema de transporte obtenido muestra que el truncamiento MCOM es asintóticamente casi invisible para la mayoría de los índices, en los rangos donde contamos con el cuarto momento.
+
+Esto descarta una posible fuente de grandes desplazamientos ordinales, pero no impide que los espaciamientos verdaderos colapsen.
+
+La estimación que realmente daría un salto respecto a la información de Selberg–Fujii sería uniforme en el índice y en cortes primos no acotados. Para el problema de separación, su contenido tendría que controlar directamente
+
+\boxed{
+\tau_{k+1}^{\mathrm{Cms}}(X;W)
+-\tau_k^{\mathrm{Cms}}(X;W)
+}
+
+y no solamente una media sobre k.
+
+En particular, seguimos necesitando demostrar, sin usar las ordenadas verdaderas como entrada,
+
+\limsup_{X\to\infty}
+\left[
+\tau_{k+1}^{\mathrm{Cms}}(X;W)
+-\tau_k^{\mathrm{Cms}}(X;W)
+\right]>0
+\qquad\text{para cada }k.
+
+Conclusión: he podido demostrar una mejora de las consecuencias ordinales obtenidas al combinar MCOM con los momentos citados de Selberg–Fujii: el ahorro T/(\log T)^3 en transporte total y su correspondiente estabilidad de espaciamientos en densidad. No he demostrado una mejora de los teoremas de momentos de Selberg o Fujii propiamente dichos, ni el control uniforme necesario para RH.
+
+No he creado ni modificado ninguna versión del manuscrito.

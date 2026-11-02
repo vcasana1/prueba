@@ -1,0 +1,13 @@
+[h1e12] T0=2.676534e+11  taucs comprobados=97376  (indices 999999997477..1000000094852)
+  N(tauc_k)-k : {-1: 48866, 0: 48510}    (fuera de {-1,0}: 0 )
+  RMS(tauc-gamma) = 0.06789 esp ; max |.| = 0.2803
+  margen minimo en la celda (gamma_{k-1},gamma_{k+1}): +0.1478 esp; [(1000000032926, 0.1478), (1000000004642, 0.153), (1000000071607, 0.1638), (1000000008625, 0.1708), (1000000091267, 0.1721), (1000000066714, 0.1742), (1000000065146, 0.1804), (1000000027300, 0.1805)]
+  ternas mas apretadas (k del central, anchura, margen del tauc central):
+     k=1000000071607  anchura=0.4426 esp  margen=+0.1638
+     k=1000000015385  anchura=0.4556 esp  margen=+0.1985
+     k=1000000079146  anchura=0.4572 esp  margen=+0.2240
+     k=1000000052819  anchura=0.4719 esp  margen=+0.2095
+     k=1000000093692  anchura=0.4831 esp  margen=+0.1954
+     k=1000000077306  anchura=0.4878 esp  margen=+0.2167
+     k=1000000004642  anchura=0.4926 esp  margen=+0.1530
+     k=1000000091267  anchura=0.4938 esp  margen=+0.1721

@@ -1,0 +1,24 @@
+K=2001052 Tmax=1132497.212379 gmax=36239911 jmax=20 scheme=count 1.0 primes sieved=4619 n_jmax+1=1448
+  block j= -1  primes 0->1  points 99  t=0s
+  block j=  0  primes 1->1  points 99  t=0s
+  block j=  1  primes 1->2  points 162  t=0s
+  block j=  2  primes 2->2  points 162  t=0s
+  block j=  3  primes 2->4  points 241  t=0s
+  block j=  4  primes 4->5  points 270  t=0s
+  block j=  5  primes 5->8  points 346  t=0s
+  block j=  6  primes 8->11  points 410  t=0s
+  block j=  7  primes 11->16  points 504  t=0s
+  block j=  8  primes 16->22  points 604  t=0s
+  block j=  9  primes 22->32  points 755  t=0s
+  block j= 10  primes 32->45  points 934  t=0s
+  block j= 11  primes 45->64  points 1176  t=0s
+  block j= 12  primes 64->90  points 1485  t=0s
+  block j= 13  primes 90->128  points 1903  t=0s
+  block j= 14  primes 128->181  points 2444  t=0s
+  block j= 15  primes 181->256  points 3188  t=1s
+  block j= 16  primes 256->362  points 4142  t=1s
+  block j= 17  primes 362->512  points 5492  t=2s
+  block j= 18  primes 512->724  points 7190  t=4s
+  block j= 19  primes 724->1024  points 9590  t=8s
+  block j= 20  primes 1024->1448  points 12824  t=9s
+done 8.791451930999756

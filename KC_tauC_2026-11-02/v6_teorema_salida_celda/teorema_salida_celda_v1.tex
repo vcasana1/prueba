@@ -1,0 +1,295 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage[pagebackref=true,colorlinks=true,linkcolor=MidnightBlue,citecolor=OliveGreen,urlcolor=MidnightBlue]{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfcomment}
+\numberwithin{equation}{section}
+
+% ---------- referencias: paginas donde se citan ----------
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{\ifcase #1 \or\ \textit{(Citado en p.~#2.)}\else\ \textit{(Citado en pp.~#2.)}\fi}
+
+% ---------- previsualizacion al pasar el cursor (ecuaciones, enunciados, referencias) ----------
+\makeatletter
+\let\CG@origref\ref
+\let\CG@origeqref\eqref
+\newcommand{\CG@gettip}[1]{\@ifundefined{CGTip@#1}{#1}{\csname CGTip@#1\endcsname}}
+\newcommand{\CG@getbib}[1]{\@ifundefined{CGBib@#1}{#1}{\csname CGBib@#1\endcsname}}
+\DeclareRobustCommand{\CGref}[1]{\pdftooltip{\CG@origref{#1}}{\CG@gettip{#1}}}
+\DeclareRobustCommand{\CGeqref}[1]{\pdftooltip{\CG@origeqref{#1}}{\CG@gettip{#1}}}
+\DeclareRobustCommand{\CGcite}[2][]{\pdftooltip{\if\relax\detokenize{#1}\relax\cite{#2}\else\cite[#1]{#2}\fi}{\CG@getbib{#2}}}
+\newcommand{\tip}[2]{\expandafter\gdef\csname CGTip@#1\endcsname{#2}}
+\newcommand{\bibtip}[2]{\expandafter\gdef\csname CGBib@#1\endcsname{#2}}
+\makeatother
+
+\tip{eq:RvM}{Ec. (2.1): N(t) = N0(t) + S(t) + varpi(t)/pi, N0(t) = (t/2pi) log(t/(2pi e)) + 7/8, |varpi(t)| <= 0.53/t.}
+\tip{eq:draft}{Ec. (2.2): Phi\_m(t) = -(1/pi) sum\_{nu<=m} arg(1 - p\_nu\^{}(-1/2-it)); Phi°(t) = (2-u) Phi\_{m\_j}(t) + (u-1) Phi\_{m\_{j+1}}(t), u = t/2\^{}j, m\_j = floor(2\^{}(j/2)).}
+\tip{eq:F}{Ec. (2.3): F = N0 + clip(Phi°, -h, h), h(t) = log log max(t, e\^{}e); tauc\_k = meas\{t>0 : F(t) < k - 1/2\}.}
+\tip{eq:kernel}{Ec. (2.4): sigma(y) = 1/2 + Si(y)/pi; kappa\_t(delta) = (2-u) sigma(delta L1) + (u-1) sigma(delta L2), L\_i = log x\_i.}
+\tip{eq:xeta}{Ec. (2.5): x\_eta = -sigma\^{}(-1)(3/8 + eta/4) > 0 for 0 <= eta < 1/2; x\_0 = 0.39614.}
+\tip{eq:propA}{Ec. (3.1): bajo RH, Phi°(t) - S(t) - varpi(t)/pi = sum*\_gamma [kappa\_t(t-gamma) - 1\{gamma<=t\}] + E(t), |E(t)| <= C t\^{}(-1/12); con recorte inactivo es F - N.}
+\tip{eq:landau}{Ec. (3.2): sum\_{n<x} Lambda(n) n\^{}(-s) = -zeta'/zeta(s) + x\^{}(1-s)/(1-s) - sum*\_rho x\^{}(rho-s)/(rho-s) + sum\_q x\^{}(-2q-s)/(2q+s).}
+\tip{eq:deriv}{Ec. (3.3): pi (S - P\_x)'(t) = Re[x\^{}(1-s)/(1-s)] + Re[trivial] - sum*\_gamma sin((gamma-t) log x)/(gamma-t).}
+\tip{eq:G}{Ec. (3.4): G\_x(t) = sum*\_gamma [1\{gamma<=t\} - sigma((t-gamma) log x)].}
+\tip{eq:trunc}{Ec. (4.1): tauc\_{k+1} = a + meas([a,b] cap \{F < k+1/2\}).}
+\tip{eq:blockF}{Ec. (4.2): en J, F(t) = (k-1) + sum\_{i=0}\^{}3 kappa(t - gamma\_{k+i}) + rho(t), |rho| <= eta.}
+\tip{eq:exitcond}{Ec. (4.3): gamma\_{k+3} - gamma\_k < x\_eta / L2.}
+\tip{thm:main}{Teorema 1.1: bajo RH y (H), hay infinitos k con tauc\_{k+1} < gamma\_k, luego N(tauc\_{k+1}) = k-1 y el tauc sale de las celdas de gamma\_{k+1}.}
+\tip{prop:A}{Proposicion 3.1 (formula explicita para F - N, bajo RH).}
+\tip{lem:trunc}{Lema 4.1 (truncamiento del subnivel).}
+\tip{lem:B}{Lema 4.2 (geometria del subnivel en un bloque de cuatro ceros): si se cumplen (B1)-(B4), tauc\_{k+1} < gamma\_k.}
+\tip{hyp:H}{Hipotesis (H): infinitos k con un bloque de cuatro ceros de anchura < x\_eta/L2 y entorno controlado (H1)-(H4).}
+\tip{sec:heur}{Seccion 6: plausibilidad de (H) y estimacion de la altura.}
+
+\bibtip{Davenport}{H. Davenport, Multiplicative Number Theory, 3a ed., GTM 74, Springer, 2000, doi:10.1007/978-1-4757-5927-3.}
+\bibtip{Titchmarsh}{E. C. Titchmarsh, The Theory of the Riemann Zeta-Function, 2a ed. (rev. D. R. Heath-Brown), Oxford Univ. Press, 1986.}
+\bibtip{Montgomery}{H. L. Montgomery, The pair correlation of zeros of the zeta function, Proc. Sympos. Pure Math. 24, AMS, 1973, 181-193.}
+\bibtip{Odlyzko}{A. M. Odlyzko, On the distribution of spacings between zeros of the zeta function, Math. Comp. 48 (1987) 273-308, doi:10.1090/S0025-5718-1987-0866115-0.}
+\bibtip{RudnickSarnak}{Z. Rudnick, P. Sarnak, Zeros of principal L-functions and random matrix theory, Duke Math. J. 81 (1996) 269-322.}
+\bibtip{CasanyaIJNT}{V. Casana-Giner, Ordinal primes / prime-corrected Riemann-von Mangoldt points, borrador v55, github.com/vcasana1/IJNT20261030.}
+
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corolario}
+\theoremstyle{definition}
+\newtheorem{hypothesis}[theorem]{Hipótesis}
+\newtheorem{remark}[theorem]{Observación}
+\DeclareMathOperator{\meas}{meas}
+\DeclareMathOperator{\Si}{Si}
+\newcommand{\Nz}{N_0}
+
+\title{Salida de celda de los taucs del borrador bajo RH\\ y una hipótesis de tipo GUE}
+\author{Víctor Casaña-Giner}
+\date{2 de noviembre de 2026 \quad (versión 1)}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Para los puntos corregidos $\tau^{\mathrm C}_k$ (taucs) del borrador \CGcite{CasanyaIJNT}, construidos con las fases de Euler de los primeros $\lfloor2^{j/2}\rfloor$ primos, se demuestra que, bajo la hipótesis de Riemann y una hipótesis explícita sobre la estadística local de los ceros de tipo GUE, hay infinitos índices $k$ tales que $\tau^{\mathrm C}_{k+1}<\gamma_k$. En esos índices el tauc no cae en ninguna de las dos celdas de $\gamma$ contiguas a $\gamma_{k+1}$. El mecanismo es determinista: en un bloque de cuatro ceros más estrecho que la resolución $\approx0.4/\log x$ de las fases primas, los dos taucs interiores quedan fuera del bloque. La parte analítica (Proposición~\CGref{prop:A}) usa RH; la parte geométrica (Lema~\CGref{lem:B}) es incondicional; la existencia de bloques adecuados es la hipótesis (H).
+\end{abstract}
+\tableofcontents
+
+\section{Enunciado}\label{sec:intro}
+
+\begin{theorem}\label{thm:main}
+Supongamos la hipótesis de Riemann y la Hipótesis~\CGref{hyp:H}. Entonces existen infinitos $k$ con
+\begin{equation*}
+\tau^{\mathrm C}_{k+1}<\gamma_k ,\qquad\text{luego}\qquad N\bigl(\tau^{\mathrm C}_{k+1}\bigr)=k-1\notin\{k,\,k+1\}.
+\end{equation*}
+\end{theorem}
+
+En consecuencia, bajo RH y (H) el enunciado ``$N(\tau^{\mathrm C}_k)\in\{k-1,k\}$ para todo $k$'' es falso para la regla del borrador, y no puede servir como paso hacia RH. El teorema no dice nada sobre reglas con $\log x/\log t\to\infty$ (Observación~\ref{rem:theta}).
+
+\section{Notación}\label{sec:not}
+
+Sea $N(t)$ el número de ceros no triviales $\rho=\beta+i\gamma$ con $0<\gamma\le t$, con multiplicidad. Por la fórmula de Riemann--von Mangoldt, tal como figura en \CGcite{CasanyaIJNT},
+\begin{equation}\label{eq:RvM}
+N(t)=\Nz(t)+S(t)+\frac{\varpi(t)}\pi,\qquad \Nz(t)=\frac t{2\pi}\log\frac t{2\pi e}+\frac78,\qquad |\varpi(t)|\le\frac{0.53}{t},
+\end{equation}
+con $S(t)=\frac1\pi\arg\zeta(\frac12+it)$. Sea $p_1<p_2<\cdots$ la sucesión de primos. Para $2^j\le t\le2^{j+1}$ y $m_j=\lfloor2^{j/2}\rfloor$,
+\begin{equation}\label{eq:draft}
+\Phi_m(t)=-\frac1\pi\sum_{\nu\le m}\arg\bigl(1-p_\nu^{-1/2-it}\bigr),\qquad
+\Phi^\circ(t)=(2-u)\Phi_{m_j}(t)+(u-1)\Phi_{m_{j+1}}(t),\quad u=\frac t{2^j},
+\end{equation}
+y, con $h(t)=\log\log\max(t,e^e)$,
+\begin{equation}\label{eq:F}
+F=\Nz+\max\bigl(-h,\min(h,\Phi^\circ)\bigr),\qquad \tau^{\mathrm C}_k=\meas\{t>0:F(t)<k-\tfrac12\}.
+\end{equation}
+La \emph{celda} de $\gamma_k$ es el par de intervalos $[\gamma_{k-1},\gamma_k)\cup[\gamma_k,\gamma_{k+1})$; ``el tauc cae en su celda'' significa $N(\tau^{\mathrm C}_k)\in\{k-1,k\}$.
+
+Sean $x_1=p_{m_j}+\frac12$ y $x_2=p_{m_{j+1}}+\frac12$, que no son potencias de primo, y $L_i=\log x_i$. Sean
+\begin{equation}\label{eq:kernel}
+\sigma(y)=\frac12+\frac{\Si(y)}\pi,\qquad \kappa_t(\delta)=(2-u)\,\sigma(\delta L_1)+(u-1)\,\sigma(\delta L_2).
+\end{equation}
+La función $\sigma$ es continua, $\sigma(y)+\sigma(-y)=1$, y $\sigma'(y)=\frac{\sin y}{\pi y}>0$ en $(-\pi,\pi)$. Para $0\le\eta<\frac12$ se define
+\begin{equation}\label{eq:xeta}
+x_\eta=-\sigma^{-1}\Bigl(\frac38+\frac\eta4\Bigr)>0,\qquad x_0=0.39614,\quad x_{1/4}=0.19677,
+\end{equation}
+donde $\sigma^{-1}$ es la inversa de $\sigma$ en $(-\pi,\pi)$. Valores usados abajo, calculados numéricamente: $\sigma(-1.3)=0.12313$ y $\sigma'(2)=0.14472$. Como $m_{j+1}/m_j\to\sqrt2$, se tiene $L_2/L_1\to1$; en lo que sigue $t$ es tan grande que $L_2\le1.05\,L_1$.
+
+\section{La fórmula explícita para $F-N$}\label{sec:A}
+
+\begin{proposition}\label{prop:A}
+Supongamos RH. Existen $C,t_0$ tales que, para todo $t\ge t_0$ que no sea una ordenada,
+\begin{equation}\label{eq:propA}
+\Phi^\circ(t)-S(t)-\frac{\varpi(t)}\pi=\sideset{}{^*}\sum_{\gamma}\Bigl[\kappa_t(t-\gamma)-\mathbf 1_{\{\gamma\le t\}}\Bigr]+E(t),\qquad |E(t)|\le C\,t^{-1/12},
+\end{equation}
+donde $\sum^*$ recorre todas las ordenadas $\gamma\in\mathbb R$ (positivas y negativas), como límite de las sumas parciales $|\gamma|<T$, $T\to\infty$. La misma cota vale para $E'(t)$ multiplicada por $\log t$. En particular, si $|\Phi^\circ(t)|<h(t)$, el lado izquierdo es $F(t)-N(t)$ por \CGeqref{eq:RvM}.
+\end{proposition}
+
+\begin{proof}
+\emph{Paso 1 (fórmula de Landau, [REC]).} Para $x>1$ no potencia de primo y $s=\frac12+it$ con $t$ no ordenada,
+\begin{equation}\label{eq:landau}
+\sum_{n<x}\frac{\Lambda(n)}{n^{s}}=-\frac{\zeta'}{\zeta}(s)+\frac{x^{1-s}}{1-s}-\sideset{}{^*}\sum_\rho\frac{x^{\rho-s}}{\rho-s}+\sum_{q\ge1}\frac{x^{-2q-s}}{2q+s},
+\end{equation}
+con convergencia uniforme en los compactos de $t$ que no contienen ordenadas. Se obtiene con la fórmula de Perron truncada aplicada a $-\frac{\zeta'}{\zeta}(s+w)\frac{x^w}{w}$ y el desplazamiento de contorno de \CGcite[cap.~17]{Davenport}. No he comprobado la referencia exacta de esta variante con $s$ desplazado; el argumento es el del caso $s=0$ (la fórmula explícita para $\psi(x)$).
+
+\emph{Paso 2 (partes reales).} Sea $P_x(t)=\frac1\pi\operatorname{Im}\sum_{n<x}\Lambda(n)n^{-s}/\log n$. Entre ordenadas, $\pi S'(t)=\operatorname{Re}\frac{\zeta'}{\zeta}(s)$ y $\pi P_x'(t)=-\operatorname{Re}\sum_{n<x}\Lambda(n)n^{-s}$. Bajo RH, $\rho-s=i(\gamma-t)$, así que $\operatorname{Re}\frac{x^{\rho-s}}{\rho-s}=\frac{\sin((\gamma-t)\log x)}{\gamma-t}$, que está acotado cerca de $t=\gamma$. Tomando parte real en \CGeqref{eq:landau}:
+\begin{equation}\label{eq:deriv}
+\pi\,(S-P_x)'(t)=\operatorname{Re}\frac{x^{1-s}}{1-s}+\operatorname{Re}\sum_{q\ge1}\frac{x^{-2q-s}}{2q+s}-\sideset{}{^*}\sum_\gamma\frac{\sin((\gamma-t)\log x)}{\gamma-t}.
+\end{equation}
+
+\emph{Paso 3 (integración).} Sea
+\begin{equation}\label{eq:G}
+G_x(t)=\sideset{}{^*}\sum_\gamma\Bigl[\mathbf 1_{\{\gamma\le t\}}-\sigma\bigl((t-\gamma)\log x\bigr)\Bigr]=\sideset{}{^*}\sum_\gamma\Bigl[\frac{\Si((\gamma-t)\log x)}\pi-\frac12\operatorname{sgn}(\gamma-t)\Bigr].
+\end{equation}
+Cada término salta $+1$ en $t=\gamma$, igual que $S$. Su derivada fuera de $\gamma$ es $-\frac1\pi\frac{\sin((\gamma-t)\log x)}{\gamma-t}$. La convergencia uniforme del Paso 1 permite derivar término a término. Por tanto $S-P_x-G_x$ es continua y su derivada es la de los dos primeros términos de \CGeqref{eq:deriv}, cuya primitiva es $O(\sqrt x/(t\log x))+O(1/t)$. Así
+\begin{equation*}
+S(t)-P_x(t)-G_x(t)=c_x+O\Bigl(\frac{\sqrt x}{t\log x}+\frac1t\Bigr).
+\end{equation*}
+
+\emph{Paso 4 ($c_x=0$; esbozo).} Se promedia en $t\in[T,2T]$ con $x$ fijo y $T\to\infty$:
+\begin{itemize}[nosep]
+\item La media de $S$ tiende a $0$, porque $\int_0^TS=O(\log T)$ \CGcite[\S9.9]{Titchmarsh} (referencia de memoria, sin comprobar).
+\item La media de $P_x$ tiende a $0$, porque es un polinomio trigonométrico fijo.
+\item La media de $G_x$ tiende a $0$, porque $y\mapsto\mathbf 1_{\{y\ge0\}}-\sigma(y\log x)$ es impar con integral impropia nula, y solo contribuyen los $O(\log T)$ ceros cerca de los extremos del intervalo.
+\end{itemize}
+El intercambio de media y suma se justifica con la versión truncada de \CGeqref{eq:landau}. Este paso está esbozado, no escrito con todo detalle.
+
+\emph{Paso 5 (potencias de primo de más).} Sea $x=x_i$. Como $x\in(p_m,p_{m+1})$, la fase $\Phi_m$ contiene exactamente los términos $n=p^r$ con $p\le p_m$, es decir, $n<x$ más las potencias $p^r>x$ con $p\le p_m$, $r\ge2$. Así $\Phi_m=P_x+Q_x$ con
+\begin{equation*}
+Q_x(t)=\frac1\pi\operatorname{Im}\sum_{\substack{p\le p_m,\ r\ge2\\ p^r>x}}\frac{p^{-r/2-irt}}{r}.
+\end{equation*}
+Los términos con $r\ge3$ suman $O(x^{-1/6})$. Para $r=2$ queda $\frac1{2\pi}\operatorname{Im}\sum_{\sqrt x<p\le x}p^{-1-2it}$. La fórmula explícita para $\sum_{y<p\le x}p^{-w}$ con $w=1+2it$ da, bajo RH, términos de ceros de tamaño $y^{-1/2}\sum_\gamma|\frac12+i\gamma-w|^{-1}\ll y^{-1/2}\log^2t$, con $y=\sqrt x$ (esbozo). Por tanto $Q_x(t)\ll x^{-1/6}+x^{-1/4}\log^2t$.
+
+\emph{Paso 6 (mezcla diádica).} Por los Pasos 3 a 5, aplicados a $x_1$ y $x_2$ con pesos $2-u$ y $u-1$, y como $|\varpi/\pi|\le0.17/t$,
+\begin{equation*}
+\Phi^\circ-S-\frac{\varpi}\pi=-\bigl[(2-u)G_{x_1}+(u-1)G_{x_2}\bigr]+O\Bigl(x_1^{-1/6}+x_1^{-1/4}\log^2t+\frac{\sqrt{x_2}}{t}+\frac1t\Bigr).
+\end{equation*}
+Con $x_i\asymp\sqrt t\log t$ el error es $O(t^{-1/12})$, y $-[\ldots]$ es la suma de \CGeqref{eq:propA}. La cota para $E'$ se obtiene igual, derivando cada término de error, lo que introduce como mucho un factor $\log t$.
+\end{proof}
+
+\section{Geometría del subnivel}\label{sec:B}
+
+\begin{lemma}[truncamiento]\label{lem:trunc}
+Sean $k\ge2$, $a\ge2\pi e$ con $\Nz(a)+h(a)<k+\frac12$, y $b$ con $\Nz(b)-h(b)>k+\frac12$ y $b$ mayor que el punto a partir del cual $\Nz-h$ es creciente. Entonces
+\begin{equation}\label{eq:trunc}
+\tau^{\mathrm C}_{k+1}=a+\meas\bigl([a,b]\cap\{F<k+\tfrac12\}\bigr).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Por el recorte, $\Nz-h\le F\le\Nz+h$.
+\begin{itemize}[nosep]
+\item Si $t<2\pi e$, entonces $\Nz(t)\le\frac78$ y $h=1$, luego $F<2\le k+\frac12$.
+\item En $[2\pi e,a]$, $\Nz+h$ es no decreciente, luego $F\le\Nz(a)+h(a)<k+\frac12$.
+\item Para $t\ge b$, $F\ge\Nz(t)-h(t)\ge\Nz(b)-h(b)>k+\frac12$.
+\end{itemize}
+\end{proof}
+
+\begin{lemma}[bloque de cuatro ceros]\label{lem:B}
+Sean $k\ge2$ y $a<b$ como en el Lema~\CGref{lem:trunc}. Sean $c=\frac12(\gamma_k+\gamma_{k+3})$, $J=[c-1.5/L_1,\,c+1.5/L_1]\subset[a,b]$ y $0\le\eta<\frac12$. Supongamos:
+\begin{enumerate}[label=(B\arabic*)]
+\item $\gamma_{k+3}-\gamma_k<x_\eta/L_2$;
+\item $\gamma_{k-1}<c-1.5/L_1$ y $\gamma_{k+4}>c+1.5/L_1$, de modo que en $J$ no hay más ordenadas que $\gamma_k,\dots,\gamma_{k+3}$;
+\item en $J$, $F$ es de clase $C^1$ y
+\begin{equation}\label{eq:blockF}
+F(t)=(k-1)+\sum_{i=0}^3\kappa_t(t-\gamma_{k+i})+\varrho(t),\qquad |\varrho|\le\eta,\quad |\varrho'|\le0.4\,L_1,
+\end{equation}
+donde la dependencia de $u$ dentro de $J$ se incluye en $\varrho$;
+\item $|F-N|<\frac32$ en $[a,b]\setminus J$.
+\end{enumerate}
+Entonces $\tau^{\mathrm C}_{k+1}<\gamma_k$.
+\end{lemma}
+
+\begin{proof}
+Sean $\lambda=k+\frac12$ y $w=\gamma_{k+3}-\gamma_k$. Por (B1), $w<0.4/L_2\le0.4/L_1$.
+
+\emph{Monotonía en $J$.} Para $t\in J$ y cada cero del bloque, $|t-\gamma_{k+i}|\le(1.5+0.2)/L_1$. Por tanto $|(t-\gamma_{k+i})L_2|\le1.7\cdot1.05<2$. Como $\sigma'$ es positiva y decreciente en $[0,\pi)$, se tiene $\partial_t\kappa_t(t-\gamma)\ge L_1\sigma'(2)\,(1+o(1))$. Así $F'\ge4\cdot0.1447\,L_1-0.4\,L_1>0$ en $J$.
+
+\emph{Valores en los extremos de $J$.} En $t=c-1.5/L_1$, cada argumento cumple $(t-\gamma_{k+i})L_\iota\le-1.3$. Por monotonía de $\sigma$ en $(-\pi,\pi)$,
+\begin{equation*}
+F\le k-1+4\,\sigma(-1.3)+\eta=k-1+0.4925+\eta<\lambda.
+\end{equation*}
+En $t=c+1.5/L_1$, análogamente, $F\ge k-1+4\,\sigma(1.3)-\eta=k+2.5075-\eta>\lambda$.
+
+\emph{Fuera de $J$.} En $[a,c-1.5/L_1)$ se tiene $N\le k-1$, y por (B4), $F<k-1+\frac32=\lambda$. En $(c+1.5/L_1,b]$ se tiene $N\ge k+3$, y por (B4), $F>k+3-\frac32>\lambda$.
+
+Por \CGeqref{eq:trunc}, $\tau^{\mathrm C}_{k+1}=t^\ast$, el único punto de $J$ con $F(t^\ast)=\lambda$.
+
+\emph{Posición de $t^\ast$.} Por \CGeqref{eq:blockF},
+\begin{equation*}
+\sum_{i=0}^3\kappa_{t^\ast}(t^\ast-\gamma_{k+i})=\frac32-\varrho(t^\ast)\le\frac32+\eta.
+\end{equation*}
+Como $\kappa$ es creciente en el rango considerado y $\gamma_{k+i}\le\gamma_{k+3}$, cada sumando es al menos $\kappa(t^\ast-\gamma_{k+3})$. Por tanto
+\begin{equation*}
+\kappa_{t^\ast}(t^\ast-\gamma_{k+3})\le\frac38+\frac\eta4=\sigma(-x_\eta).
+\end{equation*}
+Supongamos que $t^\ast\ge\gamma_k$. Entonces $t^\ast-\gamma_{k+3}\ge-w>-x_\eta/L_2$. Como $L_1\le L_2$, se sigue que $(t^\ast-\gamma_{k+3})L_\iota>-x_\eta$ para $\iota=1,2$. Siendo $\sigma$ estrictamente creciente, $\kappa_{t^\ast}(t^\ast-\gamma_{k+3})>(2-u)\sigma(-x_\eta)+(u-1)\sigma(-x_\eta)=\sigma(-x_\eta)$, lo que contradice la desigualdad anterior. Luego $\tau^{\mathrm C}_{k+1}=t^\ast<\gamma_k$.
+\end{proof}
+
+La condición de salida, en unidades del espaciado medio $2\pi/\log(t/2\pi)$, es
+\begin{equation}\label{eq:exitcond}
+\gamma_{k+3}-\gamma_k<\frac{x_\eta}{L_2}=\frac{x_\eta}{2\pi\,\theta_2}\cdot\frac{2\pi}{\log(t/2\pi)},\qquad \theta_2=\frac{\log x_2}{\log(t/2\pi)}\xrightarrow[t\to\infty]{}\frac12 .
+\end{equation}
+Con $\eta=0$, un bloque de cuatro ceros de anchura menor que $0.126/\theta_2\to0.25$ espaciados.
+
+\section{La hipótesis (H) y la demostración del teorema}\label{sec:main}
+
+Para cada $k$ sea $D_k(t)=\sum^*_{\gamma\notin\{\gamma_k,\dots,\gamma_{k+3}\}}\bigl[\kappa_t(t-\gamma)-\mathbf 1_{\{\gamma\le t\}}\bigr]$, que es la contribución de los ceros fuera del bloque. Sean $D(t)$ la suma sobre todas las ordenadas y $[a_k,b_k]$ la ventana del Lema~\CGref{lem:trunc} para el nivel $k+\frac12$, tomada con $\Nz(a_k)+h(a_k)$ y $\Nz(b_k)-h(b_k)$ a distancia menor que $1$ del nivel.
+
+\begin{hypothesis}[H]\label{hyp:H}
+Existen $\eta\in[0,\frac12)$ e infinitos $k$ para los que, con $c_k$ y $J_k$ como en el Lema~\CGref{lem:B}:
+\begin{enumerate}[label=(H\arabic*)]
+\item $\gamma_{k+3}-\gamma_k<x_\eta/L_2(c_k)$, $\gamma_{k-1}<c_k-1.5/L_1$ y $\gamma_{k+4}>c_k+1.5/L_1$;
+\item en $J_k$: $|D_k|\le\eta/2$ y $|D_k'|\le0.3\,L_1$;
+\item en $[a_k,b_k]\setminus J_k$: $|D|\le1$;
+\item en $[a_k,b_k]$: $|S|\le h-2$.
+\end{enumerate}
+\end{hypothesis}
+
+(H) es un enunciado sobre los ceros solamente. Su relación con GUE se discute en la Sección~\CGref{sec:heur}.
+
+\begin{proof}[Demostración del Teorema~\CGref{thm:main}]
+Sea $k$ uno de los índices de (H) con $c_k\ge t_0$ y $C\,t^{-1/12}\le\eta/2$.
+
+\emph{El recorte está inactivo.} En $[a_k,b_k]$, por la Proposición~\CGref{prop:A}, $\Phi^\circ=S+D+\varpi/\pi+E$. Con (H2)--(H4), $|\Phi^\circ|\le h-2+1+\eta/2+o(1)<h$. Por tanto $F=\Nz+\Phi^\circ$ y \CGeqref{eq:propA} se aplica en toda la ventana.
+
+\emph{La forma de bloque.} En $J_k$ no hay ordenadas fuera del bloque, por (H1). Por tanto $N(t)=(k-1)+\#\{i:\gamma_{k+i}\le t\}$, y para cada cero del bloque $\mathbf 1_{\{\gamma\le t\}}+[\kappa_t(t-\gamma)-\mathbf 1_{\{\gamma\le t\}}]=\kappa_t(t-\gamma)$. Así \CGeqref{eq:propA} da \CGeqref{eq:blockF} con $\varrho=D_k+E$, luego $|\varrho|\le\eta$ y $|\varrho'|\le0.3L_1+o(L_1)\le0.4L_1$.
+
+\emph{Las demás condiciones.} Fuera de $J_k$, $|F-N|=|D+E|\le1+\eta/2<\frac32$, que es (B4). (B1) y (B2) son (H1).
+
+El Lema~\CGref{lem:B} da $\tau^{\mathrm C}_{k+1}<\gamma_k$. Como hay infinitos $k$ así, el teorema queda demostrado, con las salvedades de los Pasos~1, 4 y~5 de la Proposición~\CGref{prop:A}.
+\end{proof}
+
+\section{Plausibilidad de (H) y altura de la primera salida}\label{sec:heur}
+
+\begin{remark}[GUE]
+En el modelo del proceso seno, el límite de escala de GUE propuesto por Montgomery \CGcite{Montgomery} y contrastado numéricamente por Odlyzko \CGcite{Odlyzko}:
+\begin{itemize}[nosep]
+\item (H1) tiene probabilidad positiva: la densidad de cuatro puntos consecutivos en una anchura $w$ es $\asymp w^{15}$, con $w^{12}$ del determinante de Vandermonde al cuadrado y $w^3$ del volumen;
+\item (H2)--(H4) son condiciones abiertas sobre estadísticas lineales del entorno con varianza finita, compatibles con (H1) con probabilidad condicional positiva.
+\end{itemize}
+Con estacionariedad y ergodicidad del proceso de ceros normalizados, (H) se sigue. Esto no se deduce de los resultados demostrados sobre correlaciones de $n$ niveles \CGcite{RudnickSarnak}: allí las funciones test son suaves con soporte de Fourier restringido, mientras que aquí intervienen la configuración local a la vez que sumas condicionalmente convergentes con colas $\cos y/y$.
+\end{remark}
+
+\begin{remark}[medidas, $k\le2\,001\,052$]
+En los ceros $\gamma_k$ con $k\le2\,001\,052$, el bloque de cuatro ceros más estrecho mide $1.17$ espaciados, frente al umbral $\approx0.17$--$0.25$ de \CGeqref{eq:exitcond}. Ningún tauc sale de su celda; el margen mínimo, de $0.11$ espaciados, está en el tauc central de la terna más estrecha. Con la ley $w^{15}$, el primer bloque bajo el umbral aparecería hacia $10^{16}$ ceros. Es una estimación de orden de magnitud.
+\end{remark}
+
+\begin{remark}[reglas con más primos]\label{rem:theta}
+El umbral \CGeqref{eq:exitcond} es proporcional a $1/\theta_2$. Si el corte crece como $x=t^{\theta(t)}$ con $\theta(t)\to\infty$, el umbral tiende a $0$ en espaciados. La probabilidad de que un cero sea el inicio de un bloque de salida es entonces $\asymp\theta^{-15}$, y la suma sobre $k$ de esas probabilidades converge si $\theta(t)\gg t^{1/15+\varepsilon}$. En ese caso el mecanismo de este teorema solo produce un número finito de salidas. El teorema no descarta, por tanto, la versión con $x\to\infty$ (DBSRH), solo la regla del borrador.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{CasanyaIJNT} V.~Casaña-Giner, \emph{Prime-corrected Riemann--von Mangoldt points} (borrador v55), \href{https://github.com/vcasana1/IJNT20261030}{github.com/vcasana1/IJNT20261030}.
+
+\bibitem{Davenport} H.~Davenport, \emph{Multiplicative Number Theory}, 3.ª ed., Graduate Texts in Mathematics~74, Springer, 2000, \href{https://doi.org/10.1007/978-1-4757-5927-3}{doi:10.1007/978-1-4757-5927-3}.
+
+\bibitem{Montgomery} H.~L.~Montgomery, The pair correlation of zeros of the zeta function, en \emph{Analytic Number Theory}, Proc. Sympos. Pure Math.~24, AMS, 1973, 181--193 (sin DOI localizado).
+
+\bibitem{Odlyzko} A.~M.~Odlyzko, On the distribution of spacings between zeros of the zeta function, \emph{Math. Comp.} \textbf{48} (1987) 273--308, \href{https://doi.org/10.1090/S0025-5718-1987-0866115-0}{doi:10.1090/S0025-5718-1987-0866115-0}.
+
+\bibitem{RudnickSarnak} Z.~Rudnick y P.~Sarnak, Zeros of principal $L$-functions and random matrix theory, \emph{Duke Math. J.} \textbf{81} (1996) 269--322 (DOI no verificado).
+
+\bibitem{Titchmarsh} E.~C.~Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 2.ª ed., revisada por D.~R.~Heath-Brown, Oxford University Press, 1986 (sin DOI).
+
+\end{thebibliography}
+\end{document}

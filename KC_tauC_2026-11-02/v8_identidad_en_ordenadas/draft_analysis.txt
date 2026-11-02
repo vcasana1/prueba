@@ -1,0 +1,44 @@
+== draft:  K=2001052  RMS(u)=0.09101  mean u=-0.00001  #|u|>=1/2: 220  max|u|=0.6663
+ dyadic blocks (T, 2T]:  n   eta=mean u^2   1-4eta   max|u|   #|u|>=1/2
+   2^10       893  0.00577   0.9769   0.3600   0
+   2^11      2012  0.00598   0.9761   0.3083   0
+   2^12      4476  0.00700   0.9720   0.4974   0
+   2^13      9856  0.00693   0.9723   0.4462   0
+   2^14     21519  0.00733   0.9707   0.4920   0
+   2^15     46654  0.00750   0.9700   0.5226   3
+   2^16    100536  0.00778   0.9689   0.5415   8
+   2^17    215531  0.00803   0.9679   0.5656   17
+   2^18    459982  0.00826   0.9670   0.5716   48
+   2^19    977804  0.00840   0.9664   0.6663   121
+   2^20    161121  0.00882   0.9647   0.5812   23
+ windows of 1000 zeros: 2001   certified (max|u|<1/2): 1790  (89.46%)   not certifiable: 211
+   j*: min 5  median 7  p90 8  p99 10  max 23
+   delta = 1/2 - max|u|: min 0.0001  p1 0.0031  p10 0.0212  median 0.0789
+   j* / (log W / (2 delta)):  median 0.153  range [0.000, 0.439]
+ certifiable windows by height:
+   2^12:     4 windows, certified 100.00%,  median j* 6
+   2^13:    10 windows, certified 100.00%,  median j* 6
+   2^14:    21 windows, certified 100.00%,  median j* 6
+   2^15:    47 windows, certified  93.62%,  median j* 6
+   2^16:   101 windows, certified  92.08%,  median j* 6
+   2^17:   215 windows, certified  92.09%,  median j* 7
+   2^18:   460 windows, certified  90.00%,  median j* 7
+   2^19:   978 windows, certified  88.24%,  median j* 7
+   2^20:   161 windows, certified  86.34%,  median j* 7
+ largest |u_k| (k, gamma_k, u_k, left gap, right gap in mean spacings):
+   k=  999405  gamma= 599943.379535  u=+0.6663  gaps 0.018 0.831
+   k=  974835  gamma= 586467.199295  u=-0.6502  gaps 0.727 0.046
+   k= 1034591  gamma= 619197.381949  u=-0.6080  gaps 0.612 0.058
+   k= 1097797  gamma= 653654.013123  u=-0.6025  gaps 0.587 0.025
+   k= 1441606  gamma= 838569.614337  u=-0.5955  gaps 1.868 0.044
+   k= 1384023  gamma= 807863.483570  u=+0.5948  gaps 0.097 0.674
+   k= 1336509  gamma= 782452.790889  u=-0.5935  gaps 0.901 0.060
+   k= 1723585  gamma= 987634.173459  u=-0.5912  gaps 0.788 0.057
+   k= 1061111  gamma= 633674.276976  u=-0.5813  gaps 0.990 0.037
+   k= 1959279  gamma=1110785.420111  u=+0.5812  gaps 0.072 0.779
+   k=  901489  gamma= 546073.083943  u=-0.5803  gaps 0.880 0.059
+   k=  892125  gamma= 540897.156388  u=+0.5798  gaps 0.059 0.692
+   k= 1927524  gamma=1094262.131791  u=+0.5786  gaps 0.013 1.293
+   k= 1025096  gamma= 614006.274802  u=+0.5755  gaps 0.046 0.882
+   k= 1615148  gamma= 930550.715541  u=+0.5733  gaps 0.048 0.526
+ at |u|>=1/2: median of min neighbour gap 0.057 (all zeros: 0.723);  sign of u: +112 / -108

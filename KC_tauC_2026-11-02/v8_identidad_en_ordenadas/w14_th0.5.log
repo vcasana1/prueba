@@ -1,0 +1,19 @@
+  j= 3 zeros        1 primes 4->6  max|u|=0.0006  t=0s
+  j= 4 zeros        3 primes 6->11  max|u|=0.0154  t=0s
+  j= 5 zeros       10 primes 11->18  max|u|=0.0200  t=0s
+  j= 6 zeros       28 primes 18->31  max|u|=0.0723  t=0s
+  j= 7 zeros       69 primes 31->54  max|u|=0.0876  t=0s
+  j= 8 zeros      167 primes 54->97  max|u|=0.0969  t=0s
+  j= 9 zeros      390 primes 97->172  max|u|=0.0917  t=0s
+  j=10 zeros      893 primes 172->309  max|u|=0.3238  t=0s
+  j=11 zeros     2012 primes 309->564  max|u|=0.2683  t=0s
+  j=12 zeros     4476 primes 564->1028  max|u|=0.4309  t=0s
+  j=13 zeros     9856 primes 1028->1900  max|u|=0.3706  t=0s
+  j=14 zeros    21519 primes 1900->3512  max|u|=0.4280  t=0s
+  j=15 zeros    46654 primes 3512->6542  max|u|=0.4588  t=0s
+  j=16 zeros   100536 primes 6542->12251  max|u|=0.4685  t=1s
+  j=17 zeros   215531 primes 12251->23000  max|u|=0.4628  t=1s
+  j=18 zeros   459982 primes 23000->43390  max|u|=0.4984  t=2s
+  j=19 zeros   977804 primes 43390->82025  max|u|=0.5411  t=5s
+  j=20 zeros   161121 primes 82025->155611  max|u|=0.4925  t=5s
+done 5.094669342041016

@@ -1,0 +1,55 @@
+  j= 3 zeros        1 primes 7->15  max|u|=0.0029  t=0s
+  j= 4 zeros        3 primes 15->31  max|u|=0.0031  t=0s
+  j= 5 zeros       10 primes 31->68  max|u|=0.0234  t=0s
+  j= 6 zeros       28 primes 68->154  max|u|=0.0355  t=0s
+  j= 7 zeros       69 primes 154->349  max|u|=0.0512  t=0s
+  j= 8 zeros      167 primes 349->807  max|u|=0.0706  t=0s
+  j= 9 zeros      390 primes 807->1900  max|u|=0.0794  t=0s
+  j=10 zeros      893 primes 1900->4514  max|u|=0.2579  t=0s
+  j=11 zeros     2012 primes 4514->10799  max|u|=0.1749  t=0s
+  j=12 zeros     4476 primes 10799->26090  max|u|=0.3902  t=0s
+  j=13 zeros     9856 primes 26090->63565  max|u|=0.2863  t=0s
+  j=14 zeros    21519 primes 63565->155611  max|u|=0.3832  t=1s
+  j=15 zeros    46654 primes 155611->382984  max|u|=0.4237  t=1s
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  j=16 zeros   100536 primes 382984->946870  max|u|=0.4522  t=2s
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  j=17 zeros   215531 primes 946870->2350230  max|u|=0.4509  t=5s
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  j=18 zeros   459982 primes 2350230->5854641  max|u|=0.4765  t=12s
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  j=19 zeros   977804 primes 5854641->14630843  max|u|=0.4883  t=28s
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in multiply
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+/home/claude/KC_v9/uk_at_zeros_v9.py:36: RuntimeWarning: overflow encountered in exp
+  c = 1.0 / (r * np.exp((r / 2.0) * np.log(p))); m = c > 1e-15
+  j=20 zeros   161121 primes 14630843->36665650  max|u|=0.4848  t=51s
+done 51.460689067840576

@@ -14,3 +14,4 @@ formfactor_v10.py   factor de estructura (form factor) de ceros, tau RvM, taucs 
 dw_check_v10.py     prediccion gaussiana (Debye-Waller) del factor de estructura de las taucs desde la covarianza de phi; red desplazada k-1/2-phi -> dw_check_v10_top.txt
 spacing_hist_v12.py histograma de espaciados (ceros, taucs) frente a GUE (surmise de Wigner), KS, fracciones de espaciado pequeno -> spacing_hist_v12_top.txt, spacing_hist_v12_mid.txt
 tight_pairs_v13.py  pares apretados de ceros: hueco de las taucs, correlacion de Spearman con el hueco real, error del punto medio -> tight_pairs_v13.txt
+margin_triangle_v14.py margen de celda simetrica M_k = s_k - |tau_k-gamma_k| - |tau_{k+1}-gamma_{k+1}| frente al hueco real -> margin_triangle_v14.txt

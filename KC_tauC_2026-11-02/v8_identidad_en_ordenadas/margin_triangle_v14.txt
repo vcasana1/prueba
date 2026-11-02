@@ -1,0 +1,4 @@
+draft     : min M = -0.0326   #M<=0:      5 of 1001051   tight pairs (g<0.05): median M = +0.0401, median g = 0.0401, corr(M,g) = +1.000
+w14_0.5   : min M = +0.0054   #M<=0:      0 of 1001051   tight pairs (g<0.05): median M = +0.0401, median g = 0.0401, corr(M,g) = +1.000
+w14_0.7   : min M = +0.0054   #M<=0:      0 of 1001051   tight pairs (g<0.05): median M = +0.0401, median g = 0.0401, corr(M,g) = +1.000
+sharp1.4  : min M = +0.0054   #M<=0:      0 of 1001051   tight pairs (g<0.05): median M = +0.0401, median g = 0.0401, corr(M,g) = +1.000

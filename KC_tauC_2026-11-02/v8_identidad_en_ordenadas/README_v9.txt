@@ -11,3 +11,4 @@ mv_dphi_v9.py       valor Montgomery-Vaughan (incondicional) de mean Phi'^2 con 
 (g_w14_th0.5_phi.bin / _dphi.bin: rejilla de Phi^o con h=1/32, 290 MB cada uno, no se incluyen; se regeneran con KC_v2/nufft_phi_v7.py zeross.bin g_w14_th0.5 wsize w14 0.5 32)
 formfactor_v10.py   factor de estructura (form factor) de ceros, tau RvM, taucs (borrador, W14 0.5, W14 0.7) y de la medida continua dF,
                     alpha en (0,2], coherencia punto a punto con los ceros  -> formfactor_v10_top.txt (k 1738908..2001052), formfactor_v10_mid.txt (k 262144..524288)
+dw_check_v10.py     prediccion gaussiana (Debye-Waller) del factor de estructura de las taucs desde la covarianza de phi; red desplazada k-1/2-phi -> dw_check_v10_top.txt

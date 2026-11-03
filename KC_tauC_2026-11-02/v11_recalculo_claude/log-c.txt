@@ -1,0 +1,11 @@
+K=2001052 Tmax=1132550.659 primes=1453
+chunks 2000/17697
+chunks 4000/17697
+chunks 6000/17697
+chunks 8000/17697
+chunks 10000/17697
+chunks 12000/17697
+chunks 14000/17697
+chunks 16000/17697
+measure of F<1/2 in (0,1): 0.385804500
+max |Newton - zLamb| = 2.328e-10
